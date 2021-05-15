@@ -8,7 +8,6 @@
     <div class ="card card-info card-outline col-8">
         <div class ="card-header">
           <h5>Input Data</h5>
-          tes
         </div>
         <div class="card-body">
           <form action="{{route('simpan-blok')}}" method="post">
