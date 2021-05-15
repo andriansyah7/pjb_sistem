@@ -1,0 +1,66 @@
+@extends('HalamanDepan.beranda')
+
+@section('title','Data Approval Supervisor')
+@section('container')
+ 
+<div class="content">
+      <div class ="card card-info card-outline">  
+      <div class ="card-header">
+      @if (auth()->user()->role_id=="3")
+          <div class ="card-tools inlane m-2">
+            <a href="{{route('create-spv')}}" class="btn btn-success btn-sm">Approval ECP <i class="fas fa-plus-square"></i></a>
+         </div>
+         @else
+         @endif
+      </div>
+        
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="#example2" class="table table-bordered table-striped myTable">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>NO ECP</th>
+                  <th>STATUS</th>
+                  <th>NAMA SUPERVISOR</th>
+                  <th>ALASAN</th>
+                  <th>APPROVED DATE</th>
+                  <th>AKSI</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach ($spv as $e=>$item)
+                <tr>
+                    <td>{{$item->spv_approval_id}}</td>                  
+                    <td>{{$item->ecp->ecp_no}}</td>
+                    @if($item->status_ecp_id == 2)
+                    <td> <label class="badge badge-success">{{$item->status_ecp->status_ecp_name}} </label></td>
+                    
+
+                    @elseif($item->status_ecp_id == 1)
+                    <td> <label class="badge badge-warning">{{$item->status_ecp->status_ecp_name}} </label></td>
+
+                    @elseif($item->status_ecp_id == 3)
+                    <td> <label class="badge badge-danger">{{$item->status_ecp->status_ecp_name}} </label></td>
+                    @endif
+                    <td>{{$item->user->user_name}}</td>
+                    <td>{{$item->spv_approval_alasan}}</td>
+                    <td>{{$item->created_at}}</td>
+                    <td>
+                      <a href="{{route('edit-spv',$item->spv_approval_id)}}"><i class="fas fa-edit"></i></a> 
+                      
+                      <a href="{{route('delete-spv',$item->spv_approval_id)}}"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i></a>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+</div>
+</div>
+@endsection
+
+
+
+ 
