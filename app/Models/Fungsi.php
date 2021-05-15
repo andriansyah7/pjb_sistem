@@ -18,6 +18,10 @@ class Fungsi extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function notulen()
+    {
+        return $this->hasMany(Notulen::class);
+    }
 
     public function unit()
     {

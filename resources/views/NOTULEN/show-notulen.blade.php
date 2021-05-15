@@ -58,6 +58,8 @@
                 <th>:</th>
                 <th>{{$notulen->notulen_peserta}}</th>
                 </tr>
+             
+            
 
               
                 </tbody>
@@ -76,7 +78,7 @@
              </div>
             
              <div>
-            <a href="#" class="btn btn-info btn-sm">Print Notulen <i class="fas fa-print"></i></a>
+            <a href="{{route('cetaknotulen',$notulen->notulen_id)}}" class="btn btn-info btn-sm">Print Notulen <i class="fas fa-file-word"></i></a>
              </div>
              </div>
             </div>

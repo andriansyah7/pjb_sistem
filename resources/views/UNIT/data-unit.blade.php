@@ -17,7 +17,7 @@
                 <thead>
                 <tr>
                   <th>NO</th>
-                  <th>ID</th>
+                  
                   <th>BIDANG KERJA</th>
                   <th>AKSI</th>
                 </tr>
@@ -27,7 +27,7 @@
                 @foreach ($unit as $e=>$item)
                 <tr>
                     <td>{{$e+1}}</td> 
-                    <td>{{$item->unit_id}}</td>                  
+                                    
                     <td>{{$item->unit_name}}</td>
                     <td>
                       <a href="{{route('edit-unit',$item->unit_id)}}"><i class="fas fa-edit"></i></a> 

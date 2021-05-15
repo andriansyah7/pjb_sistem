@@ -33,10 +33,10 @@
 
             <div class="form-group col-sm-9">
             <label>Bidang</label>
-              <select class="form-control select2 @error('unit_id') is-invalid @enderror"  name="unit_id" value="{{old('unit_id')}}">
-                <option selected disabled><-Pilih Bidang-></option>
-              @foreach($unit as $unt)
-                <option value="{{$unt->unit_id}}">{{$unt->unit_name}}</option>
+              <select id="unit_id" class="form-control select2 @error('unit_id') is-invalid @enderror"  name="unit_id" value="{{old('unit_id')}}">
+                <option value='0'><-Pilih Bidang-></option>
+              @foreach($unit['data'] as $unt)
+                <option value='{{$unt->unit_id}}' >{{$unt->unit_name}}</option>
                @endforeach
               </select>
               @error('unit_id') <div class="invalid-feedback"> {{$message}} </div> @enderror
@@ -68,16 +68,14 @@
               @error('role_id') <div class="invalid-feedback"> {{$message}} </div> @enderror
             </div>
            
+           
             <div class="form-group col-sm-9">
             <label>Fungsi</label>
-              <select class="form-control select2 @error('fungsi_id') is-invalid @enderror" name="fungsi_id" style="width: 100%;" value="{{old('fungsi_id')}}">
-                <option selected disabled><-Pilih Fungsi-></option>
-              @foreach($fungsi as $item)
-                <option value="{{$item->fungsi_id}}">{{$item->fungsi_name}}->{{$item->unit->unit_name}}</option>
-              @endforeach
+             <select id="fungsi_id" class="form-control select2 @error('fungsi_id') is-invalid @enderror" name="fungsi_id" style="width: 100%;" >
+                <option value='0'><-Pilih Fungsi-></option>
               </select>
-              @error('fungsi_id') <div class="invalid-feedback"> {{$message}} </div> @enderror
             </div>
+            
 
             <div class="form-group col-sm-9">
             <label>Password</label>
@@ -90,34 +88,14 @@
             <div class="form-group">
               <button type="submit" class="btn btn-success">Simpan Data</button>
             </div>
+
+           
         </div>
     <!-- /.content -->  
       </div>
     </div>
-  @endsection
   
-<script src="{{asset('adminLTE')}}/plugins/select2/js/select2.full.min.js"></script>
-  <script type="text/javascript">
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": true,
-    });
-  });
+    @endsection
 
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
 
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    });
-    });
-</script>
 

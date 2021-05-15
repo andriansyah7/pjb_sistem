@@ -44,7 +44,7 @@
                 <div class="form-group col-sm-8">
             <label>Status ECP </label>
               <select class="form-control select2 @error('status_ecp_id') is-invalid @enderror" id="status_ecp_id" name="status_ecp_id" value="{{old('status_ecp_id')}}">
-                <option selected disabled>Approval ECP</option>
+                <option selected disabled><-Status ECP-></option>
               @foreach($status as $item)
                 <option value="{{$item->status_ecp_id}}">{{$item->status_ecp_name}}</option>
               @endforeach

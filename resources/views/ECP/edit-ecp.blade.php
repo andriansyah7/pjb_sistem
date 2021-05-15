@@ -10,7 +10,11 @@
           <h5>Input Data</h5>
         </div>
         <div class="card-body">
-          <form action="{{route('update-ecp','ecp_no')}}" method="post" enctype="multipart/form-data">
+        @php
+          $ecp_no = str_replace('/','-',$ecp->ecp_no);
+                    @endphp
+          <form action="{{route('update-ecp',$ecp_no)}}" method="post" enctype="multipart/form-data">
+          @method('patch')
           @csrf
           <div class="row">
           <div class="col-md-7">

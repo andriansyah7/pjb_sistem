@@ -10,8 +10,8 @@
           <h5>Input Data</h5>
         </div>
         <div class="card-body">
-          <form action="{{route('update-unit','unit_id')}}" method="post">
-          
+          <form action="/update-unit/{{$unit->unit_id}}" method="post">
+          @method('patch')
           @csrf
 
           <div class="row">

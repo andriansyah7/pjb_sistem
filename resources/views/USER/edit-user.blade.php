@@ -10,9 +10,9 @@
           <h5>Edit Data</h5>
         </div>
         <div class="card-body">
-          <form action="{{route('update-user','$user_nid')}}" method="post">
+          <form action="/update-user/{{$user->user_nid}}" method="post">
+          @method('patch')
           @csrf
-          {{method_field('PUT')}}
           <div class="row">
           <div class="col-md-6">
             <div class="form-group col-sm-7">
@@ -68,6 +68,18 @@
               @endforeach
               </select>
               @error('role_id') <div class="invalid-feedback"> {{$message}} </div> @enderror
+            </div>
+
+            <div class="form-group col-sm-7">
+            <label>Fungsi</label>
+              <select class="form-control select2 @error('role_id') is-invalid @enderror"  name="fungsi_id">
+            
+                <option selected disabled></option>
+              @foreach($fungsi as $rl)
+                <option value="{{$rl->fungsi_id}}" {{($user->fungsi_id == $rl ->fungsi_id) ? 'selected':''}}>{{$rl->fungsi_name}}</option>
+              @endforeach
+              </select>
+              @error('fungsi_id') <div class="invalid-feedback"> {{$message}} </div> @enderror
             </div>
 
             <div class="form-group col-sm-7">

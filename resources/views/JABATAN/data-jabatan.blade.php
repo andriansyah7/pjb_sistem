@@ -17,7 +17,6 @@
                 <thead>
                 <tr>
                   <th>NO</th>
-                  <th>ID</th>
                   <th>NAMA JABATAN</th>
                   <th>AKSI</th>
                 </tr>
@@ -26,8 +25,7 @@
 
                 @foreach ($jabatan as $e=>$item)
                 <tr>
-                    <td>{{$e+1}}</td>                  
-                    <td>{{$item->jabatan_id}}</td>                  
+                    <td>{{$e+1}}</td>                                  
                     <td>{{$item->jabatan_name}}</td>
                     <td>
                       <a href="{{route('edit-jabatan',$item->jabatan_id)}}"><i class="fas fa-edit"></i></a> 

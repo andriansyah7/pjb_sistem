@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Spv_approval;
 use App\Models\Status_ecp;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class SpvController extends Controller
 {
@@ -28,11 +29,12 @@ class SpvController extends Controller
     public function create()
     {
         $spv = Spv_approval::all();
-        $ecp = Ecp::all();
+        
         $user = User::all();
         $status = Status_ecp::all();
-        $ecpapproval = Ecp::all();
-        return view('SPV.create-spv',compact('spv','ecp','user','ecpapproval','status'));
+        $data = Auth::user()->user_nid;
+        $ecpapproval = Ecp::where('ecp_approval_1',$data)->orderBy('created_at','asc')->get();
+        return view('SPV.create-spv',compact('spv','user','ecpapproval','status'));
     }
 
     /**
@@ -59,10 +61,10 @@ class SpvController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Spv_approval $spv_approval)
     {
-        $spv = Spv_approval::findOrFail($id);
-        return view ('SPV.show-spv', compact('spv'));
+        
+        return view ('SPV.show-spv', compact('spv_approval'));
     }
 
     /**
@@ -71,15 +73,13 @@ class SpvController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($spv_approval_id)
+    public function edit(Spv_approval $spv_approval)
     {
-        $spv = Spv_approval::all();
-        $ecp = Ecp::all();
-        $user = User::all();
-        $status = Status_ecp::all();
-        $ecpapproval = Ecp::where('ecp_approval_1',"12345678ZZ")->get();
-        $spv = Spv_approval::findOrFail($spv_approval_id);
-        return view('SPV.edit-spv',compact('spv','ecp','user','ecpapproval','status'));
+        $ecp = Ecp::get();
+        $user = User::get();
+        $status = Status_ecp::get();
+        
+        return view('SPV.edit-spv',compact('ecp','user','status','spv_approval'));
     }
 
     /**
@@ -89,8 +89,9 @@ class SpvController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $spv_approval_id)
+    public function update(Request $request,Spv_approval $spv_approval)
     {
+        
         $request->validate([
             'ecp_no'=>'required',
             'user_nid'=>'required',
@@ -98,9 +99,15 @@ class SpvController extends Controller
             'spv_approval_alasan'=>'required'
         ]);
 
-        $spv = Spv_approval::findOrFail($spv_approval_id);
-        $spv->update($request->all());
-        return redirect('data-spv')->with('success', 'Data Berhasil Diupdate!');
+        Spv_approval::where('spv_approval_id',$spv_approval->spv_approval_id)
+        ->update([
+            'ecp_no' => $request->ecp_no,
+            'user_nid' => $request->user_nid,
+            'status_ecp_id' => $request->status_ecp_id,
+            'spv_approval_alasan' => $request->spv_approval_alasan,
+        ]);
+        
+        return redirect('data-spv')->with('success', 'Data Berhasil Diupdate !');
     }
 
     /**
@@ -114,5 +121,18 @@ class SpvController extends Controller
         $spv = Spv_approval::findOrFail($spv_approval_id);
         $spv->delete();
         return back()->with('info', 'Data Berhasil Terhapus'); 
+    }
+
+    public function cetakdoc($spv_approval_id)
+    {
+        $spv = Spv_Approval::findOrFail($spv_approval_id);
+       
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('EcpForm.docx'));
+
+        $templateProcessor->setValue('alasan_spv', $spv->spv_approval_alasan);
+
+        $templateProcessor->saveAs('EcpForm1.docx');
+        
+        return response()->download(public_path('EcpForm1.docx'));
     }
 }

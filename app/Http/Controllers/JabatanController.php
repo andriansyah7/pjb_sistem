@@ -60,17 +60,21 @@ class JabatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($jabatan_id)
+    public function edit(Jabatan $jabatan)
     {
-        $jabatan = Jabatan::findOrFail($jabatan_id);
+        
         return view('JABATAN.edit-jabatan',compact('jabatan'));
     }
 
 
-    public function update(Request $request, $jabatan_id)
+    public function update(Request $request,Jabatan $jabatan)
     {
-        $jbt = Jabatan::findOrFail($jabatan_id);
-        $jbt->update($request->all());
+        
+        
+        Jabatan::where('jabatan_id',$jabatan->jabatan_id)
+        ->update([
+            'jabatan_name'=>$request->jabatan_name,
+        ]);
         return redirect('data-jabatan')->with('success', 'Data Berhasil Terupdate!');
     }
 

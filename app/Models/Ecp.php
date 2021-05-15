@@ -23,6 +23,7 @@ class Ecp extends Model
         'ecp_approval_1',
         'ecp_approval_2',
         'ecp_file_pendukung',
+        'progres_id',
         
     ];
 
@@ -30,6 +31,11 @@ class Ecp extends Model
     {
         
         return $this->belongsTo(User::class,'user_nid','user_nid');
+    }
+    public function progres()
+    {
+        
+        return $this->belongsTo(Progres::class,'progres_id','progres_id');
     }
     
     public function approval1()

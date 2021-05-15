@@ -26,7 +26,7 @@
                 <tr>
                 <th>Tanggal Diajukan</th>
                 <th>:</th>
-                <th>{{date('d M Y',strtotime($ecp->created_at))}}</th>
+                <th>{{date('d M Y H:i:s',strtotime($ecp->created_at))}}</th>
                 </tr>
 
                 <tr>
@@ -36,21 +36,51 @@
                 </tr>
 
                 <tr>
+                <th>Approval 1</th>
+                <th>:</th>
+                <th>{{$ecp->approval1->user_name}}</th>
+                </tr>
+              
+                <tr>
+                <th>Approval 2</th>
+                <th>:</th>
+                <th>{{$ecp->approval2->user_name}}</th>
+                </tr>
+                
+                <tr>
                 <th>Deskripsi</th>
                 <th>:</th>
-                <th>{{$ecp->ecp_deskripsi}}</th>
+                <th><i>{{$ecp->ecp_deskripsi}}</i></th>
                 </tr>
 
+                <tr>
+                <th>Deskripsi Tambahan</th>
+                <th>:</th>
+                <th>{{$ecp->ecp_desktambahan}}</th>
+                </tr>
                 
+                <tr>
+                <th>Alasan</th>
+                <th>:</th>
+                <th>{{$ecp->ecp_alasan}}</th>
+                </tr>
 
-              
+
+                <tr>
+                <th>File Pendukung</th>
+                <th>:</th>
+                <th><p> <a href="{{asset($ecp->ecp_file_pendukung) }}" class="btn btn-xs btn-info" download="">Download File      <i class="fas fa-download"></i></a></p></th>
+                </tr>
                 </tbody>
              </table>
 
              
             
              <div>
-            <a href="#" class="btn btn-info btn-sm">Print ECP <i class="fas fa-print"></i></a>
+             @php
+                       $ecp_no = str_replace('/','-',$ecp->ecp_no);
+                    @endphp
+            <a href="{{route('cetakword',$ecp_no)}}" class="btn btn-info btn-sm">Print ECP <i class="fas fa-file-word"></i></a>
              </div>
              </div>
             </div>

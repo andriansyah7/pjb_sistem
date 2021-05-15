@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Ecp;
+use App\Models\Fungsi;
 use App\Models\Notulen;
 
 class NotulenController extends Controller
@@ -46,10 +47,6 @@ class NotulenController extends Controller
         'notulen_rapat'=>'required',
         'notulen_agenda'=>'required',
         'notulen_peserta'=>'required',
-        'notulen_pembahasan'=>'required',
-        'notulen_permasalahan'=>'required',
-        'notulen_permasalahan'=>'required',
-        'notulen_hasil_pembahasan'=>'required',
         ]);
 
         $notulen=$request->except(['_token']);
@@ -81,21 +78,35 @@ class NotulenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Notulen $notulen)
     {
-        //
+        $ecp= Ecp::all();
+        $user= User::all();
+        $pimpinan = User::where('role_id',"3")->get();
+        return view('NOTULEN.edit-notulen',compact('notulen','ecp','user','pimpinan'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+    public function update(Request $request,Notulen $notulen)
     {
-        //
+        $request->validate([
+            'notulen_pimpinan_rapat'=>'required',
+            'notulen_notulis'=>'required',
+            'notulen_tanggal'=>'required',
+            'notulen_waktu'=>'required',
+            'notulen_tempat'=>'required',
+            'notulen_rapat'=>'required',
+            'notulen_agenda'=>'required',
+            'notulen_peserta'=>'required',
+            ]);
+
+            $data=$request->except(['_token','_method']);
+            $data['notulen_tanggal']= date('Y-m-d');
+            $data['created_at']= date('Y-m-d H:i:s');
+            $data['updated_at']= date('Y-m-d H:i:s');
+
+            Notulen::where('notulen_id',$notulen->notulen_id)->update($data);
+            return redirect('data-notulen')->with('success', 'Data Berhasil Diupdate !');
     }
 
     /**
@@ -109,5 +120,35 @@ class NotulenController extends Controller
         $notulen = Notulen::findOrFail($notulen_id);
         $notulen->delete();
         return back()->with('info', 'Data Berhasil Terhapus'); 
+    }
+
+    public function cetaknotulen($notulen_id)
+    {
+        $wordTest = new \PhpOffice\PhpWord\PhpWord();
+        $notulen = Notulen::findOrFail($notulen_id);
+        
+     
+        $user = User::findOrFail($notulen->notulen_pimpinan_rapat);
+        $user2 = User::findOrFail($notulen->notulen_notulis);
+        
+        // dd($cmt);
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('NotulenForm.docx'));
+
+       
+        $templateProcessor->setValue('notulen_pimpinan_rapat', $user->user_name);
+        $templateProcessor->setValue('notulen_tanggal',date('d M Y',strtotime ($notulen->notulen_tanggal)));
+        $templateProcessor->setValue('notulen_waktu', $notulen->notulen_waktu);
+        $templateProcessor->setValue('notulen_tempat', $notulen->notulen_tempat);
+        $templateProcessor->setValue('notulen_rapat', $notulen->notulen_rapat);
+        $templateProcessor->setValue('notulen_agenda', $notulen->notulen_agenda);
+        $templateProcessor->setValue('notulen_peserta', $notulen->notulen_peserta);
+        $templateProcessor->setValue('notulen_pembahasan', $notulen->notulen_pembahasan);
+        $templateProcessor->setValue('notulen_permasalahan', $notulen->notulen_permasalahan);
+        $templateProcessor->setValue('notulen_hasil_pembahasan', $notulen->notulen_hasil_pembahasan);
+        $templateProcessor->setValue('notulen_notulis', $user2->user_name);
+
+        $templateProcessor->saveAs('NotulenForm1.docx');
+        
+        return response()->download(public_path('NotulenForm1.docx'));
     }
 }

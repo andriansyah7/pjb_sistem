@@ -1,24 +1,63 @@
 @extends('HalamanDepan.beranda')
 
-@section('title','Detail Evaluate ECP From Supervisor')
-
+@section('title','Detail APPROVAL 1')
 @section('container')
  
-  <div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">ECP NO: {{$spv->ecpnomor}}</h5>
-       <p> <h6 class="card-text">Disetujui: {{$spv->keputusan_spv}}</h6></p>
-        <p class="card-text">Alasan: {{$spv->alasan_spv}}</p>
-        <p class="card-text">Nama Supervisor: {{$spv->nama_spv}}</p>
-        <p class="card-text">Tanggal Disetujui: {{$spv->created_at}}</p>
-        
+<div class="content">
+      <div class ="card card-info card-outline">  
+      <div class ="card-header">     
 
-
-        <a href="{{route('data-spv')}}" class="btn btn-primary btn-sm">Back</a>
+      <h3>Detai Approval Supervisor</h3>
+         
       </div>
-    </div>
-  </div>
-  </div>
-  @endsection
+        
+            <!-- /.card-header -->
+            <div class="card-body">
+             <div class="row">
+             <div class="col-md-5">
+             <table class="table table-noborder">
+                <tbody>
+                <tr>
+                <th>No ECP </th>
+                <th>:</th>
+                <th>{{$spv_approval->ecp_no}}</th>
+                </tr>
+
+                <tr>
+                <th>Tanggal Approval</th>
+                <th>:</th>
+                <th>{{date('d M Y H:i:s',strtotime($spv_approval->created_at))}}</th>
+                </tr>
+
+                <tr>
+                <th>Supervisor</th>
+                <th>:</th>
+                <th>{{$spv_approval->user->user_name}}</th>
+                </tr>
+                
+                <tr>
+                <th>Alasan</th>
+                <th>:</th>
+                <th>{{$spv_approval->spv_approval_alasan}}</th>
+                </tr>
+
+
+                </tbody>
+             </table>
+
+             
+            
+             <div>
+            <a href="" class="btn btn-info btn-sm">Print Approval <i class="fas fa-print"></i></a>
+             </div>
+             </div>
+            </div>
+             </div>
+</div>
+</div>
+
+@endsection
+
+
+
+ 

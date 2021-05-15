@@ -69,31 +69,29 @@ class FungsiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Fungsi $fungsi)
     {
-        //
+        $unit= Unit::get();
+        return view('FUNGSI.edit-fungsi',compact('fungsi','unit'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function update(Request $request,Fungsi $fungsi)
     {
-        //
+        
+        
+        Fungsi::where('fungsi_id',$fungsi->fungsi_id)
+        ->update([
+            'unit_id'=>$request->unit_id,
+            'fungsi_name'=>$request->fungsi_name,
+        ]);
+        return redirect('data-fungsi')->with('success', 'Data Berhasil Terupdate!');
+    }
+    public function destroy($fungsi_id)
+    {
+            $fungsi = Fungsi::findOrFail($fungsi_id);
+            $fungsi->delete();
+            return back()->with('info', 'Data Berhasil Terhapus');
+       
     }
 }

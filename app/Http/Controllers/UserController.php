@@ -34,19 +34,25 @@ class UserController extends Controller
     public function create()
     {
         $jabatan = Jabatan::all();
-        $unit = Unit::all();
-        $fungsi = Fungsi::all();
         $roles = Role::all();
-        return view('USER.create-user',compact ('jabatan','roles','unit','fungsi'));
+        $unit['data'] = Unit::orderby("unit_id","asc")
+        			   ->select('unit_id','unit_name')
+        			   ->get();
+        return view('USER.create-user',compact ('jabatan','roles','unit'));
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function getfungsi($unit_id=0)
+    {
+        $fungsi['data'] = Fungsi::orderby("fungsi_name","asc")
+        ->select('fungsi_id','fungsi_name')
+        ->where('unit_id',$unit_id)
+        ->get();
+
+        return response()->json($fungsi);
+    }
+
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -85,23 +91,17 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($user_nid)
+  
+    public function edit(User $user)
     {
         $jabatan = Jabatan::get();
         $roles = Role::get();
         $unit = Unit::get();
-        $fungsi = Fungsi::all();
-        $user = User::findOrFail($user_nid);
+        $fungsi = Fungsi::get();
         return view('USER.edit-user',compact('jabatan','roles','user','unit','fungsi'));
     }
 
-    public function update(Request $request, $user_nid)
+    public function update(Request $request,User $user)
     {
         $request->validate([
             'user_nid'=>'required|size:10',
@@ -115,10 +115,10 @@ class UserController extends Controller
         
         
         $password = Hash::make($request->password);
-        $user= $request->except(['_token']);
+        
 
        
-        User::where('user_nid',$user_nid)
+        User::where('user_nid',$user->user_nid)
         ->update([
             'user_nid' => $request->user_nid,
             'user_name' => $request->user_name,
@@ -128,8 +128,6 @@ class UserController extends Controller
             'role_id' => $request->role_id,
             'user_email' => $request->user_email,
             'password' => $password,
-            'created_at' => date('Y-M-d H:i:s'),
-            'updated_at' => date('Y-M-d H:i:s'),
             ]);
 
         return redirect('data-user')->with('success', 'Data Berhasil Diupdate !');

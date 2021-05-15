@@ -31,7 +31,8 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                <!-- git config --global user.email "you@example.com"
+  git config --global user.name "Your Name" -->
                 @foreach ($ecp as $item)
                 <tr>
                 <td>{{ $loop->iteration}}</td>                   

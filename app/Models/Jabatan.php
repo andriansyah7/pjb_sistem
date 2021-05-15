@@ -12,7 +12,6 @@ class Jabatan extends Model
     protected $primaryKey = "jabatan_id";
     public $incrementing = false;
     protected $fillable = [
-        'jabatan_id',
         'jabatan_name',
     ];
 

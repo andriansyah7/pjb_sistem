@@ -16,7 +16,7 @@
         
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="#example2" class="table table-bordered table-striped myTable">
+              <table class="table table-bordered table-striped myTable">
                 <thead>
                 <tr>
                   <th>#</th>
@@ -48,9 +48,13 @@
                     <td>{{$item->spv_approval_alasan}}</td>
                     <td>{{$item->created_at}}</td>
                     <td>
+                    <a href="{{route('show-spv',$item->spv_approval_id)}}"><i class="fas fa-eye" style="color:black"></i></a>
+
+                    @if ($item->user_nid==auth()->user()->user_nid)
                       <a href="{{route('edit-spv',$item->spv_approval_id)}}"><i class="fas fa-edit"></i></a> 
                       
                       <a href="{{route('delete-spv',$item->spv_approval_id)}}"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i></a>
+                    @endif
                     </td>
                 </tr>
                 @endforeach

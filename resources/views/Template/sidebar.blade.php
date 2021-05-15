@@ -14,7 +14,7 @@
           <li class="nav-header">Layanan</li>
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+              <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 ECP
                 <i class="right fas fa-angle-left"></i>
@@ -31,13 +31,13 @@
           <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 1 ECP</p>
+                  <p>History Approval 1 ECP</p>
                 </a>
               </li>
           <li class="nav-item">
                 <a href="{{route('data-manager')}}" class="nav-link {{ Route::currentRouteNamed('data-manager') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 2 ECP</p>
+                  <p>History Approval 2 ECP</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -66,14 +66,14 @@
               <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 1 ECP</p>
+                  <p>History Approval 1 ECP</p>
                 </a>
               </li>
 
           <li class="nav-item">
                 <a href="{{route('data-manager')}}" class="nav-link {{ Route::currentRouteNamed('data-manager') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 2 ECP</p>
+                  <p>History Approval 2 ECP</p>
                 </a>
               </li>
 
@@ -103,14 +103,14 @@
           <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 1 ECP</p>
+                  <p>History Approval 1 ECP</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{route('data-manager')}}" class="nav-link {{ Route::currentRouteNamed('data-manager') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 2 ECP</p>
+                  <p>History Approval 2 ECP</p>
                 </a>
               </li>
 
@@ -140,13 +140,13 @@
               <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 1 ECP</p>
+                  <p>History Approval 1 ECP</p>
                 </a>
               </li>
           <li class="nav-item">
                 <a href="{{route('data-manager')}}" class="nav-link {{ Route::currentRouteNamed('data-manager') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 2 ECP</p>
+                  <p>History Approval 2 ECP</p>
                 </a>
               </li>
           
@@ -176,13 +176,13 @@
           <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 1 ECP</p>
+                  <p>History Approval 1 ECP</p>
                 </a>
               </li>
           <li class="nav-item">
                 <a href="{{route('data-manager')}}" class="nav-link {{ Route::currentRouteNamed('data-manager') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Approval 2 ECP</p>
+                  <p>History Approval 2 ECP</p>
                 </a>
               </li>
 
@@ -204,10 +204,64 @@
             </ul>
           </li>
 
+
+
 <!-- pengaturan -->
           
-          @if (auth()->user()->role_id=="1")
+          
           <li class="nav-header">Pengaturan</li>
+<!-- serp -->
+<li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                SERP
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+          @if (auth()->user()->role_id=="1")
+          <li class="nav-item">
+                <a href="{{route('data-blok')}}" class="nav-link {{ Route::currentRouteNamed('data-blok') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data Blok</p>
+                </a>
+              </li>
+
+          <li class="nav-item">
+                <a href="{{route('data-serp_unit')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_unit') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data Unit</p>
+                </a>
+              </li>
+          @endif
+
+          @if (auth()->user()->role_id=="4")
+          <li class="nav-item">
+                <a href="{{route('data-serp_system')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_system') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data System</p>
+                </a>
+              </li>
+
+          <li class="nav-item">
+                <a href="{{route('data-serp_pic')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_pic') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data PIC</p>
+                </a>
+              </li>
+
+          <li class="nav-item">
+                <a href="{{route('data-serp_main')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_main') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data Main Equipment</p>
+                </a>
+              </li>
+              @endif
+
+            </ul>
+          </li>
+          @if (auth()->user()->role_id=="1")
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -246,6 +300,9 @@
               </li>
               @endif
             </ul>
+          </li>
+          <li class="user-footer">
+          <a href="{{ route('logout') }}" class="badge badge-danger">Logout  <i class="fas fa-sign-out-alt"></i></a>
           </li>
         
         </ul>

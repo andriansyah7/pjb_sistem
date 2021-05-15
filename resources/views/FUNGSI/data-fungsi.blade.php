@@ -17,7 +17,6 @@
                 <thead>
                 <tr>
                   <th>NO</th>
-                  <th>ID</th>
                   <th>NAMA FUNGSI</th>
                   <th>NAMA BIDANG</th>
                   <th>AKSI</th>
@@ -28,7 +27,6 @@
                 @foreach ($fungsi as $e=>$item)
                 <tr>
                     <td>{{$e+1}}</td>                  
-                    <td>{{$item->fungsi_id}}</td>                  
                     <td>{{$item->fungsi_name}}</td>
                     <td>{{$item->unit->unit_name}}</td>                  
                     <td>

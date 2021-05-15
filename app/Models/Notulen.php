@@ -11,6 +11,7 @@ class Notulen extends Model
     protected $primaryKey = "notulen_id";
     protected $fillable = [
         'notulen_pimpinan_rapat',
+        'notulen_fungsi',
         'notulen_notulis',
         'notulen_tanggal',
         'notulen_waktu',
@@ -34,6 +35,11 @@ public function notulis()
 {
     
     return $this->belongsTo(User::class,'notulen_notulis','user_nid');
+}
+public function fungsi()
+{
+    
+    return $this->belongsTo(Fungsi::class,'notulen_fungsi','fungsi_id');
 }
 
 public function ecp()

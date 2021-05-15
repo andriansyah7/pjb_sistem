@@ -13,15 +13,15 @@
         
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="#example2" class="table table-bordered table-striped myTable">
+              <table class="table table-bordered table-striped myTable">
                 <thead>
                 <tr>
                   <th>#</th>
                   <th>NID</th>
                   <th>NAMA</th>
                   <th>JABATAN</th>
-                  <th>BIDANG</th>
                   <th>FUNGSI</th>
+                  <th>BIDANG</th>
                   <th>ROLE</th>
                   <th>AKSI</th>
                 </tr>
@@ -34,8 +34,8 @@
                     <td>{{$item->user_nid}}</td>
                     <td>{{$item->user_name}}</td>
                     <td>{{$item->jabatan->jabatan_name}}</td>
-                    <td>{{$item->unit->unit_name}}</td>
                     <td>{{$item->fungsi->fungsi_name}}</td>
+                    <td>{{$item->unit->unit_name}}</td>
                     <td>{{$item->roles->role_name}}</td>
                     <td>
                       

@@ -18,11 +18,20 @@
   <link rel="stylesheet" href="{{asset('adminLTE')}}/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-  <link rel="stylesheet" type="text/css" href="{{asset('adminLTE')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-  <link rel="stylesheet" type="text/css" href="{{asset('adminLTE')}}/plugins/datatables/jquery.dataTables.css">
+   <!-- daterange picker -->
+   <link rel="stylesheet" href="{{asset('adminLTE')}}/plugins/daterangepicker/daterangepicker.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.38.0/css/tempusdominus-bootstrap-4.min.css" crossorigin="anonymous" />
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+   <!-- DataTables -->
+   <link rel="stylesheet" href="{{asset('adminLTE')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{asset('adminLTE')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{asset('adminLTE')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  
   <link rel="stylesheet" href="{{asset('adminLTE')}}/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="{{asset('adminLTE')}}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" >
+
 
 
 </head>
@@ -30,15 +39,16 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-dark navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-dark">
     <!-- SEARCH FORM -->
       
     <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown user-menu">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+    <a href="#" class="nav-link">
           <img src="{{asset('adminLTE')}}/dist/img/user.png" class="user-image img-circle elevation-2" alt="User Image">
           <span class="d-none d-md-inline">{{auth()->user()->user_name}}</span>
         </a>
+        </li>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-secondary">
@@ -56,6 +66,7 @@
           <a href="{{ route('logout') }}" class="badge badge-danger">Logout</a>
           </li>
         </ul>
+    
         </ul>
   </nav>
   <!-- /.navbar -->
@@ -112,7 +123,7 @@
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2021 <a href="#">SystemOwner</a>.</strong> All rights
+    <strong>Copyright &copy; 2021 <a href="#">SystemOwner PT PJB</a>.</strong> All rights
     reserved.
   </footer>
 

@@ -17,7 +17,7 @@
         
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="#example2" class="table table-bordered table-striped myTable">
+              <table class="table table-bordered table-striped myTable">
                 <thead>
                 <tr>
                      <th>#</th>
@@ -57,7 +57,6 @@
             </div>
 </div>
 </div>
-@include('Template.script')
 @endsection
 
 

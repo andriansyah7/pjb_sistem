@@ -55,17 +55,22 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($unit_id)
+    public function edit(Unit $unit)
     {
-        $unit = Unit::findOrFail($unit_id);
+       
         return view('UNIT.edit-unit',compact('unit'));
     }
 
 
-    public function update(Request $request, $unit_id)
+    public function update(Request $request,Unit $unit)
     {
-        $unt = Unit::findOrFail($unit_id);
-        $unt->update($request->all());
+        
+        
+        Unit::where('unit_id',$unit->unit_id)
+        ->update([
+            'unit_name'=>$request->unit_name,
+        ]);
+     
         return redirect('data-unit')->with('success', 'Data Berhasil Terupdate!');
     }
 

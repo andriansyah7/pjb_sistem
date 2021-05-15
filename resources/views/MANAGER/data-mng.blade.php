@@ -31,9 +31,9 @@
                 </thead>
                 <tbody>
 
-                @foreach ($mng as $e=>$item)
+                @foreach ($mng as $item)
                 <tr>
-                    <td>{{$item->manager_approval_id}}</td>                  
+                    <td>{{$loop->iteration}}</td>                  
                     <td>{{$item->ecp->ecp_no}}</td>
                     @if($item->status_ecp_id == 2)
                     <td> <label class="badge badge-success">{{$item->status_ecp->status_ecp_name}} </label></td>
@@ -49,9 +49,13 @@
                     <td>{{$item->manager_approval_alasan}}</td>
                     <td>{{$item->created_at}}</td>
                     <td>
+                    <a href="{{route('show-manager',$item->manager_approval_id)}}"><i class="fas fa-eye" style="color:black"></i></a>
+                    @if ($item->user_nid==auth()->user()->user_nid)
+
                       <a href="{{route('edit-manager',$item->manager_approval_id)}}"><i class="fas fa-edit"></i></a> 
                       
                       <a href="{{route('delete-manager',$item->manager_approval_id)}}"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i></a>
+                   @endif
                     </td>
                 </tr>
                 @endforeach
