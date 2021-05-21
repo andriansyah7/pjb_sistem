@@ -19,7 +19,7 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>NO percobaan</th>
+                  <th>NO ECP</th>
                   <th>NAMA</th>
                   <th>DESKRIPSI</th>
                   <th>APPROVAL1</th>
