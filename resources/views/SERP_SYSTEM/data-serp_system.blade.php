@@ -16,7 +16,7 @@
               <table id="#example2" class="table table-bordered table-striped myTable">
                 <thead>
                 <tr>
-                  <th>NO</th>
+                  <th  width="1px">NO</th>
                   <th>NAMA SYSTEM</th>
                   <th>NAMA UNIT</th>
                   <th>AKSI</th>

@@ -16,9 +16,9 @@
               <table id="#example2" class="table table-bordered table-striped myTable">
                 <thead>
                 <tr>
-                  <th>NO</th>
+                  <th  width="1px">NO</th>
                   <th>NAMA PIC</th>
-                  <th>AKSI</th>
+                  <th  width="100px">AKSI</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,9 +28,9 @@
                     <td>{{$e+1}}</td>                  
                     <td>{{$item->serp_pic_name}}</td>
                     <td>
-                      <a href="{{route('edit-serp_pic',$item->serp_pic_id)}}"><i class="fas fa-edit"></i></a> 
+                      <a href="{{route('edit-serp_pic',$item->serp_pic_id)}}" class="badge badge-light"><i class="fas fa-edit" style="color:blue"></i> Edit</a> 
                       |
-                      <a href="{{route('delete-serp_pic',$item->serp_pic_id)}}"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i></a>
+                      <a href="{{route('delete-serp_pic',$item->serp_pic_id)}}" class="badge badge-light"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i> Hapus</a>
                     </td>
                 </tr>
                 @endforeach
