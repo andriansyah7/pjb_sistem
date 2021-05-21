@@ -12,8 +12,23 @@ class Serp_Main_Equipment extends Model
     public $incrementing = false;
     protected $fillable = [
         'serp_main_equipment_id',
+        'serp_system_id',
+        'serp_pic_id',
         'serp_main_equipment_name',
         'serp_main_equipment_keterangan',
+        'OC',
+        'PT',
+        'PQ',
+        'SF',
+        'RC',
+        'PE',
+        'RT',
+        'SCR',
+        'OCR',
+        'ACR',
+        'AFPF',
+        'MPI',
+
         
     ];
 

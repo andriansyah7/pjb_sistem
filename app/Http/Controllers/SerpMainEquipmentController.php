@@ -42,7 +42,53 @@ class SerpMainEquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'serp_main_equipment_name'=>'required',
+            'serp_system_id'=>'required',
+            'OC'=>'required',
+            'PT'=>'required',
+            'PQ'=>'required',
+            'RC'=>'required',
+            'PE'=>'required',
+            'RT'=>'required',
+            'serp_pic_id'=>'required',
+            'serp_main_equipment_keterangan'=>'required',
+        ]);
+        
+        $oc=$request->OC;
+        $pt=$request->PT;
+        $pq=$request->PQ;
+        $sf=$request->SF;
+        $rc=$request->RC;
+        $pe=$request->PE;
+        $rt=$request->RT;
+        $ocr=$request->OCR;
+        $afpf=$request->AFPF;
+        $scr=pow((pow($oc,2)+pow($pt,2)+pow($pq,2)+pow($sf,2)+pow($rc,2)+pow($pe,2)+pow($rt,2))/7,0.5);
+        $acr=$scr*$ocr;
+        $mpi=$acr*$afpf;
+        
+        Serp_Main_Equipment::create([
+            'serp_main_equipment_name' => $request->serp_main_equipment_name,
+            'serp_system_id' => $request->serp_system_id,
+            'OC' => $request->OC,
+            'PT' => $request->PT,
+            'PQ' => $request->PQ,
+            'SF' => $request->SF,
+            'RC' => $request->RC,
+            'PE' => $request->PE,
+            'RT' => $request->RT,
+            'SCR'=>$scr,
+            'OCR'=>$request->OCR,
+            'ACR'=>$acr,
+            'AFPF'=>$request->AFPF,
+            'MPI'=>$mpi,
+            'serp_pic_id' => $request->serp_pic_id,
+            'serp_main_equipment_keterangan' => $request->serp_main_equipment_keterangan,
+            'created_at' => date('Y-M-d H:i:s'),
+            'updated_at' => date('Y-M-d H:i:s'),
+            ]);
+        return redirect('data-serp_main')->with('success', 'Data Berhasil Tersimpan!');
     }
 
     /**
@@ -85,8 +131,10 @@ class SerpMainEquipmentController extends Controller
      * @param  \App\Models\Serp_Main_Equipment  $serp_Main_Equipment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Serp_Main_Equipment $serp_Main_Equipment)
+    public function destroy($serp_main_equipment_id)
     {
-        //
+        $data = Serp_Main_Equipment::findOrFail($serp_main_equipment_id);
+        $data->delete();
+        return back()->with('info', 'Data Berhasil Terhapus');
     }
 }

@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth', 'ceklevel: 1']], function () {
     Route::get('/delete-unit/{unit_id}', 'UnitController@destroy')->name('delete-unit');
     //Data Fungsi
     Route::get('/data-fungsi', 'FungsiController@index')->name('data-fungsi');
-    Route::get('/create-fungsi', 'FungsiController@create')->name('create-fungsi');
+    Route::get('/create-fungsi', 'FungsiController@create')->name('create-fungsii');
     Route::post('/simpan-fungsi', 'FungsiController@store')->name('simpan-fungsi');
     Route::get('/edit-fungsi/{fungsi}', 'FungsiController@edit')->name('edit-fungsi');
     Route::patch('/update-fungsi/{fungsi}', 'FungsiController@update')->name('update-fungsi');

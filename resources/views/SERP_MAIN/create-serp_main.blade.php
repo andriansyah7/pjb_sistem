@@ -76,6 +76,18 @@
               <input type="text" name="RT" class="form-control @error('RT') is-invalid @enderror" placeholder="Nilai RT">
               @error('RT') <div class="invalid-feedback"> {{$message}} </div> @enderror
             </div>
+
+            <div class="form-group col-sm-1">
+            <label>OCR</label>
+              <input type="text" name="OCR" class="form-control @error('OCR') is-invalid @enderror" placeholder="Nilai OCR">
+              @error('OCR') <div class="invalid-feedback"> {{$message}} </div> @enderror
+            </div>
+
+            <div class="form-group col-sm-1">
+            <label>AFPF</label>
+              <input type="text" name="AFPF" class="form-control @error('OCR') is-invalid @enderror" placeholder="Nilai AFPF">
+              @error('AFPF') <div class="invalid-feedback"> {{$message}} </div> @enderror
+            </div>
             </div>
 
             <div class="row">
@@ -94,8 +106,8 @@
             <div class="row">
             <div class="form-group col-sm-7">
             <label>Keterangan</label>
-              <input type="text" name="main_equipment_keterangan" class="form-control @error('main_equipment_keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan Main Equipment">
-              @error('main_equipment_keterangan') <div class="invalid-feedback"> {{$message}} </div> @enderror
+              <input type="text" name="serp_main_equipment_keterangan" class="form-control @error('serp_main_equipment_keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan Main Equipment">
+              @error('serp_main_equipment_keterangan') <div class="invalid-feedback"> {{$message}} </div> @enderror
             </div>
             </div>
             
