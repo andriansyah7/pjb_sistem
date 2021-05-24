@@ -15,6 +15,14 @@
           <div class="row">
 
             <div class="form-group col-sm-7">
+            <label>KKS</label>
+              <input type="text" name="serp_main_equipment_id" class="form-control @error('serp_main_equipment_id') is-invalid @enderror" placeholder="Masukkan KKS">
+              @error('serp_main_equipment_id') <div class="invalid-feedback"> {{$message}} </div> @enderror
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="form-group col-sm-7">
             <label>Nama Equipment</label>
               <input type="text" name="serp_main_equipment_name" class="form-control @error('serp_main_equipment_name') is-invalid @enderror" placeholder="Masukkan Nama Main Equipment">
               @error('serp_main_equipment_name') <div class="invalid-feedback"> {{$message}} </div> @enderror

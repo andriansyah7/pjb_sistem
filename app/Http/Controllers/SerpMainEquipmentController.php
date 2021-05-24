@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Serp_System;
 use App\Models\Serp_Main_Equipment;
 use App\Models\Serp_Pic;
+use App\Exports\MainEquipmentExport;
+use App\Imports\MainEquipmentImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class SerpMainEquipmentController extends Controller
@@ -21,11 +24,37 @@ class SerpMainEquipmentController extends Controller
         return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   public function ekspor ()
+   {
+       $tgl= date('d-M-Y');
+    return Excel::download(new MainEquipmentExport, 'serp_main_equipment.csv');
+
+   }
+
+   public function impor(Request $request) 
+   {
+       // validasi
+       $this->validate($request, [
+           'file' => 'required|mimes:csv,xls,xlsx'
+       ]);
+
+       // menangkap file excel
+       $file = $request->file('file');
+
+       // membuat nama file unik
+       $nama_file = rand().$file->getClientOriginalName();
+
+       // upload ke folder file_main_equipment di dalam folder public
+       $file->move('file_main_equipment',$nama_file);
+
+       // import data
+       Excel::import(new MainEquipmentImport,'file_main_equipment/'.$nama_file);
+
+       // notifikasi
+       return redirect('data-serp_main')->with('success', 'Data Berhasil DiImpor!');
+
+   }
+
     public function create()
     {
         $serp_system = Serp_System::all();
@@ -43,6 +72,7 @@ class SerpMainEquipmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'serp_main_equipment_id'=>'required',
             'serp_main_equipment_name'=>'required',
             'serp_system_id'=>'required',
             'OC'=>'required',
@@ -69,6 +99,7 @@ class SerpMainEquipmentController extends Controller
         $mpi=$acr*$afpf;
         
         Serp_Main_Equipment::create([
+            'serp_main_equipment_id' => $request->serp_main_equipment_id,
             'serp_main_equipment_name' => $request->serp_main_equipment_name,
             'serp_system_id' => $request->serp_system_id,
             'OC' => $request->OC,
