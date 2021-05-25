@@ -18,7 +18,7 @@
                 <tr>
                   <th  width="1px">NO</th>
                   <th>NAMA PIC</th>
-                  <th  width="100px">AKSI</th>
+                  <th  width="160px">AKSI</th>
                 </tr>
                 </thead>
                 <tbody>

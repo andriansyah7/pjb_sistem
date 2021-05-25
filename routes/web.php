@@ -150,10 +150,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/ekspor-serp_main', 'SerpMainEquipmentController@ekspor')->name('ekspor-serp_main');
     Route::post('/impor-serp_main', 'SerpMainEquipmentController@impor')->name('impor-serp_main');
     Route::post('/simpan-serp_main', 'SerpMainEquipmentController@store')->name('simpan-serp_main');
-    Route::get('/edit-serp_main/{serp_main}', 'SerpMainEquipmentController@edit')->name('edit-serp_main');
-    Route::patch('/update-serp_main/{serp_main}', 'SerpMainEquipmentController@update')->name('update-serp_main');
-    Route::get('/delete-serp_main/{serp_main}', 'SerpMainEquipmentController@destroy')->name('delete-serp_main');
-    Route::get('/show-serp_main/{serp_main}', 'SerpMainEquipmentController@show')->name('show-serp_main');
+    Route::get('/edit-serp_main/{serp_main_equipment}', 'SerpMainEquipmentController@edit')->name('edit-serp_main');
+    Route::patch('/update-serp_main/{serp_main_equipment}', 'SerpMainEquipmentController@update')->name('update-serp_main');
+    Route::get('/delete-serp_main/{serp_main_equipment}', 'SerpMainEquipmentController@destroy')->name('delete-serp_main');
+    Route::get('/show-serp_main/{serp_main_equipment}', 'SerpMainEquipmentController@show')->name('show-serp_main');
 });
 
 //user staff

@@ -25,7 +25,7 @@
                   <th>NAMA SUPERVISOR</th>
                   <th>ALASAN</th>
                   <th>APPROVED DATE</th>
-                  <th>AKSI</th>
+                  <th width="190px">AKSI</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,12 +48,12 @@
                     <td>{{$item->spv_approval_alasan}}</td>
                     <td>{{$item->created_at}}</td>
                     <td>
-                    <a href="{{route('show-spv',$item->spv_approval_id)}}"><i class="fas fa-eye" style="color:black"></i></a>
+                    <a href="{{route('show-spv',$item->spv_approval_id)}}" class="badge badge-dark"><i class="fas fa-eye" style="color:white"></i>Detail</a>
 
                     @if ($item->user_nid==auth()->user()->user_nid)
-                      <a href="{{route('edit-spv',$item->spv_approval_id)}}"><i class="fas fa-edit"></i></a> 
+                      <a href="{{route('edit-spv',$item->spv_approval_id)}}" class="badge badge-dark"> <i class="fas fa-edit" style="color:blue"></i>Edit</a> 
                       
-                      <a href="{{route('delete-spv',$item->spv_approval_id)}}"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i></a>
+                      <a href="{{route('delete-spv',$item->spv_approval_id)}}" class="badge badge-dark"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i>Hapus</a>
                     @endif
                     </td>
                 </tr>

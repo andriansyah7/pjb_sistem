@@ -27,7 +27,7 @@
                   <th>FILE PENDUKUNG</th>
                   <th>TANGGAL PENGAJUAN</th>
                   <th>PROGRES</th>
-                  <th>AKSI</th>
+                  <th width="260px">AKSI</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,16 +48,16 @@
                     @php
                        $ecp_no = str_replace('/','-',$item->ecp_no);
                     @endphp
-                    <a href="{{route('show-ecp',$ecp_no)}}"><i class="fas fa-eye" style="color:black"></i></a>
+                    <a href="{{route('show-ecp',$ecp_no)}}" class="badge badge-light"><i class="fas fa-eye" style="color:black"></i>Detail</a>
                     @if (auth()->user()->role_id=='4')
-                    <a href="{{route('progres-notulen',$ecp_no)}}"><i class="fas fa-file-signature" style="color:darkblue"></i></a>
-                    <a href="{{route('progres-tindaklanjut',$ecp_no)}}"><i class="fas fa-file-export" style="color:tomato"></i></a>
+                    <a href="{{route('progres-notulen',$ecp_no)}}" class="badge badge-light"><i class="fas fa-file-signature" style="color:darkblue">+Notulen</i></a>
+                    <a href="{{route('progres-tindaklanjut',$ecp_no)}}" class="badge badge-light"><i class="fas fa-file-export" style="color:tomato"></i>+Tindak Lanjut</a>
 
                     @endif
                     @if ($item->user_nid==auth()->user()->user_nid)
-                      <a href="{{route('edit-ecp',$ecp_no)}}" class="fas fa-edit"></i></a> 
+                      <a href="{{route('edit-ecp',$ecp_no)}}" class="badge badge-light"><i class="fas fa-edit" style="color:blue"></i>Edit</a> 
             
-                      <a href="{{route('delete-ecp',$ecp_no)}}"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i></a>
+                      <a href="{{route('delete-ecp',$ecp_no)}}" class="badge badge-light"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i>Hapus</a>
                     @endif
                     </td>
                 </tr>

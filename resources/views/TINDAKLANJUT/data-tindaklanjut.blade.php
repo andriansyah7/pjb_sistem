@@ -26,7 +26,7 @@
                     <th>NOTULIS</th>
                     <th>DESKRIPSI</th>
                     <th>TANGGAL</th>
-                    <th>Aksi</th>
+                    <th width="200px">AKSI</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,12 +41,12 @@
                     <td>{{$item->created_at}}</td>
                     <td>
                     @if (auth()->user()->role_id=="4")
-                      <a href="{{route('show-tindaklanjut',$item->tindaklanjut_id)}}"><i class="fas fa-eye" style="color:black"></i></a>
+                      <a href="{{route('show-tindaklanjut',$item->tindaklanjut_id)}}" class="badge badge-light"><i class="fas fa-eye" style="color:black"></i>Detail</a>
                        |
-                      <a href="{{route('edit-tindaklanjut',$item->tindaklanjut_id)}}"><i class="fas fa-file" style="color: blue"></i></a>
+                      <a href="{{route('edit-tindaklanjut',$item->tindaklanjut_id)}}" class="badge badge-light"><i class="fas fa-file" style="color: blue"></i> Edit</a>
                        | 
                
-                      <a href="{{route('delete-tindaklanjut',$item->tindaklanjut_id)}}"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i></a>
+                      <a href="{{route('delete-tindaklanjut',$item->tindaklanjut_id)}}" class="badge badge-light"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i>Hapus</a>
                     @endif
                    
 
