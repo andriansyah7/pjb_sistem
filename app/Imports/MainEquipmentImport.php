@@ -11,8 +11,8 @@ class MainEquipmentImport implements ToModel
     public function model(array $row)
     {
         return new Serp_Main_Equipment([
-            'serp_main_equipment_id ' => $row[0],
-            'serp_system_id ' => $row[1], 
+            'serp_main_equipment_id' => $row[0],
+            'serp_system_id' => $row[1], 
             'serp_main_equipment_name' => $row[2], 
             'PT' => $row[3], 
             'OC' => $row[4], 

@@ -15,7 +15,8 @@
         
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="#example2" class="table table-bordered table-striped myTable">
+              <div class="table-responsive">
+              <table id="#example2" class="table table-bordered table-sm table-striped myTable">
                 <thead>
                 <tr>
                   <th>#</th>
@@ -27,7 +28,7 @@
                   <th>FILE PENDUKUNG</th>
                   <th>TANGGAL PENGAJUAN</th>
                   <th>PROGRES</th>
-                  <th width="260px">AKSI</th>
+                  <th>AKSI</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,6 +65,7 @@
                 @endforeach
                 </tbody>
               </table>
+              </div>
             </div>
 </div>
 </div>

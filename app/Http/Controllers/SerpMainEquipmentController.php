@@ -27,7 +27,7 @@ class SerpMainEquipmentController extends Controller
    public function ekspor ()
    {
        $tgl= date('d-M-Y');
-    return Excel::download(new MainEquipmentExport, 'serp_main_equipment.csv');
+    return Excel::download(new MainEquipmentExport, 'serp_main_equipment.xlsx');
 
    }
 
@@ -49,6 +49,7 @@ class SerpMainEquipmentController extends Controller
 
        // import data
        Excel::import(new MainEquipmentImport,'file_main_equipment/'.$nama_file);
+
 
        // notifikasi
        return redirect('data-serp_main')->with('success', 'Data Berhasil DiImpor!');

@@ -7,7 +7,7 @@
   <link rel="icon" href="{{asset('adminLTE')}}/dist/img/listrik4.png" >
   <title>@yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('adminLTE')}}/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -15,7 +15,7 @@
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{asset('adminLTE')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('adminLTE')}}/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{asset('adminLTE')}}/dist/css/adminlte.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
    <!-- daterange picker -->
@@ -113,7 +113,8 @@
               </div>
           </div>
         </div>
-      </div>
+      
+</div>
     </section>
     <!-- /.content -->
   </div>

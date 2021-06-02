@@ -41,13 +41,14 @@
 		</div>
         
             <!-- /.card-header -->
-            <div class="card-body">
-              <table id="#example2" class="table table-bordered table-striped myTable">
+            <div text-sm class="card-body">
+              <div class="table-responsive">
+              <table id="#example2" class="table table-bordered table-striped myTable table-sm">
                 <thead>
                 <tr>
                   <th width="10px">KKS</th>
-                  <th>NAMA EQUIPMENT</th>
-                  <th>NAMA SYSTEM</th>
+                  <th width="200px">NAMA EQUIPMENT</th>
+                  <th width="200px">NAMA SYSTEM</th>
                   <th width="1px">PT</th>
                   <th width="1px">OC</th>
                   <th width="1px">PQ</th>
@@ -60,9 +61,9 @@
                   <th width="2px">ACR</th>
                   <th width="1px">AFPF</th>
                   <th width="2px">MPI</th>
-                  <th width="120px">PIC</th>
-                  <th>KETERANGAN</th>
-                  <th width="140px">AKSI</th>
+                  <th >PIC</th>
+                  <th >KETERANGAN</th>
+                  <th >AKSI</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -87,14 +88,15 @@
                     <td>{{$item->pic->serp_pic_name}}</td>
                     <td>{{$item->serp_main_equipment_keterangan}}</td>
                     <td>
-                      <a href="{{route('edit-serp_main',$item->serp_main_equipment_id)}}" class="badge badge-light"><i class="fas fa-edit" style="color:blue"></i> Edit</a> 
-                      |
-                      <a href="{{route('delete-serp_main',$item->serp_main_equipment_id)}}" class="badge badge-light"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i>Hapus</a>
+                      <a href="{{route('edit-serp_main',$item->serp_main_equipment_id)}}" class="badge badge-light"><i class="fas fa-edit" style="color:blue"></i></a> 
+                     
+                      <a href="{{route('delete-serp_main',$item->serp_main_equipment_id)}}" class="badge badge-light"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i></a>
                     </td>
                 </tr>
                 @endforeach
                 </tbody>
               </table>
+              </div>
             </div>
 </div>
 </div>

@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Serp_System;
 use App\Models\Serp_Unit;
+use App\Exports\SerpSystemExport;
+use App\Imports\SerpSystemImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class SerpSystemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         $serp_system = Serp_System::all();
@@ -20,11 +19,7 @@ class SerpSystemController extends Controller
         return view('SERP_SYSTEM.data-serp_system',compact('serp_system','serp_unit'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         $serp_system = Serp_System::all();
@@ -32,12 +27,7 @@ class SerpSystemController extends Controller
         return view('SERP_SYSTEM.create-serp_system',compact('serp_system','serp_unit'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -53,12 +43,38 @@ class SerpSystemController extends Controller
         return redirect('data-serp_system')->with('success', 'Data Berhasil Tersimpan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Serp_System  $serp_System
-     * @return \Illuminate\Http\Response
-     */
+    public function ekspor ()
+    {
+        $tgl= date('d-M-Y');
+     return Excel::download(new SerpSystemExport, 'serp_system.xlsx');
+ 
+    }
+
+    public function impor(Request $request) 
+    {
+        // validasi
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+ 
+        // menangkap file excel
+        $file = $request->file('file');
+ 
+        // membuat nama file unik
+        $nama_file = rand().$file->getClientOriginalName();
+ 
+        // upload ke folder file_main_equipment di dalam folder public
+        $file->move('file_serp_system',$nama_file);
+ 
+        // import data
+        Excel::import(new SerpSystemImport,'file_serp_system/'.$nama_file);
+        
+ 
+        // notifikasi
+        return redirect('data-serp_system')->with('success', 'Data Berhasil DiImpor!');
+ 
+    }
+
     public function show(Serp_System $serp_System)
     {
         //

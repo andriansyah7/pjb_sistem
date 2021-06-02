@@ -61,7 +61,7 @@ class UserController extends Controller
             'jabatan_id'=>'required',
             'unit_id'=>'required',
             'role_id'=>'required',
-            'user_email'=>'required',
+            
             'password'=>'required'
         ]);
         $password = Hash::make($request->password);
@@ -104,12 +104,12 @@ class UserController extends Controller
     public function update(Request $request,User $user)
     {
         $request->validate([
-            'user_nid'=>'required|size:10',
+            'user_nid'=>'required',
             'user_name'=>'required',
             'jabatan_id'=>'required',
             'unit_id'=>'required',
             'role_id'=>'required',
-            'user_email'=>'required',
+            
             'password'=>'required'
         ]);
         

@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth', 'ceklevel: 1']], function () {
     Route::get('/delete-unit/{unit_id}', 'UnitController@destroy')->name('delete-unit');
     //Data Fungsi
     Route::get('/data-fungsi', 'FungsiController@index')->name('data-fungsi');
-    Route::get('/create-fungsi', 'FungsiController@create')->name('create-fungsii');
+    Route::get('/create-fungsi', 'FungsiController@create')->name('create-fungsi');
     Route::post('/simpan-fungsi', 'FungsiController@store')->name('simpan-fungsi');
     Route::get('/edit-fungsi/{fungsi}', 'FungsiController@edit')->name('edit-fungsi');
     Route::patch('/update-fungsi/{fungsi}', 'FungsiController@update')->name('update-fungsi');
@@ -132,6 +132,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/data-serp_system', 'SerpSystemController@index')->name('data-serp_system');
     Route::get('/create-serp_system', 'SerpSystemController@create')->name('create-serp_system');
     Route::post('/simpan-serp_system', 'SerpSystemController@store')->name('simpan-serp_system');
+    Route::post('/ekspor-serp_system', 'SerpSystemController@ekspor')->name('ekspor-serp_system');
+    Route::post('/impor-serp_system', 'SerpSystemController@impor')->name('impor-serp_system');
     Route::get('/edit-serp_system/{serp_system}', 'SerpSystemController@edit')->name('edit-serp_system');
     Route::patch('/update-serp_system/{serp_system}', 'SerpSystemController@update')->name('update-serp_system');
     Route::get('/delete-serp_system/{serp_system}', 'SerpSystemController@destroy')->name('delete-serp_system');
