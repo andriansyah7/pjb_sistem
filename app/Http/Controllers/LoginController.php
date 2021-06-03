@@ -9,6 +9,11 @@ class LoginController extends Controller
 {
     public function postlogin (Request $request) {
         // dd($request->all());
+        $request->validate([
+            'user_nid'=>'required',
+            'password'=>'required'
+        ]);
+        
         if (Auth::attempt($request->only('user_nid','password'))){
             return redirect('/beranda');
         }

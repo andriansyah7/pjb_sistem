@@ -16,7 +16,7 @@
             <!-- /.card-header -->
             <div class="card-body">
               <div class="table-responsive">
-              <table id="#example2" class="table table-bordered table-sm table-striped myTable">
+              <table id="#example2" class="table table-bordered table-striped myTable table-sm ">
                 <thead>
                 <tr>
                   <th>#</th>
@@ -28,12 +28,11 @@
                   <th>FILE PENDUKUNG</th>
                   <th>TANGGAL PENGAJUAN</th>
                   <th>PROGRES</th>
-                  <th>AKSI</th>
+                  <th width="175px">AKSI</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!-- git config --global user.email "you@example.com"
-  git config --global user.name "Your Name" -->
+               
                 @foreach ($ecp as $item)
                 <tr>
                 <td>{{ $loop->iteration}}</td>                   
