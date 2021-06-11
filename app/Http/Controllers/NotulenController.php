@@ -13,7 +13,7 @@ class NotulenController extends Controller
     
     public function index()
     {
-        $notulen = Notulen::all();
+        $notulen = Notulen::orderBy('created_at','desc')->get();
         $ecp = Ecp::all();
         $user = User::all();
         return view('NOTULEN.data-notulen',compact('notulen','ecp','user'));

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{asset('adminLTE')}}/dist/img/listrik4.png" >
   <title>PJB | Login</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -17,7 +18,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
 <div class="login-logo">
-    <a href="{{asset('adminLTE')}}/index2.html">System <b>Owner</b></a>
+<img width="100%" src="{{asset('adminLTE')}}/dist/img/SOAppsNobg.png" />
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -57,11 +58,8 @@
         </div>
       </form>
 
+@include('sweetalert::alert')
 <!-- jQuery -->
-<script src="{{asset('adminLTE/plugins/jquery/jquery.min.js')}}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('adminLTE/dist/js/adminlte.min.js')}}"></script>
+@include('Template.script')
 </body>
 </html>

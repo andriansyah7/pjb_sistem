@@ -18,7 +18,7 @@ class SpvController extends Controller
      */
     public function index()
     {
-        $spv = Spv_approval::all();
+        $spv = Spv_approval::orderBy('created_at','desc')->get();
         $ecp = Ecp::all();
         $user = User::all();
         return view('SPV.data-spv',compact('spv','ecp','user'));

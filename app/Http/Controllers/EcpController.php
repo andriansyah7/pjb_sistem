@@ -29,7 +29,7 @@ class EcpController extends Controller
         $approval1 = User::where('role_id',"3")->get();
         $approval2 = User::where('role_id',"2")->get();
         $data = Auth::user()->user_nid;
-        $ecp = Ecp::where('ecp_approval_1',$data)->get();
+        $ecp = Ecp::where('ecp_approval_1',$data)->orderBy('created_at','desc')->get();
         return view('SPV.data-ecp-approval1', compact('approval1','approval2','ecp'));
     }
     
@@ -39,9 +39,16 @@ class EcpController extends Controller
         $approval1 = User::where('role_id',"3")->get();
         $approval2 = User::where('role_id',"2")->get();
         $data = Auth::user()->user_nid;
-        $ecpapproval = Ecp::where('ecp_approval_2',$data)->get();
+      
+        if (Auth::user()->fungsi_id=='4') {
+            $ecpapproval= Ecp::orderBy('created_at','desc')->get();
+            return view('MANAGER.data-ecp-approval2', compact('approval1','approval2','ecpapproval'));
+        }
+            $ecpapproval = Ecp::where('ecp_approval_2',$data)->orderBy('created_at','desc')->get();
         return view('MANAGER.data-ecp-approval2', compact('approval1','approval2','ecpapproval'));
     }
+
+
 
     public function create()
     {
@@ -178,7 +185,52 @@ class EcpController extends Controller
         }
         return redirect()->back();
     }
+
+    public function progres_meqa($ecp_no)
+    {
+        $ecp_no= str_replace('-','/',$ecp_no);
+        try{
+            Ecp::where('ecp_no',$ecp_no)->update([
+                'progres_id'=>8
+            ]);
+            return redirect('create-meqa')->with('success', 'Berhasil Merubah Progres ECP !');
+            
+        }catch (\Exception $e){
+            return redirect('data-ecp')->with('info', 'Gagal Merubah Progres ECP');
+        }
+        return redirect()->back();
+    }
     
+    public function reject_meqa($ecp_no)
+    {
+        $ecp_no= str_replace('-','/',$ecp_no);
+        try{
+            Ecp::where('ecp_no',$ecp_no)->update([
+                'progres_id'=>9
+            ]);
+            return redirect('create-meqa')->with('success', 'Berhasil Merubah Progres ECP!');
+            
+        }catch (\Exception $e){
+            return redirect('data-ecp')->with('info', 'Gagal Merubah Progres ECP');
+        }
+        return redirect()->back();
+    }
+
+    public function signoff_meqa($ecp_no)
+    {
+        $ecp_no= str_replace('-','/',$ecp_no);
+        try{
+            Ecp::where('ecp_no',$ecp_no)->update([
+                'progres_id'=>10
+            ]);
+            return redirect('data-meqa')->with('success', 'Berhasil Sign Off ECP!');
+            
+        }catch (\Exception $e){
+            return redirect('data-ecp')->with('info', 'Gagal Merubah Progres ECP');
+        }
+        return redirect()->back();
+    }
+
     public function reject_spv($ecp_no)
     {
         $ecp_no= str_replace('-','/',$ecp_no);

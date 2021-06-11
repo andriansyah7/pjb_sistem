@@ -74,6 +74,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Manager_approval::class);
     }
+    public function meqa()
+    {
+        return $this->hasMany(Meqa::class);
+    }
 
     public function pimpinan_rapat()
     {

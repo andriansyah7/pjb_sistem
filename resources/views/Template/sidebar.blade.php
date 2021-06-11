@@ -10,6 +10,10 @@
               <p>Dashboard </p>
             </a>
           </li> 
+          </li>
+          <li class="user-footer">
+          <a href="{{ route('logout') }}" class="badge badge-danger">Logout  <i class="fas fa-sign-out-alt"></i></a>
+          </li>
           <!-- Layanan -->
           <li class="nav-header">Layanan</li>
           <li class="nav-item has-treeview menu-open">
@@ -38,6 +42,12 @@
                 <a href="{{route('data-manager')}}" class="nav-link {{ Route::currentRouteNamed('data-manager') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
                   <p>History Approval 2 ECP</p>
+                </a>
+              </li>
+          <li class="nav-item">
+                <a href="{{route('data-meqa')}}" class="nav-link {{ Route::currentRouteNamed('data-meqa') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>History Approval MEQA</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -76,7 +86,12 @@
                   <p>History Approval 2 ECP</p>
                 </a>
               </li>
-
+              <li class="nav-item">
+                <a href="{{route('data-meqa')}}" class="nav-link {{ Route::currentRouteNamed('data-meqa') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>History Approval MEQA</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{route('data-notulen')}}" class="nav-link {{ Route::currentRouteNamed('data-notulen') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
@@ -113,7 +128,12 @@
                   <p>History Approval 2 ECP</p>
                 </a>
               </li>
-
+              <li class="nav-item">
+                <a href="{{route('data-meqa')}}" class="nav-link {{ Route::currentRouteNamed('data-meqa') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>History Approval MEQA</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{route('data-notulen')}}" class="nav-link {{ Route::currentRouteNamed('data-notulen') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
@@ -149,7 +169,12 @@
                   <p>History Approval 2 ECP</p>
                 </a>
               </li>
-          
+              <li class="nav-item">
+                <a href="{{route('data-meqa')}}" class="nav-link {{ Route::currentRouteNamed('data-meqa') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>History Approval MEQA</p>
+                </a>
+              </li>
           <li class="nav-item">
                 <a href="{{route('data-notulen')}}" class="nav-link {{ Route::currentRouteNamed('data-notulen') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
@@ -185,6 +210,12 @@
                   <p>History Approval 2 ECP</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('data-meqa')}}" class="nav-link {{ Route::currentRouteNamed('data-meqa') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>History Approval MEQA</p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="{{route('data-notulen')}}" class="nav-link {{ Route::currentRouteNamed('data-notulen') ? 'active' : '' }}">
@@ -200,18 +231,11 @@
                 </a>
               </li>
               @endif
-
+              
             </ul>
           </li>
 
-
-
-<!-- pengaturan -->
-          
-          
-          <li class="nav-header">Pengaturan</li>
-<!-- serp -->
-<li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
@@ -220,23 +244,36 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-          @if (auth()->user()->role_id=="1")
-          <li class="nav-item">
-                <a href="{{route('data-blok')}}" class="nav-link {{ Route::currentRouteNamed('data-blok') ? 'active' : '' }}">
+              <li class="nav-item">
+                <a href="{{route('data-serp_main')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_main') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data Blok</p>
+                  <p>Data Main Equipment</p>
                 </a>
+              </li>
+              </ul>
               </li>
 
-          <li class="nav-item">
-                <a href="{{route('data-serp_unit')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_unit') ? 'active' : '' }}">
-                  <i class="far fa-file"></i>
-                  <p>Data Unit</p>
-                </a>
-              </li>
-          @endif
+
+
+
+<!-- pengaturan -->
+          
+          
+      
+        
 
           @if (auth()->user()->role_id=="4")
+          <li class="nav-header">Pengaturan</li>
+          
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                SERP
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
           <li class="nav-item">
                 <a href="{{route('data-serp_system')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_system') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
@@ -251,17 +288,40 @@
                 </a>
               </li>
 
-          <li class="nav-item">
-                <a href="{{route('data-serp_main')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_main') ? 'active' : '' }}">
-                  <i class="far fa-file"></i>
-                  <p>Data Main Equipment</p>
-                </a>
-              </li>
+              </ul>
+          </li>
               @endif
 
-            </ul>
-          </li>
+           
+
           @if (auth()->user()->role_id=="1")
+          <li class="nav-header">Pengaturan</li>
+
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                SERP
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+          <li class="nav-item">
+                <a href="{{route('data-blok')}}" class="nav-link {{ Route::currentRouteNamed('data-blok') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data Blok</p>
+                </a>
+              </li>
+
+          <li class="nav-item">
+                <a href="{{route('data-serp_unit')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_unit') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data Unit</p>
+                </a>
+              </li>
+              </ul>
+              </li>
+
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -298,12 +358,10 @@
                   <p>Data Fungsi</p>
                 </a>
               </li>
-              @endif
             </ul>
-          </li>
-          <li class="user-footer">
-          <a href="{{ route('logout') }}" class="badge badge-danger">Logout  <i class="fas fa-sign-out-alt"></i></a>
-          </li>
+            </li>
+              @endif
+         
         
         </ul>
       </nav>

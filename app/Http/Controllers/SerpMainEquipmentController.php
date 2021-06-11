@@ -20,13 +20,12 @@ class SerpMainEquipmentController extends Controller
     public function index()
     {
         $serp_system = Serp_System::all();
-        $serp_main = Serp_Main_Equipment::all();
+        $serp_main = Serp_Main_Equipment::orderBy('created_at','desc')->get();
         return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main'));
     }
 
    public function ekspor ()
    {
-       $tgl= date('d-M-Y');
     return Excel::download(new MainEquipmentExport, 'serp_main_equipment.xlsx');
 
    }

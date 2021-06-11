@@ -47,12 +47,19 @@
                        $ecp_no = str_replace('/','-',$item->ecp_no);
                     @endphp
                     <a href="{{route('show-ecp',$ecp_no)}}" class="badge badge-dark"><i class="fas fa-eye" style="color:aliceblue"></i> Detail</a>
-                    @if (auth()->user()->role_id=='2')
+
+                    @if ((auth()->user()->role_id=='2') && ($item->progres_id=='2'))
                     <a href="{{route('progres-manager',$ecp_no)}}" class="badge badge-dark"><i onclick="return confirm('Yakin Approve ECP ?')" class="fas fa-check-circle" style="color:chartreuse"></i> Approve</a>
                     <a href="{{route('reject-manager',$ecp_no)}}" class="badge badge-dark"><i onclick="return confirm('Yakin Reject ECP ?')" class="fas fa-times-circle" style="color:red"></i> Reject</a>
-
+                    @endif
+                    @if ((auth()->user()->fungsi_id=='4') && ($item->progres_id=='4'))
+                    <a href="{{route('progres-meqa',$ecp_no)}}" class="badge badge-dark"><i onclick="return confirm('Yakin Approve ECP ?')" class="fas fa-check-circle" style="color:chartreuse"></i>MEQA Approve</a>
+                    <a href="{{route('reject-meqa',$ecp_no)}}" class="badge badge-dark"><i onclick="return confirm('Yakin Reject ECP ?')" class="fas fa-times-circle" style="color:red"></i> Reject</a>
 
                     @endif
+                    @if ((auth()->user()->fungsi_id=='4') && ($item->progres_id=='5'))
+                    <a href="{{route('signoff-meqa',$ecp_no)}}" class="badge badge-dark"><i onclick="return confirm('Yakin Sign Off ECP ?')"class="fas fa-file-export" style="color:red"></i>Sign Off ECP</a>
+                  @endif
                     </td>
                 </tr>
                 @endforeach

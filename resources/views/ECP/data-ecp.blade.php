@@ -28,7 +28,7 @@
                   <th>FILE PENDUKUNG</th>
                   <th>TANGGAL PENGAJUAN</th>
                   <th>PROGRES</th>
-                  <th width="175px">AKSI</th>
+                  <th>AKSI</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,11 +49,13 @@
                        $ecp_no = str_replace('/','-',$item->ecp_no);
                     @endphp
                     <a href="{{route('show-ecp',$ecp_no)}}" class="badge badge-light"><i class="fas fa-eye" style="color:black"></i>Detail</a>
-                    @if (auth()->user()->role_id=='4')
+         
+                  @if ((auth()->user()->role_id=='4') && ($item->progres_id=='3'))
                     <a href="{{route('progres-notulen',$ecp_no)}}" class="badge badge-light"><i class="fas fa-file-signature" style="color:darkblue">+Notulen</i></a>
-                    <a href="{{route('progres-tindaklanjut',$ecp_no)}}" class="badge badge-light"><i class="fas fa-file-export" style="color:tomato"></i>+Tindak Lanjut</a>
-
                     @endif
+                    @if ((auth()->user()->role_id=='4') && ($item->progres_id=='8'))
+                    <a href="{{route('progres-tindaklanjut',$ecp_no)}}" class="badge badge-light"><i class="fas fa-file-export" style="color:tomato"></i>+Tindak Lanjut</a>
+                  @endif
                     @if ($item->user_nid==auth()->user()->user_nid)
                       <a href="{{route('edit-ecp',$ecp_no)}}" class="badge badge-light"><i class="fas fa-edit" style="color:blue"></i>Edit</a> 
             

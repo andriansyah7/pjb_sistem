@@ -27,7 +27,7 @@ class TindakLanjutController extends Controller
      */
     public function create()
     {
-        $tindaklanjut = Tindaklanjut::all();
+        $tindaklanjut = Tindaklanjut::orderBy('created_at','desc')->get();
         $ecp= Ecp::all();
         $user= User::all();
         return view('TINDAKLANJUT.create-tindaklanjut',compact('tindaklanjut','ecp','user'));
