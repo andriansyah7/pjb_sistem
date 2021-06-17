@@ -47,7 +47,8 @@
                     @endif
                     <td>{{$item->user->user_name}}</td>
                     <td>{{$item->spv_approval_alasan}}</td>
-                    <td>{{$item->created_at}}</td>
+                    <td>{{date('d M Y H:i:s',strtotime($item->created_at))}}</td>
+
                     <td>
                     <a href="{{route('show-spv',$item->spv_approval_id)}}" class="badge badge-dark"><i class="fas fa-eye" style="color:white"></i>Detail</a>
 

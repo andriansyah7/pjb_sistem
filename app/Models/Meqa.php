@@ -14,14 +14,14 @@ class Meqa extends Model
         'user_nid',
         'status_ecp_id',
         'drawings',
-        'operation_manual',
+        'operating_manual',
         'SOP',
-        'maint manual',
-        'predictive maint schedules',
-        'preventative maint schedules',
-        'MIMS equipment',
-        'process control system',
-        'business process',
+        'maint_manual',
+        'predictive_maint_schedules',
+        'preventative_maint_schedules',
+        'MIMS_equipment',
+        'process_control_system',
+        'business_process',
     ];
 
     public function user()
