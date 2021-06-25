@@ -163,6 +163,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/show-serp_pic/{serp_pic}', 'SerpPicController@show')->name('show-serp_pic');
     //serp_main_equipment
     Route::get('/data-serp_main', 'SerpMainEquipmentController@index')->name('data-serp_main');
+    Route::get('/search-serp_main', 'SerpMainEquipmentController@search')->name('search-serp_main');
     Route::get('/create-serp_main', 'SerpMainEquipmentController@create')->name('create-serp_main');
     Route::get('/ekspor-serp_main', 'SerpMainEquipmentController@ekspor')->name('ekspor-serp_main');
     Route::post('/impor-serp_main', 'SerpMainEquipmentController@impor')->name('impor-serp_main');

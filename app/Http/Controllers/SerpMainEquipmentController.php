@@ -17,12 +17,7 @@ class SerpMainEquipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $serp_system = Serp_System::all();
-        $serp_main = Serp_Main_Equipment::orderBy('created_at','desc')->get();
-        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main'));
-    }
+
 
    public function ekspor ()
    {
@@ -168,7 +163,7 @@ class SerpMainEquipmentController extends Controller
             'serp_pic_id'=>'required',
             'serp_main_equipment_keterangan'=>'required',
         ]);
-        
+    
         $oc=$request->OC;
         $pt=$request->PT;
         $pq=$request->PQ;

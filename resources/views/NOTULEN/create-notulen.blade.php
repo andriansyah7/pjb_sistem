@@ -59,10 +59,7 @@
       </div>
       </div>
 
-      <div class="col-md-4">
-      <div class="form-group">
-      <label>Waktu</label> 
-      <input type="time" class="form-control" name="notulen_waktu">
+
       </div>
       </div>
       
