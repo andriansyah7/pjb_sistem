@@ -5,7 +5,23 @@
  
 <div class="content">
       <div class ="card card-info card-outline">  
-      <div class ="card-header">     
+      <div class ="card-header">   
+      <div class="form-group">
+            <div class="form-group">
+            <form action="{{route('search-serp_main')}}" method="GET">
+            @csrf
+              <label for="">PIC</label>
+              <select name="serp_pic_id" id="" class="form-control">
+                @foreach ($pic as $item)
+                  <option value="{{$item->serp_pic_id}}"> {{$item->serp_pic_name}} </option>
+                @endforeach
+              </select>
+              <div class="form-group">
+              <button type="submit" class="btn btn-primary mb-1">Search</button>
+              </div>
+            </div>  
+            </form>
+          </div>
           <div class ="card-tools inlane m-2">
             <a href="{{route('ekspor-serp_main')}}" class="btn btn-info btn-sm">Ekspor Data <i class="fas fa-download"></i></a>
             <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#importExcel">Impor Data <i class="fas fa-upload"></i></a>
