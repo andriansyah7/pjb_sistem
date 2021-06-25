@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Ecp;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Models\ECM_Review;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use Illuminate\Http\Request;
 
-class BerandaController extends Controller
+class ECMReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +18,7 @@ class BerandaController extends Controller
      */
     public function index()
     {
-        $user_nid = Auth::user()->user_nid;
-        $user = User::findOrFail($user_nid);
-        return view('Template.dashboard');
-    }
-
-
-    public function dataecp()
-    {
-        return view('Halaman.data-ecp');
+        //
     }
 
     /**
@@ -34,7 +28,13 @@ class BerandaController extends Controller
      */
     public function create()
     {
-        //
+          
+        $ecm = ECM_Review::all();
+        
+        $user = User::all();
+       
+        
+        return view('ECM.create-review',compact('ecm','user'));
     }
 
     /**
@@ -45,16 +45,22 @@ class BerandaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ecp_no'=>'required',
+            'user_nid'=>'required',
+            'ecm_review_alasan'=>'required'
+        ]);
+        ECM_Review::create($request->all());
+        return redirect('data-ecp')->with('success', 'Berhasil Review ECP !');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\ECM_Review  $eCM_Review
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ECM_Review $eCM_Review)
     {
         //
     }
@@ -62,10 +68,10 @@ class BerandaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\ECM_Review  $eCM_Review
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ECM_Review $eCM_Review)
     {
         //
     }
@@ -74,10 +80,10 @@ class BerandaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\ECM_Review  $eCM_Review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ECM_Review $eCM_Review)
     {
         //
     }
@@ -85,10 +91,10 @@ class BerandaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\ECM_Review  $eCM_Review
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ECM_Review $eCM_Review)
     {
         //
     }

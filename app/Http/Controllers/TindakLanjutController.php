@@ -16,7 +16,7 @@ class TindakLanjutController extends Controller
      */
     public function index()
     {
-        $tindaklanjut = Tindaklanjut::all();
+        $tindaklanjut = Tindaklanjut::orderBy('created_at','desc')->get();
         return view('TINDAKLANJUT.data-tindaklanjut',compact('tindaklanjut'));
     }
 
@@ -42,16 +42,30 @@ class TindakLanjutController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ecp_no'=>'required',
+            
             'tindaklanjut_notulis'=>'required',
             'tindaklanjut_deskripsi'=>'required',
+            'tindaklanjut_file_terkait'=>'required',
+            'updated_at'=>'required',
         ]);
+        $file =$request->file('tindaklanjut_file_terkait'); 
+            
+        //mengambil nama file
+        $nama_file      = $file->getClientOriginalName();
 
-        $data=$request->except(['_token']);
-        $data['created_at']= date('Y-m-d H:i:s');
-        $data['updated_at']= date('Y-m-d H:i:s');
+        //memindahkan file ke folder tujuan
+        $file->move('tindaklanjut_files',$file->getClientOriginalName());
+    
 
-        Tindaklanjut::insert($data);
+        Tindaklanjut::create([
+            'ecp_no' => $request->ecp_no,
+            'tindaklanjut_notulis'=>$request->tindaklanjut_notulis,
+            'tindaklanjut_deskripsi'=>$request->tindaklanjut_deskripsi,
+            'tindaklanjut_file_terkait'=>'tindaklanjut_files/'.$nama_file,
+            'created_at' => date('Y-M-d H:i:s'),
+            'updated_at' => date('Y-M-d'),
+
+        ]);
         return redirect('data-tindaklanjut')->with('success', 'Data Berhasil Tersimpan!');
     }
 

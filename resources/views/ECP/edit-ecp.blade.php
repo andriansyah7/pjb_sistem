@@ -84,6 +84,17 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                 </div>
+
+            <div class="form-group">
+            <label>Urgensi</label>
+            <select class="form-control select2 @error('urgensi_id') is-invalid @enderror"  name="urgensi_id" value="{{old('urgensi_id')}}">
+                <option selected disabled>->Pilih Urgensi<-</option>
+              @foreach($urgensi as $data)
+                <option value="{{$data->urgensi_id}}" {{($ecp->urgensi_id== $data->urgensi_id) ? 'selected':''}}>{{$data->urgensi_name}}</option>
+              @endforeach
+              </select>
+              @error('urgensi_id') <div class="invalid-feedback"> {{$message}} </div> @enderror
+          </div>
             </div>
         </div>
             <div class="form-group">

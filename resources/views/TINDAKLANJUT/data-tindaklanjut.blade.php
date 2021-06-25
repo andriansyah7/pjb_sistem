@@ -6,13 +6,12 @@
 <div class="content">
       <div class ="card card-info card-outline">  
       <div class ="card-header">     
-      @if (auth()->user()->role_id=="4")
+      <!-- @if (auth()->user()->role_id=="4")
 
           <div class ="card-tools inlane m-2">
             <a href="{{route('create-tindaklanjut')}}" class="btn btn-success btn-sm">Tindak Lanjut ECP <i class="fas fa-plus-square"></i></a>
          </div>
-         @else
-         @endif
+         @endif -->
       </div>
         
             <!-- /.card-header -->
@@ -22,11 +21,13 @@
                 <thead>
                 <tr>
                      <th>#</th>
-                     <th>ID</th>
+                     
                     <th>NO ECP</th>
                     <th>NOTULIS</th>
                     <th>DESKRIPSI</th>
-                    <th>TANGGAL</th>
+                    <th>FILE TERKAIT</th>
+                    <th>TANGGAL DIBUAT</th>
+                    <th>DEADLINE MONITORING</th>
                     <th width="200px">AKSI</th>
                 </tr>
                 </thead>
@@ -35,11 +36,13 @@
                 @foreach ($tindaklanjut as $item)
                 <tr>
                     <td>{{ $loop->iteration}}</td>                    
-                    <td>{{ $item->tindaklanjut_id}}</td>                    
                     <td>{{$item->ecp->ecp_no}}</td>
                     <td>{{$item->notulis->user_name}}</td>
                     <td>{{$item->tindaklanjut_deskripsi}}</td>
-                    <td>{{$item->created_at}}</td>
+                    <td> <p> <a href="{{asset($item->tindaklanjut_file_terkait) }}" class="badge  badge-info" download=""><i class="fas fa-download"></i>  Download File </a></p></td>
+
+                    <td>{{date('d M Y H:i:s',strtotime($item->created_at))}}</td>
+                    <td>{{date('d M Y',strtotime($item->updated_at))}}</td>
                     <td>
                     @if (auth()->user()->role_id=="4")
                       <a href="{{route('show-tindaklanjut',$item->tindaklanjut_id)}}" class="badge badge-light"><i class="fas fa-eye" style="color:black"></i>Detail</a>

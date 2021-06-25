@@ -10,10 +10,7 @@
               <p>Dashboard </p>
             </a>
           </li> 
-          </li>
-          <li class="user-footer">
-          <a href="{{ route('logout') }}" class="badge badge-danger">Logout  <i class="fas fa-sign-out-alt"></i></a>
-          </li>
+          
           <!-- Layanan -->
           <li class="nav-header">Layanan</li>
           <li class="nav-item has-treeview menu-open">
@@ -73,7 +70,7 @@
                 </a>
               </li>
           
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
                   <p>History Approval 1 ECP</p>
@@ -91,7 +88,7 @@
                   <i class="far fa-file"></i>
                   <p>History Approval MEQA</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="{{route('data-notulen')}}" class="nav-link {{ Route::currentRouteNamed('data-notulen') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
@@ -114,8 +111,14 @@
                   <p>Data ECP</p>
                 </a>
               </li>
-          
           <li class="nav-item">
+                <a href="{{route('data-ecp')}}" class="nav-link {{ Route::currentRouteNamed('data-ecp') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data Disposisi ECP</p>
+                </a>
+              </li>
+          
+          <!-- <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
                   <p>History Approval 1 ECP</p>
@@ -133,7 +136,7 @@
                   <i class="far fa-file"></i>
                   <p>History Approval MEQA</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="{{route('data-notulen')}}" class="nav-link {{ Route::currentRouteNamed('data-notulen') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
@@ -157,7 +160,7 @@
                 </a>
               </li>
 
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
                   <p>History Approval 1 ECP</p>
@@ -174,7 +177,7 @@
                   <i class="far fa-file"></i>
                   <p>History Approval MEQA</p>
                 </a>
-              </li>
+              </li> -->
           <li class="nav-item">
                 <a href="{{route('data-notulen')}}" class="nav-link {{ Route::currentRouteNamed('data-notulen') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
@@ -198,7 +201,7 @@
                 </a>
               </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
                   <p>History Approval 1 ECP</p>
@@ -215,7 +218,7 @@
                   <i class="far fa-file"></i>
                   <p>History Approval MEQA</p>
                 </a>
-              </li>
+              </li> -->
 
               <li class="nav-item">
                 <a href="{{route('data-notulen')}}" class="nav-link {{ Route::currentRouteNamed('data-notulen') ? 'active' : '' }}">

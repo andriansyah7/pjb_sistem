@@ -13,6 +13,7 @@ class Tindaklanjut extends Model
         'ecp_no',
         'tindaklanjut_notulis',
         'tindaklanjut_deskripsi',
+        'tindaklanjut_file_terkait',
     ];
 
     public function notulis()

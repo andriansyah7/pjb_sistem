@@ -15,15 +15,9 @@
           <div class="row">
           <div class="col-md-5">
           <div class="form-group">
-            <label>No ECP</label>
-              <select class="form-control select2 @error('ecp_no') is-invalid @enderror" id="ecp_no" name="ecp_no" value="{{old('ecp_no')}}">
-                <option selected disabled>Pilih ECP</option>
-              @foreach($ecp as $item)
-                <option value="{{$item->ecp_no}}">{{$item->ecp_no}} : {{$item->ecp_deskripsi}} -> Diajukan Oleh {{$item->user->user_name}}</option>
-              @endforeach
-              </select>
-              @error('ecp_no') <div class="invalid-feedback"> {{$message}} </div> @enderror
-              </div>
+            <label>NO ECP</label>
+              <input type="text" id="ecp_no" name="ecp_no" class="form-control" value="{{$ecp_no}}">
+            </div>
           </div>
 
           <div class="col-md-3">
@@ -35,6 +29,25 @@
                 </select>
               </div>
           </div>
+
+          <div class="col-md-3">
+          <div class="form-group">
+                    <label for="exampleInputEmail1">File Pendukung</label>
+                    <a>/disarankan file .zip</a>
+                      <input type="file" class="form-control"  name="tindaklanjut_file_terkait">
+                      {{-- pesan error  --}}
+                            @error('ecp_file_pendukung')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                </div>
+                </div>
+
+                <div class="col-md-3">
+      <div class="form-group">
+      <label>Deadline Monitoring</label> 
+      <input type="date" class="form-control datee"  name="updated_at">
+      </div>
+      </div>
           </div>
 
         <div class="row">

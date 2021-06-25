@@ -1,13 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Meqa_approval;
+use App\Models\Status_ecp;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Ecp;
+
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class BerandaController extends Controller
+
+class MeqaApprovalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +21,7 @@ class BerandaController extends Controller
      */
     public function index()
     {
-        $user_nid = Auth::user()->user_nid;
-        $user = User::findOrFail($user_nid);
-        return view('Template.dashboard');
-    }
-
-
-    public function dataecp()
-    {
-        return view('Halaman.data-ecp');
+        //
     }
 
     /**
@@ -34,7 +31,10 @@ class BerandaController extends Controller
      */
     public function create()
     {
-        //
+       
+       
+        $spv = User::where('unit_id','1')->where('role_id','3')->get();
+        return view ('MEQA_APPROVE.create-approval',compact('spv'));
     }
 
     /**
@@ -45,16 +45,24 @@ class BerandaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ecp_no'=>'required',
+            'user_nid'=>'required',
+            'spv_so'=>'required',
+            'status_ecp_id'=>'required',
+            'meqa_approval_alasan'=>'required'
+        ]);
+        MEQA_approval::create($request->all());
+        return redirect('data-ecp')->with('success', 'Berhasil Membuat Approval !');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Meqa_approval  $meqa_approval
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Meqa_approval $meqa_approval)
     {
         //
     }
@@ -62,10 +70,10 @@ class BerandaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Meqa_approval  $meqa_approval
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Meqa_approval $meqa_approval)
     {
         //
     }
@@ -74,10 +82,10 @@ class BerandaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Meqa_approval  $meqa_approval
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Meqa_approval $meqa_approval)
     {
         //
     }
@@ -85,10 +93,10 @@ class BerandaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Meqa_approval  $meqa_approval
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Meqa_approval $meqa_approval)
     {
         //
     }

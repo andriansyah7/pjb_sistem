@@ -36,7 +36,7 @@
               <select class="form-control select2 @error('serp_system_id') is-invalid @enderror"  name="serp_system_id">
                 <option selected disabled>Pilih System-></option>
               @foreach($serp_system as $data)
-              <option value="{{$data->serp_system_id}}" {{($serp_main_equipment->serp_system_id == $data->serp_system_id) ? 'selected':''}}>{{$data->serp_system_name}}</option>
+              <option value="{{$data->serp_system_id}}" {{($serp_main_equipment->serp_system_id == $data->serp_system_id) ? 'selected':''}}>{{$data->unit->serp_unit_name}} - {{$data->serp_system_name}}</option>
                @endforeach
               </select>
               @error('serp_system_id') <div class="invalid-feed back"> {{$message}} </div> @enderror

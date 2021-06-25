@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Ecp;
+use App\Models\Spv_so;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use Illuminate\Http\Request;
 
-class BerandaController extends Controller
+class SpvSoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +17,7 @@ class BerandaController extends Controller
      */
     public function index()
     {
-        $user_nid = Auth::user()->user_nid;
-        $user = User::findOrFail($user_nid);
-        return view('Template.dashboard');
-    }
-
-
-    public function dataecp()
-    {
-        return view('Halaman.data-ecp');
+        //
     }
 
     /**
@@ -34,7 +27,14 @@ class BerandaController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::user()->fungsi_id=='1') {
+           
+            $staff = User::where('fungsi_id','1')->where('role_id','5')->get();
+            }
+            elseif (Auth::user()->fungsi_id=='2') {
+                $staff = User::where('fungsi_id','2')->where('role_id','5')->get();
+            }
+        return view ('SPV.create-spv_so',compact('spv'));
     }
 
     /**
@@ -45,16 +45,24 @@ class BerandaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ecp_no'=>'required',
+            'user_nid'=>'required',
+            'staff_so'=>'required',
+        
+            'spv_so_review'=>'required'
+        ]);
+        Spv_so::create($request->all());
+        return redirect('data-ecp')->with('success', 'Berhasil Membuat Approval !');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Spv_so  $spv_so
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Spv_so $spv_so)
     {
         //
     }
@@ -62,10 +70,10 @@ class BerandaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Spv_so  $spv_so
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Spv_so $spv_so)
     {
         //
     }
@@ -74,10 +82,10 @@ class BerandaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Spv_so  $spv_so
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Spv_so $spv_so)
     {
         //
     }
@@ -85,10 +93,10 @@ class BerandaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Spv_so  $spv_so
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Spv_so $spv_so)
     {
         //
     }
