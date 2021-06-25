@@ -52,8 +52,8 @@
     $('[data-mask]').inputmask()
 
     //Date picker
-    $('#reservationdate').datetimepicker({
-        format: 'L'
+    $('.datee').datetimepicker({
+        format: 'YYYY/MM/DD'
     });
 
     //Date and time picker

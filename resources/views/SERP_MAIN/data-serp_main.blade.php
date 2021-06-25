@@ -46,6 +46,7 @@
               <table id="#example2" class="table table-bordered table-striped myTable table-sm">
                 <thead>
                 <tr>
+                  <th width="10px">NO</th>
                   <th width="10px">KKS</th>
                   <th width="200px">NAMA EQUIPMENT</th>
                   <th width="200px">NAMA SYSTEM</th>
@@ -70,6 +71,7 @@
 
                 @foreach ($serp_main as $e=>$item)
                 <tr>                 
+                    <td>{{ $loop->iteration}}</td> 
                     <td>{{$item->serp_main_equipment_id}}</td>
                     <td>{{$item->serp_main_equipment_name}}</td>
                     <td>{{$item->system->serp_system_name}}</td>

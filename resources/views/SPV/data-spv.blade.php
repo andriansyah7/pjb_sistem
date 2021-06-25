@@ -33,7 +33,7 @@
 
                 @foreach ($spv as $e=>$item)
                 <tr>
-                    <td>{{$item->spv_approval_id}}</td>                  
+                <td>{{ $loop->iteration}}</td>                    
                     <td>{{$item->ecp->ecp_no}}</td>
                     @if($item->status_ecp_id == 2)
                     <td> <label class="badge badge-success">{{$item->status_ecp->status_ecp_name}} </label></td>
@@ -52,11 +52,11 @@
                     <td>
                     <a href="{{route('show-spv',$item->spv_approval_id)}}" class="badge badge-dark"><i class="fas fa-eye" style="color:white"></i>Detail</a>
 
-                    @if ($item->user_nid==auth()->user()->user_nid)
+                    <!-- @if ($item->user_nid==auth()->user()->user_nid)
                       <a href="{{route('edit-spv',$item->spv_approval_id)}}" class="badge badge-dark"> <i class="fas fa-edit" style="color:blue"></i>Edit</a> 
                       
                       <a href="{{route('delete-spv',$item->spv_approval_id)}}" class="badge badge-dark"><i onclick="return confirm('Yakin hapus data?')" class="fas fa-trash-alt" style="color: red"></i>Hapus</a>
-                    @endif
+                    @endif -->
                     </td>
                 </tr>
                 @endforeach

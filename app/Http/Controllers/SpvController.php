@@ -28,12 +28,12 @@ class SpvController extends Controller
    
     public function create()
     {
+       
         $spv = Spv_approval::all();
         
         $user = User::all();
         $status = Status_ecp::all();
         $data = Auth::user()->user_nid;
-        $ecpapproval = Ecp::where('ecp_approval_1',$data)->orderBy('created_at','asc')->get();
         return view('SPV.create-spv',compact('spv','user','ecpapproval','status'));
     }
 

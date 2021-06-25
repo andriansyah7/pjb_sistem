@@ -50,9 +50,9 @@
               <div class="form-group">
             <label>Approval 1</label>
               <select class="form-control select2 @error('ecp_approval_1') is-invalid @enderror" id="ecp_approval_1" name="ecp_approval_1" value="{{old('ecp_approval_1')}}">
-                <option selected disabled><-Pilih Approval 1-></option>
+                
               @foreach($approval1 as $aprvl1)
-                <option value="{{$aprvl1->user_nid}}">{{$aprvl1->user_name}} : {{$aprvl1->jabatan->jabatan_name}} {{$aprvl1->unit->unit_name}}</option>
+                <option selected value="{{$aprvl1->user_nid}}">{{$aprvl1->user_name}} : {{$aprvl1->jabatan->jabatan_name}} {{$aprvl1->unit->unit_name}}</option>
               @endforeach
               </select>
               @error('ecp_approval_1') <div class="invalid-feedback"> {{$message}} </div> @enderror
@@ -61,9 +61,9 @@
             <div class="form-group">
             <label>Approval 2</label>
               <select class="form-control select2 @error('ecp_approval_2') is-invalid @enderror" id="ecp_approval_2" name="ecp_approval_2" value="{{old('ecp_approval_2')}}">
-                <option selected disabled><-Pilih Approval 2-></option>
+                
               @foreach($approval2 as $aprvl2)
-                <option value="{{$aprvl2->user_nid}}">{{$aprvl2->user_name}} : {{$aprvl2->jabatan->jabatan_name}} {{$aprvl2->unit->unit_name}}</option>
+                <option selected value="{{$aprvl2->user_nid}}">{{$aprvl2->user_name}} : {{$aprvl2->jabatan->jabatan_name}} {{$aprvl2->unit->unit_name}}</option>
               @endforeach
               </select>
               @error('ecp_approval_2') <div class="invalid-feedback"> {{$message}} </div> @enderror
@@ -73,11 +73,24 @@
           <div class="form-group">
                     <label for="exampleInputEmail1">File Pendukung</label>
                       <input type="file" class="form-control" id="ecp_file_pendukung" name="ecp_file_pendukung">
+                      <a style="color:red"><i>*Harap Mencantumkan Data Pendukung Berupa Drawings,Manual Book,Instruksi Kerja,atau Data Pendukung Lainnya dalam satu file .zip/.rar <i><a>
                       {{-- pesan error  --}}
                             @error('ecp_file_pendukung')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                 </div>
+
+          <div class="form-group">
+            <label>Urgensi</label>
+            <select class="form-control select2 @error('urgensi_id') is-invalid @enderror"  name="urgensi_id" value="{{old('urgensi_id')}}">
+                <option selected disabled>->Pilih Urgensi<-</option>
+              @foreach($urgensi as $data)
+                <option value="{{$data->urgensi_id}}">{{$data->urgensi_name}}</option>
+              @endforeach
+              </select>
+              @error('urgensi_id') <div class="invalid-feedback"> {{$message}} </div> @enderror
+          </div>
+
             </div>
         </div>
             <div class="form-group">

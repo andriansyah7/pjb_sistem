@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meqa extends Model
 {
-    protected $table = "meqa_approval";
+    protected $table = "meqa_cek";
     protected $primaryKey = "meqa_approval_id";
     protected $fillable = [
         'ecp_no',

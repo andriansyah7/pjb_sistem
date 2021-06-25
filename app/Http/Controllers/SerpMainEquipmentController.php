@@ -20,8 +20,11 @@ class SerpMainEquipmentController extends Controller
     public function index()
     {
         $serp_system = Serp_System::all();
-        $serp_main = Serp_Main_Equipment::orderBy('created_at','desc')->get();
-        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main'));
+        $serp_main = Serp_Main_Equipment::orderBy('MPI','desc')->limit(10)->get();
+
+        $pic= Serp_Pic::select('serp_pic_id')->get();
+
+        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
     }
 
    public function ekspor ()

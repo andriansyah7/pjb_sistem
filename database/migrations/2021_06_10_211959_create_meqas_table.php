@@ -13,7 +13,7 @@ class CreateMeqasTable extends Migration
      */
     public function up()
     {
-        Schema::create('meqa_approval', function (Blueprint $table) {
+        Schema::create('meqa_cek', function (Blueprint $table) {
             $table->increments ('meqa_approval_id');
             $table->string('ecp_no');
             $table->string('user_nid',20);
@@ -43,6 +43,6 @@ class CreateMeqasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meqa_approval');
+        Schema::dropIfExists('meqa_cek');
     }
 }

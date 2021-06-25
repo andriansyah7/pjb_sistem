@@ -24,6 +24,7 @@ class Ecp extends Model
         'ecp_approval_2',
         'ecp_file_pendukung',
         'progres_id',
+        'urgensi_id',
         
     ];
 
@@ -36,6 +37,11 @@ class Ecp extends Model
     {
         
         return $this->belongsTo(Progres::class,'progres_id','progres_id');
+    }
+    public function urgensi()
+    {
+        
+        return $this->belongsTo(Urgensi::class,'urgensi_id','urgensi_id');
     }
     
     public function approval1()

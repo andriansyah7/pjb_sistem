@@ -15,15 +15,9 @@
           <div class="row">
           <div class="col-md-9">
           <div class="form-group">
-            <label>No ECP</label>
-              <select class="form-control select2 @error('ecp_no') is-invalid @enderror" id="ecp_no" name="ecp_no" value="{{old('ecp_no')}}">
-                <option selected disabled>Pilih ECP</option>
-              @foreach($ecpapproval as $ecpapproval1)
-                <option value="{{$ecpapproval1->ecp_no}}">{{$ecpapproval1->ecp_no}} : {{$ecpapproval1->ecp_deskripsi}} -> Diajukan Oleh {{$ecpapproval1->user->user_name}}</option>
-              @endforeach
-              </select>
-              @error('ecpapproval1') <div class="invalid-feedback"> {{$message}} </div> @enderror
-              </div>
+            <label>NO ECP</label>
+              <input type="text" id="ecp_no" name="ecp_no" class="form-control" value="{{$ecp_no}}">
+            </div>
 
               <div class="form-group">
                 <label>Alasan</label>

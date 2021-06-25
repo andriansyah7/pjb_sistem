@@ -43,10 +43,10 @@
                     <td> <label class="badge badge-success">{{$meqa_approval->status_ecp->status_ecp_name}} </label></td>
                     
 
-                    @elseif($item->status_ecp_id == 1)
+                    @elseif($meqa_approval->status_ecp_id == 1)
                     <td> <label class="badge badge-warning">{{$meqa_approval->status_ecp->status_ecp_name}} </label></td>
 
-                    @elseif($item->status_ecp_id == 3)
+                    @elseif($meqa_approval->status_ecp_id == 3)
                     <td> <label class="badge badge-danger">{{$meqa_approval->status_ecp->status_ecp_name}} </label></td>
                     @endif
                 </tr>

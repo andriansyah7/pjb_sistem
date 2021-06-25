@@ -9,6 +9,8 @@ use App\Models\Unit;
 use App\Models\Fungsi;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     /**
@@ -99,6 +101,30 @@ class UserController extends Controller
         $unit = Unit::get();
         $fungsi = Fungsi::get();
         return view('USER.edit-user',compact('jabatan','roles','user','unit','fungsi'));
+    }
+
+    public function edit_password()
+    {
+        $user_nid = Auth::user()->user_nid;
+        $user = User::findOrFail($user_nid);
+      
+        return view('USER.edit-password', compact('user'));
+    }
+
+    public function update_password(Request $request,$user)
+    {
+        $request->validate([
+            'password'=>'required'
+        ]);
+
+        $password = Hash::make($request->password);
+
+        User::where('user_nid',$user)
+        ->update([
+            'password' => $password,
+        ]);
+        return redirect('beranda')->with('success', 'Password Berhasil Diganti!');
+
     }
 
     public function update(Request $request,User $user)

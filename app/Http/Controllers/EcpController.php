@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 use App\Models\Ecp;
 use App\Models\User;
+use App\Models\Spv_approval;
+use App\Models\Spv_so;
+use App\Models\Manager_approval;
+use App\Models\Meqa_approval;
+use App\Models\ECM_Review;
+use App\Models\Tindaklanjut;
+use App\Models\Urgensi;
+use App\Models\Status_ecp;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -55,11 +63,12 @@ class EcpController extends Controller
         $r= rand('001','999');
         date_default_timezone_set('Asia/Jakarta');
         $ecpno=  '/ECP/'.date('d/M/Y');
+        $urgensi= Urgensi::get();
         $data = Auth::user()->fungsi_id;
         $data2 = Auth::user()->unit_id;
         $approval1 = User::where('fungsi_id',$data)->where('role_id','3')->get();
         $approval2 = User::where('unit_id',$data2)->where('role_id','2')->get();
-        return view ('ECP.create-ecp',compact('ecpno','r','approval1','approval2'));
+        return view ('ECP.create-ecp',compact('ecpno','r','approval1','approval2','urgensi'));
     }
 
     /**
@@ -76,6 +85,7 @@ class EcpController extends Controller
             'ecp_deskripsi'=>'required',
             'ecp_desktambahan'=>'required',
             'ecp_alasan'=>'required',
+            'urgensi_id'=>'required',
             'ecp_approval_1'=>'required',
             'ecp_approval_2'=>'required',
             'ecp_file_pendukung'=>'required',
@@ -102,6 +112,7 @@ class EcpController extends Controller
             'ecp_approval_2' => $request->ecp_approval_2,
             'ecp_file_pendukung' => 'ecp_files/'.$nama_file,
             'progres_id' =>1,
+            'urgensi_id' =>$request->urgensi_id,
             'created_at' => date('Y-M-d H:i:s'),
             'updated_at' => date('Y-M-d H:i:s'),
             ]);
@@ -119,21 +130,32 @@ class EcpController extends Controller
      */
     public function show($ecp_no)
     {
+
         $ecp_no= str_replace('-','/',$ecp_no);
+        
         $approval1 = User::where('role_id',"3")->get();
         $approval2 = User::where('role_id',"2")->get();
+
+     
+        $tdk = Tindaklanjut::where('ecp_no',$ecp_no)->get();
+        $review = ECM_Review::where('ecp_no',$ecp_no)->get();
+        $meqa = Meqa_approval::where('ecp_no',$ecp_no)->get();
+        $spvso = Spv_so::where('ecp_no',$ecp_no)->get();
+        $spv = Spv_approval::where('ecp_no',$ecp_no)->get();
+        $mng = Manager_approval::where('ecp_no',$ecp_no)->get();
         $ecp = Ecp::findOrFail($ecp_no);
-        return view ('ECP.show-ecp', compact('ecp','approval1','approval2','ecp_no'));
+        return view ('ECP.show-ecp', compact('ecp','approval1','approval2','ecp_no','spv','mng','review','meqa','spvso','tdk'));
     }
 
     public function progres_spv($ecp_no)
     {
         $ecp_no= str_replace('-','/',$ecp_no);
+        $status = Status_ecp::all();
         try{
             Ecp::where('ecp_no',$ecp_no)->update([
                 'progres_id'=>2
             ]);
-            return redirect('create-spv')->with('success', 'Berhasil Merubah Progres ECP!');
+            return view('SPV.create-spv', compact('ecp_no','status'))->with('success', 'Berhasil Merubah Progres ECP!');
             
         }catch (\Exception $e){
             return redirect('data-ecp-approval1')->with('info', 'Gagal Merubah Progres ECP');
@@ -144,11 +166,13 @@ class EcpController extends Controller
     public function progres_manager($ecp_no)
     {
         $ecp_no= str_replace('-','/',$ecp_no);
+        $status = Status_ecp::all();
+
         try{
             Ecp::where('ecp_no',$ecp_no)->update([
                 'progres_id'=>3
             ]);
-            return redirect('create-manager')->with('success', 'Berhasil Merubah Progres ECP!');
+            return view('MANAGER.create-mng', compact('ecp_no','status'))->with('success', 'Berhasil Merubah Progres ECP!');
             
         }catch (\Exception $e){
             return redirect('data-ecp-approval2')->with('info', 'Gagal Merubah Progres ECP');
@@ -156,14 +180,14 @@ class EcpController extends Controller
         return redirect()->back();
     }
     
-    public function progres_notulen($ecp_no)
+    public function progres_review($ecp_no)
     {
         $ecp_no= str_replace('-','/',$ecp_no);
         try{
             Ecp::where('ecp_no',$ecp_no)->update([
                 'progres_id'=>4
             ]);
-            return redirect('create-notulen')->with('success', 'Berhasil Merubah Progres ECP!');
+            return view('ECM.create-review', compact('ecp_no'))->with('success', 'Berhasil Merubah Progres ECP!');
             
         }catch (\Exception $e){
             return redirect('data-ecp')->with('info', 'Gagal Merubah Progres ECP');
@@ -178,7 +202,7 @@ class EcpController extends Controller
             Ecp::where('ecp_no',$ecp_no)->update([
                 'progres_id'=>5
             ]);
-            return redirect('create-tindaklanjut')->with('success', 'Berhasil Merubah Progres ECP!');
+            return view('TINDAKLANJUT.create-tindaklanjut', compact('ecp_no'))->with('success', 'Berhasil Merubah Progres ECP!');
             
         }catch (\Exception $e){
             return redirect('data-ecp')->with('info', 'Gagal Merubah Progres ECP');
@@ -188,12 +212,18 @@ class EcpController extends Controller
 
     public function progres_meqa($ecp_no)
     {
+       
+        $spv = User::where('unit_id','1')->where('role_id','3')->OrderBy('fungsi_id','asc')->get();
+        $status = Status_ecp::all();
+
+
         $ecp_no= str_replace('-','/',$ecp_no);
         try{
             Ecp::where('ecp_no',$ecp_no)->update([
                 'progres_id'=>8
             ]);
-            return redirect('create-meqa')->with('success', 'Berhasil Merubah Progres ECP !');
+            return view ('MEQA_APPROVE.create_approval',compact('spv','ecp_no','status'))->with('success', 'Berhasil Merubah Progres ECP !');
+
             
         }catch (\Exception $e){
             return redirect('data-ecp')->with('info', 'Gagal Merubah Progres ECP');
@@ -212,6 +242,30 @@ class EcpController extends Controller
             
         }catch (\Exception $e){
             return redirect('data-ecp')->with('info', 'Gagal Merubah Progres ECP');
+        }
+        return redirect()->back();
+    }
+
+    public function progres_spv_so($ecp_no)
+    {
+        $ecp_no= str_replace('-','/',$ecp_no);
+        if (Auth::user()->fungsi_id=='1') {
+           
+        $staff = User::where('fungsi_id','1')->where('role_id','5')->get();
+        }
+        elseif (Auth::user()->fungsi_id=='2') {
+            $staff = User::where('fungsi_id','2')->where('role_id','5')->get();
+        }
+           
+        $status = Status_ecp::all();
+        try{
+            Ecp::where('ecp_no',$ecp_no)->update([
+                'progres_id'=>11
+            ]);
+            return view('SPV.create-spv_so', compact('ecp_no','status','staff'))->with('success', 'Berhasil Merubah Progres ECP!');
+            
+        }catch (\Exception $e){
+            return redirect('data-ecp-approval1')->with('info', 'Gagal Merubah Progres ECP');
         }
         return redirect()->back();
     }
@@ -238,7 +292,8 @@ class EcpController extends Controller
             Ecp::where('ecp_no',$ecp_no)->update([
                 'progres_id'=>6
             ]);
-            return redirect('create-spv')->with('success', 'Berhasil Merubah Progres ECP!');
+            return view('SPV.create-spv', compact('ecp_no','status'))->with('success', 'Berhasil Merubah Progres ECP!');
+
             
         }catch (\Exception $e){
             return redirect('data-ecp')->with('info', 'Gagal Merubah Progres ECP');
@@ -261,22 +316,36 @@ class EcpController extends Controller
         return redirect()->back();
     }
 
+    public function edit_urgensi( $ecp_no)
+    {
+        $ecp_no= str_replace('-','/',$ecp_no);
+        $ecp = Ecp::findOrFail($ecp_no);
+        $urgensi= Urgensi::get();
+        return view('ECP.urgensi-ecp', compact('ecp','urgensi'));
+    }
+
+    public function urgensi(Request $request,$ecp_no)
+    {
+        $ecp_no= str_replace('-','/',$ecp_no);
+
+        Ecp::where('ecp_no',$ecp_no)
+        ->update([
+            'urgensi_id' => $request->urgensi_id,
+        ]);
+        return redirect('data-ecp')->with('success', 'Data Berhasil Diupdate!');
+
+    }
+   
     public function edit( $ecp_no)
     {
         $approval1 = User::where('role_id',"3")->get();
         $approval2 = User::where('role_id',"2")->get();
         $ecp_no= str_replace('-','/',$ecp_no);
+        $urgensi= Urgensi::get();
         $ecp = Ecp::findOrFail($ecp_no);
-        return view('ECP.edit-ecp', compact('ecp','approval1','approval2'));
+        return view('ECP.edit-ecp', compact('ecp','approval1','approval2','urgensi'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request,$ecp_no)
     {
         $ecp_no= str_replace('-','/',$ecp_no);
@@ -309,6 +378,8 @@ class EcpController extends Controller
             'ecp_deskripsi' => $request->ecp_deskripsi,
             'ecp_desktambahan' => $request->ecp_desktambahan,
             'ecp_alasan' => $request->ecp_alasan,
+            'progres_id' => 1,
+            'urgensi_id' => $request->urgensi_id,
             'ecp_approval_1' => $request->ecp_approval_1,
             'ecp_approval_2' => $request->ecp_approval_2,
             'ecp_file_pendukung' => 'ecp_files/'.$nama_file,

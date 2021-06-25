@@ -7,7 +7,7 @@
       <div class ="card card-info card-outline">  
       <div class ="card-header">     
 
-      <h3>Detai Approval Supervisor</h3>
+      <h3>Detail Approval Supervisor</h3>
          
       </div>
         
@@ -15,7 +15,7 @@
             <div class="card-body">
              <div class="row">
              <div class="col-md-5">
-             <table class="table table-noborder">
+             <table class="table table-borderless">
                 <tbody>
                 <tr>
                 <th>No ECP </th>
@@ -33,6 +33,18 @@
                 <th>Supervisor</th>
                 <th>:</th>
                 <th>{{$spv_approval->user->user_name}}</th>
+                </tr>
+
+                <tr>
+                <th>Status</th>
+                <th>:</th>
+                @if($spv_approval->status_ecp_id == 2)
+                    <td> <label class="badge badge-success">{{$spv_approval->status_ecp->status_ecp_name}} </label></td>          
+                    @elseif($spv_approval->status_ecp_id == 1)
+                    <td> <label class="badge badge-warning">{{$spv_approval->status_ecp->status_ecp_name}} </label></td>
+                    @elseif($spv_approval->status_ecp_id == 3)
+                    <td> <label class="badge badge-danger">{{$spv_approval->status_ecp->status_ecp_name}} </label></td>
+                    @endif
                 </tr>
                 
                 <tr>

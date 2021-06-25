@@ -1,13 +1,13 @@
 @extends('HalamanDepan.beranda')
 
-@section('title','Detail APPROVAL 1')
+@section('title','Detail APPROVAL 2')
 @section('container')
  
 <div class="content">
       <div class ="card card-info card-outline">  
       <div class ="card-header">     
 
-      <h3>Detail Approval Supervisor</h3>
+      <h3>Detail Approval Manager</h3>
          
       </div>
         
@@ -15,7 +15,7 @@
             <div class="card-body">
              <div class="row">
              <div class="col-md-5">
-             <table class="table table-noborder">
+             <table class="table table-borderless">
                 <tbody>
                 <tr>
                 <th>No ECP </th>
@@ -30,10 +30,23 @@
                 </tr>
 
                 <tr>
-                <th>Supervisor</th>
+                <th>Manager</th>
                 <th>:</th>
                 <th>{{$manager_approval->user->user_name}}</th>
                 </tr>
+
+                <tr>
+                <th>Status</th>
+                <th>:</th>
+                @if($manager_approval->status_ecp_id == 2)
+                    <td> <label class="badge badge-success">{{$manager_approval->status_ecp->status_ecp_name}} </label></td>          
+                    @elseif($manager_approval->status_ecp_id == 1)
+                    <td> <label class="badge badge-warning">{{$manager_approval->status_ecp->status_ecp_name}} </label></td>
+                    @elseif($manager_approval->status_ecp_id == 3)
+                    <td> <label class="badge badge-danger">{{$manager_approval->status_ecp->status_ecp_name}} </label></td>
+                    @endif
+                </tr>
+
                 
                 <tr>
                 <th>Alasan</th>

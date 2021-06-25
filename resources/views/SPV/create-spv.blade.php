@@ -15,19 +15,14 @@
           <div class="row">
           <div class="col-md-9">
           <div class="form-group">
-            <label>No ECP</label>
-              <select class="form-control select2 @error('ecp_no') is-invalid @enderror" id="ecp_no" name="ecp_no" value="{{old('ecp_no')}}">
-                <option selected disabled>Pilih ECP</option>
-              @foreach($ecpapproval as $ecpapproval1)
-                <option value="{{$ecpapproval1->ecp_no}}">{{$ecpapproval1->ecp_no}} : {{$ecpapproval1->ecp_deskripsi}} -> Diajukan Oleh {{$ecpapproval1->user->user_name}}</option>
-              @endforeach
-              </select>
-              @error('ecpapproval1') <div class="invalid-feedback"> {{$message}} </div> @enderror
-              </div>
+            <label>NO ECP</label>
+              <input type="text" id="ecp_no" name="ecp_no" class="form-control" value="{{$ecp_no}}">
+            </div>
+  
 
               <div class="form-group">
                 <label for="spv_approval_alasan">Alasan</label>
-                <textarea id="spv_approval_alasan" class="form-control @error('spv_approval_alasan') is-invalid @enderror" rows="2" name="spv_approval_alasan" value="{{old('spv_approval_alasan')}}"></textarea>
+                <textarea class="form-control @error('spv_approval_alasan') is-invalid @enderror" rows="2" name="spv_approval_alasan" value="{{old('spv_approval_alasan')}}"></textarea>
                 @error('spv_approval_alasan') <div class="invalid-feedback"> Masukkan Alasan !  </div> @enderror
               </div>
           </div>

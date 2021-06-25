@@ -39,15 +39,13 @@
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-dark">
-    <!-- SEARCH FORM -->
-      
     <ul class="navbar-nav ml-auto">
-    <li class="nav-item dropdown user-menu">
-    <a href="#" class="nav-link">
-          <img src="{{asset('adminLTE')}}/dist/img/user.png" class="user-image img-circle elevation-2" alt="User Image">
-          <span class="d-none d-md-inline">{{auth()->user()->user_name}}</span>
+    <li class="nav-item dropdown user user-menu">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" >
+          <img src="{{asset('adminLTE')}}/dist/img/user.png" class="user-image img-circle elevation-2" alt="User Image" >
+          <span class="hidden-xs">{{auth()->user()->user_name}}</span>
         </a>
-        </li>
+      
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-secondary">
@@ -56,13 +54,19 @@
             <p>
             {{auth()->user()->user_name}}
               <small>{{auth()->user()->user_nid}}</small>
-              <small>{{auth()->user()->jabatan->jabatan_name}}
-              {{auth()->user()->unit->unit_name}}</small>
+              <small>{{auth()->user()->jabatan->jabatan_name}},
+              {{auth()->user()->fungsi->fungsi_name}}</small>
             </p>
           </li>
           <!-- Menu Footer-->
           <li class="user-footer">
-          <a href="{{ route('logout') }}" class="badge badge-danger">Logout</a>
+          <p>
+         
+          <a href="edit-password/{{auth()->user()->user_nid}}"  style="float:left" class="badge badge-primary">Change Password <i class="fas fa-key"></i></a>       
+
+          <a href="{{ route('logout') }}" style="float:right" class="badge badge-danger">Logout <i class="fas fa-sign-out-alt"></i></a>
+          </p>
+          </li>
           </li>
         </ul>
     
