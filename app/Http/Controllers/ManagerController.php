@@ -19,7 +19,7 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $mng = Manager_approval::all();
+        $mng = Manager_approval::orderBy('created_at','desc')->get();
         $ecp = Ecp::all();
         $user = User::all();
         return view('MANAGER.data-mng',compact('mng','ecp','user'));

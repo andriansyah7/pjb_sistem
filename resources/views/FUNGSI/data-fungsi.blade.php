@@ -13,7 +13,8 @@
         
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="#example2" class="table table-bordered table-striped myTable">
+            <div class="table-responsive">
+              <table id="#example2" class="table table-bordered table-striped myTable table-sm">
                 <thead>
                 <tr>
                   <th>NO</th>
@@ -38,6 +39,7 @@
                 @endforeach
                 </tbody>
               </table>
+              </div>
             </div>
 </div>
 </div>

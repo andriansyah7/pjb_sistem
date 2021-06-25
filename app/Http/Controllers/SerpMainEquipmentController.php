@@ -17,25 +17,10 @@ class SerpMainEquipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $serp_system = Serp_System::all();
-        $serp_main = Serp_Main_Equipment::all();
-        $pic = Serp_Pic::all();
-        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
-    }   
 
-    public function search(Request $request)
-    { 
-        $serp_system = Serp_System::all();
-        $serp_main = Serp_Main_Equipment::where('serp_pic_id',$request->get('serp_pic_id'))->orderBy('mpi','desc')->take(100)->get();
-        $pic = Serp_Pic::all();
-        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
-    }
 
    public function ekspor ()
    {
-       $tgl= date('d-M-Y');
     return Excel::download(new MainEquipmentExport, 'serp_main_equipment.xlsx');
 
    }

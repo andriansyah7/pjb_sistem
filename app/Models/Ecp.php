@@ -66,6 +66,11 @@ class Ecp extends Model
         return $this->hasMany(Manager_approval::class);
     }
     
+    public function meqa()
+    {
+        return $this->hasMany(Meqa::class);
+    }
+    
     public function notulen()
     {
         return $this->hasMany(Spv_approval::class);

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Pengguna.login');
 });
 Route::get('/dashboard', function () {
     return view('Template.dashboard');
@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth', 'ceklevel: 1']], function () {
     //Data User
     Route::get('/data-user', 'UserController@index')->name('data-user');
     Route::get('/create-user', 'UserController@create')->name('create-user');
-    Route::get('/fungsi/{unit_id}', 'UserController@getfungsi')->name('create-fungsi');
+    Route::get('/fungsi/{unit_id}', 'UserController@getfungsi')->name('get-fungsi');
     Route::post('/simpan-user', 'UserController@store')->name('simpan-user');
     Route::get('/edit-user/{user}', 'UserController@edit')->name('edit-user');
     Route::patch('/update-user/{user}', 'UserController@update')->name('update-user');
@@ -108,6 +108,21 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::patch('/update-manager/{manager_approval}', 'ManagerController@update')->name('update-manager');
     Route::get('/delete-manager/{manager_approval_id}', 'ManagerController@destroy')->name('delete-manager');
 });
+
+//user manager/MEQA
+Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {    
+
+    Route::get('/progres-meqa/{ecp_no}', 'EcpController@progres_meqa')->name('progres-meqa');
+    Route::get('/reject-meqa/{ecp_no}', 'EcpController@reject_meqa')->name('reject-meqa');
+    Route::get('/signoff-meqa/{ecp_no}', 'EcpController@signoff_meqa')->name('signoff-meqa');
+    Route::get('/data-meqa', 'MeqaController@index')->name('data-meqa');
+    Route::get('/create-meqa', 'MeqaController@create')->name('create-meqa');
+    Route::post('/simpan-meqa', 'MeqaController@store')->name('simpan-meqa');
+    Route::get('/show-meqa/{meqa_approval}', 'MeqaController@show')->name('show-meqa');
+    Route::get('/edit-meqa/{meqa_approval}', 'MeqaController@edit')->name('edit-meqa');
+    Route::patch('/update-meqa/{meqa_approval}', 'MeqaController@update')->name('update-meqa');
+    Route::get('/delete-meqa/{meqa_approval_id}', 'MeqaController@destroy')->name('delete-meqa');
+});
 //admin engineer/notulen
 Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {    
     Route::get('/data-notulen', 'NotulenController@index')->name('data-notulen');
@@ -146,7 +161,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::patch('/update-serp_pic/{serp_pic}', 'SerpPicController@update')->name('update-serp_pic');
     Route::get('/delete-serp_pic/{serp_pic}', 'SerpPicController@destroy')->name('delete-serp_pic');
     Route::get('/show-serp_pic/{serp_pic}', 'SerpPicController@show')->name('show-serp_pic');
-    
+    //serp_main_equipment
     Route::get('/data-serp_main', 'SerpMainEquipmentController@index')->name('data-serp_main');
     Route::get('/search-serp_main', 'SerpMainEquipmentController@search')->name('search-serp_main');
     Route::get('/create-serp_main', 'SerpMainEquipmentController@create')->name('create-serp_main');

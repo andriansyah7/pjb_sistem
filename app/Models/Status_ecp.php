@@ -24,7 +24,11 @@ class Status_ecp extends Model
    
     public function manager_approval()
     {
-        return $this->hasMany(Spv_approval::class);
+        return $this->hasMany(Manager_approval::class);
+    }
+    public function meqa()
+    {
+        return $this->hasMany(Meqa::class);
     }
 
 }

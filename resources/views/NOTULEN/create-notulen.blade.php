@@ -44,7 +44,7 @@
           <div class="col-md-3">
             <div class="form-group">
                 <label for="notulen_notulis">Notulis</label>
-                <select class="form-control select2 @error('') is-invalid @enderror" id="notulen_notulis" name="notulen_notulis" value="{{old('notulen_notulis')}}">
+                <select class="form-control select2 @error('notulen_notulis') is-invalid @enderror" id="notulen_notulis" name="notulen_notulis" value="{{old('notulen_notulis')}}">
                 <option selected value="{{auth()->user()->user_nid}}">{{auth()->user()->user_name}}</option>
                 @error('notulen_notulis') <div class="invalid-feedback"> Masukkan Nama !  </div> @enderror 
                 </select>
@@ -59,14 +59,7 @@
       </div>
       </div>
 
-      <div class="col-md-4">
-      <div class="form-group">
-      <label>Waktu</label>
-                
-                    <input type="time" name="notulen_waktu" class="form-control">
-                    
-                       
-                    
+
       </div>
       </div>
       

@@ -17,7 +17,8 @@
         
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered table-striped myTable">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped myTable table-sm">
                 <thead>
                 <tr>
                      <th>#</th>
@@ -38,7 +39,7 @@
                     <td>{{$item->pimpinan_rapat->user_name}}</td>
                     <td>{{$item->notulis->user_name}}</td>
                     <td>{{$item->notulen_agenda}}</td>
-                    <td>{{$item->notulen_tanggal}}</td>
+                    <td>{{date('d M Y H:i:s',strtotime($item->created_at))}}</td>
                     <td>
                       <a href="{{route('show-notulen',$item->notulen_id)}}"><i class="fas fa-eye" style="color:black"></i></a>
                     @if (auth()->user()->role_id=="4")
@@ -54,6 +55,7 @@
                 @endforeach
                 </tbody>
               </table>
+              </div>
             </div>
 </div>
 </div>
