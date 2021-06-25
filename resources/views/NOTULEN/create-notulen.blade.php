@@ -62,12 +62,11 @@
       <div class="col-md-4">
       <div class="form-group">
       <label>Waktu</label>
-                <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                    <input type="time" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
-                    <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker3">
-                        <div class="input-group-text"><i class="fa fa-clock"></i></div>
-                    </div>
-      </div>
+                
+                    <input type="time" name="notulen_waktu" class="form-control">
+                    
+                       
+                    
       </div>
       </div>
       

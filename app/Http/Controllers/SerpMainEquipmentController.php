@@ -21,7 +21,16 @@ class SerpMainEquipmentController extends Controller
     {
         $serp_system = Serp_System::all();
         $serp_main = Serp_Main_Equipment::all();
-        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main'));
+        $pic = Serp_Pic::all();
+        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
+    }   
+
+    public function search(Request $request)
+    { 
+        $serp_system = Serp_System::all();
+        $serp_main = Serp_Main_Equipment::where('serp_pic_id',$request->get('serp_pic_id'))->orderBy('mpi','desc')->take(100)->get();
+        $pic = Serp_Pic::all();
+        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
     }
 
    public function ekspor ()
@@ -169,7 +178,7 @@ class SerpMainEquipmentController extends Controller
             'serp_pic_id'=>'required',
             'serp_main_equipment_keterangan'=>'required',
         ]);
-        
+    
         $oc=$request->OC;
         $pt=$request->PT;
         $pq=$request->PQ;
