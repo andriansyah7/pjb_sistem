@@ -20,13 +20,16 @@ class SerpMainEquipmentController extends Controller
         return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
     }   
 
+   
     public function search(Request $request)
     { 
+        $serp_pic_id = $request->get('serp_pic_id');
         $serp_system = Serp_System::all();
-     
-        $serp_main = Serp_Main_Equipment::where('serp_pic_id',$request->get('serp_pic_id'))->orderBy('MPI','desc')->limit(50)->get();
+        $serp_main_sc = Serp_Main_Equipment::where('serp_pic_id',$serp_pic_id)->orderBy('mpi','desc')->get()->count();
+        $serp_main_10p = floor($serp_main_sc/10);
+        $serp_main = Serp_Main_Equipment::where('serp_pic_id',$serp_pic_id)->orderBy('mpi','desc')->take($serp_main_10p)->get();
         $pic = Serp_Pic::all();
-        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
+        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic','serp_pic_id'));
     }
 
 
