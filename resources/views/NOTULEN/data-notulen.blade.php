@@ -6,13 +6,7 @@
 <div class="content">
       <div class ="card card-info card-outline">  
       <div class ="card-header">     
-      @if (auth()->user()->role_id=="4")
-
-          <div class ="card-tools inlane m-2">
-            <a href="{{route('create-notulen')}}" class="btn btn-success btn-sm">Notulen ECP <i class="fas fa-plus-square"></i></a>
-         </div>
-         @else
-         @endif
+  
       </div>
         
             <!-- /.card-header -->
