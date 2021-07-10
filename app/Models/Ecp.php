@@ -79,7 +79,7 @@ class Ecp extends Model
     
     public function notulen()
     {
-        return $this->hasMany(Spv_approval::class);
+        return $this->hasMany(Notulen::class);
     }
 
     public function tindaklanjut()

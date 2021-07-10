@@ -20,13 +20,15 @@ class NotulenController extends Controller
     }
 
     
-    public function create()
+    public function create($ecp_no)
     {
+        $ecp_no= str_replace('-','/',$ecp_no);
+
         $notulen = Notulen::all();
         $ecp = Ecp::all();
         $user = User::all();
         $pimpinan = User::where('role_id',"3")->get();
-        return view('NOTULEN.create-notulen',compact('notulen','ecp','user','pimpinan'));
+        return view('NOTULEN.create-notulen',compact('notulen','ecp_no','user','pimpinan'));
     
     }
 
@@ -55,15 +57,48 @@ class NotulenController extends Controller
         $notulen['updated_at']= date('Y-m-d H:i:s');
 
         Notulen::insert($notulen);
-        return redirect('data-notulen')->with('success', 'Data Berhasil Tersimpan!');
+        
+        return redirect('data-ecp')->with('success', 'Data Berhasil Tersimpan!');
+    }
+
+
+    public function buat()
+    {
+        $ecp = Ecp::all();
+        $user = User::all();
+        $pimpinan = User::where('role_id',"3")->get();
+        return view('NOTULEN.create-notulen-ecp',compact('ecp','user','pimpinan'));
     }
 
     /**
-     * Display the specified resource.
+     * Store a newly created resource in storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function simpan(Request $request)
+    {
+        $request->validate([
+            'notulen_pimpinan_rapat'=>'required',
+            'notulen_notulis'=>'required',
+            'notulen_tanggal'=>'required',
+            'notulen_waktu'=>'required',
+            'notulen_tempat'=>'required',
+            'notulen_rapat'=>'required',
+            'notulen_agenda'=>'required',
+            'notulen_peserta'=>'required',
+            ]);
+    
+            $notulen=$request->except(['_token']);
+            $notulen['notulen_tanggal']= date('Y-m-d');
+            $notulen['created_at']= date('Y-m-d H:i:s');
+            $notulen['updated_at']= date('Y-m-d H:i:s');
+    
+            Notulen::insert($notulen);
+            
+            return redirect('data-rcfa')->with('success', 'Data Berhasil Tersimpan!');
+    }
+   
     public function show(Notulen $notulen)
     {
         $ecp = Ecp::all();

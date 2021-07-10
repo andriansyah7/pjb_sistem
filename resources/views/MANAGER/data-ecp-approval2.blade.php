@@ -6,9 +6,8 @@
 <div class="content">
       <div class ="card card-info card-outline">  
       <div class ="card-header">     
-          <!-- <div class ="card-tools inlane m-2">
-            <a href="{{route('create-manager')}}" class="btn btn-success btn-sm">Approval ECP <i class="fas fa-plus-square"></i></a>
-         </div> -->
+      <a><b>ECP yg perlu approval : </b></a><a style="color:red"><b>{{$jum}}</b></a>   
+
       </div>
         
             <!-- /.card-header -->

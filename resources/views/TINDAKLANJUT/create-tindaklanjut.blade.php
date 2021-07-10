@@ -42,12 +42,7 @@
                 </div>
                 </div>
 
-                <div class="col-md-3">
-      <div class="form-group">
-      <label>Deadline Monitoring</label> 
-      <input type="date" class="form-control datee"  name="updated_at">
-      </div>
-      </div>
+        
           </div>
 
         <div class="row">

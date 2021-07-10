@@ -15,7 +15,7 @@
             <div class="card-body">
              <div class="row">
              <div class="col-md-5">
-             <table class="table table-noborder">
+             <table class="table table-borderless table-sm">
                 <tbody>
                 <tr>
                 <th>Pimpinan Rapat </th>
@@ -77,9 +77,7 @@
              <label>Hasil Pembahasan  :  </label> {{$notulen->notulen_hasil_pembahasan}}
              </div>
             
-             <div>
-            <a href="{{route('cetaknotulen',$notulen->notulen_id)}}" class="btn btn-info btn-sm">Print Notulen <i class="fas fa-file-word"></i></a>
-             </div>
+            
              </div>
             </div>
              </div>

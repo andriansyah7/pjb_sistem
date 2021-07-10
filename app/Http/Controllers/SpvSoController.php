@@ -17,7 +17,12 @@ class SpvSoController extends Controller
      */
     public function index()
     {
-        //
+        $data = Auth::user()->user_nid;
+        $nama = Auth::user()->user_name;
+        $spv = Spv_so::where('staff_so',$data)->orderBy('created_at','desc')->get();
+        $jumlahspv = Spv_so::where('staff_so',$data)->orderBy('created_at','desc')->count();
+        
+        return view('SPV.data-spv-so', compact('spv','data','nama','jumlahspv'));
     }
 
     /**

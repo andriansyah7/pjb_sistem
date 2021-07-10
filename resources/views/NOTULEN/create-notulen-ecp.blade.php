@@ -10,13 +10,18 @@
           <h5>Input Data</h5>
         </div>
         <div class="card-body">
-          <form action="{{route('simpan-notulen')}}" method="post" enctype="multipart/form-data">
+          <form action="{{route('simpan-notulen-ecp')}}" method="post" enctype="multipart/form-data">
           @csrf
           <div class="row">
           <div class="col-md-5">
           <div class="form-group">
             <label>NO ECP</label>
-              <input type="text" id="ecp_no" name="ecp_no" class="form-control" value="{{$ecp_no}}">
+            <select class="form-control select2 @error('ecp_no') is-invalid @enderror"  name="ecp_no" value="{{old('ecp_no')}}">
+                <option selected disabled><-Pilih No Dokumen ECP-></option>
+              @foreach ($ecp as $item)
+                <option value="{{$item->ecp_no}}">{{$item->ecp_no}} -> Dibuat Oleh: {{$item->user->user_name}}</option>
+              @endforeach
+              </select>
             </div>
 
               

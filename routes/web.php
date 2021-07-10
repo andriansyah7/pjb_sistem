@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
 //user manager/approval2
 Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {    
     Route::get('/data-ecp-approval2', 'EcpController@ecpapproval2')->name('data-ecp-approval2');
+    Route::get('/data-ecp-meqa', 'EcpController@meqaapproval')->name('data-ecp-meqa');
     Route::get('/progres-manager/{ecp_no}', 'EcpController@progres_manager')->name('progres-manager');
     Route::get('/reject-manager/{ecp_no}', 'EcpController@reject_manager')->name('reject-manager');
     Route::get('/data-manager', 'ManagerController@index')->name('data-manager');
@@ -133,7 +134,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/data-notulen', 'NotulenController@index')->name('data-notulen');
     
     Route::get('/progres-tindaklanjut/{ecp_no}', 'EcpController@progres_tindaklanjut')->name('progres-tindaklanjut');
-    Route::get('/create-notulen', 'NotulenController@create')->name('create-notulen');
+    Route::get('/create-notulen/{ecp_no}', 'NotulenController@create')->name('create-notulen');
     Route::post('/simpan-notulen', 'NotulenController@store')->name('simpan-notulen');
     Route::get('/edit-notulen/{notulen}', 'NotulenController@edit')->name('edit-notulen');
     Route::patch('/update-notulen/{notulen}', 'NotulenController@update')->name('update-notulen');
@@ -141,6 +142,15 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/show-notulen/{notulen}', 'NotulenController@show')->name('show-notulen');
     Route::get('/cetaknotulen/{notulen_id}', 'NotulenController@cetaknotulen')->name('cetaknotulen');
     
+    //notulen_rcfa
+    Route::get('/data-notulen-rcfa', 'NotulenRcfaController@index')->name('data-notulen-rcfa');
+    Route::get('/create-notulen-rcfa', 'NotulenRcfaController@create')->name('create-notulen-rcfa');
+    Route::post('/simpan-notulen-rcfa', 'NotulenRcfaController@store')->name('simpan-notulen-rcfa');
+
+    //notulen_ecp
+    Route::get('/create-notulen-ecp', 'NotulenController@buat')->name('create-notulen-ecp');
+    Route::post('/simpan-notulen-ecp', 'NotulenController@simpan')->name('simpan-notulen-ecp');
+
     //ecm_review
     Route::get('/progres-review/{ecp_no}', 'EcpController@progres_review')->name('progres-review');
     Route::get('/create-review', 'ECMReviewController@create')->name('create-review');
@@ -148,12 +158,17 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/edit-review/{ecm_review}', 'ECMReviewController@edit')->name('edit-review');
     Route::patch('/update-review/{ecm_review}', 'ECMReviewController@update')->name('update-review');
     Route::get('/delete-review/{ecm_review_id}', 'ECMReviewController@destroy')->name('delete-review');
-    Route::get('/show-review/{ecm_review}', 'ECMReviewController@show')->name('show-notulen');
+    Route::get('/show-review/{ecm_review}', 'ECMReviewController@show')->name('show-review');
+
+    //disposisi
+    Route::get('/data-spv_so', 'SpvSoController@index')->name('data-spv_so');
+    Route::get('/data-disposisi-spvso', 'MeqaApprovalController@index')->name('data-disposisi-spvso');
+
    
 
     //tindaklanjutecp
     Route::get('/data-tindaklanjut', 'TindakLanjutController@index')->name('data-tindaklanjut');
-    Route::get('/create-tindaklanjut', 'TindakLanjutController@create')->name('create-tindaklanjut');
+    Route::get('/create-tindaklanjut/{ecp_no}', 'TindakLanjutController@create')->name('create-tindaklanjut');
     Route::post('/simpan-tindaklanjut', 'TindakLanjutController@store')->name('simpan-tindaklanjut');
     Route::get('/edit-tindaklanjut/{tindaklanjut}', 'TindakLanjutController@edit')->name('edit-tindaklanjut');
     Route::patch('/update-tindaklanjut/{tindaklanjut}', 'TindakLanjutController@update')->name('update-tindaklanjut');
@@ -177,7 +192,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::patch('/update-serp_pic/{serp_pic}', 'SerpPicController@update')->name('update-serp_pic');
     Route::get('/delete-serp_pic/{serp_pic}', 'SerpPicController@destroy')->name('delete-serp_pic');
     Route::get('/show-serp_pic/{serp_pic}', 'SerpPicController@show')->name('show-serp_pic');
+   
     //serp_main_equipment
+    Route::get('/create-history', 'SerpMainEquipmentController@history')->name('create-history');
     Route::get('/data-serp_main', 'SerpMainEquipmentController@index')->name('data-serp_main');
     Route::get('/search-serp_main', 'SerpMainEquipmentController@search')->name('search-serp_main');
     Route::get('/create-serp_main', 'SerpMainEquipmentController@create')->name('create-serp_main');
@@ -188,13 +205,27 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::patch('/update-serp_main/{serp_main_equipment}', 'SerpMainEquipmentController@update')->name('update-serp_main');
     Route::get('/delete-serp_main/{serp_main_equipment}', 'SerpMainEquipmentController@destroy')->name('delete-serp_main');
     Route::get('/show-serp_main/{serp_main_equipment}', 'SerpMainEquipmentController@show')->name('show-serp_main');
+    
+    //history_serp
+    Route::get('/data-serp_history', 'HistorySerpController@index')->name('data-serp_history');
+    Route::get('/search-serp_history', 'HistorySerpController@search')->name('search-serp_history');
+    Route::get('/history-serp/{serp_main_equipment}', 'HistorySerpController@edit')->name('history-serp');
+    Route::post('simpan-history', 'HistorySerpController@update')->name('simpan-history');
+   
+   
+    //Rcfa
+    Route::get('/data-rcfa', 'RcfaController@index')->name('data-rcfa');
+    Route::get('/create-rcfa', 'RcfaController@create')->name('create-rcfa');
+    Route::post('/simpan-rcfa', 'RcfaController@store')->name('simpan-rcfa');
+    Route::get('/show-rcfa/{rcfa_no}', 'RcfaController@show')->name('show-rcfa');
 });
 
 //user staff
 Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
-    Route::get('/create-ecp', 'EcpController@create')->name('create-ecp');
     Route::get('/data-ecp', 'EcpController@index')->name('data-ecp');
+    Route::get('/create-ecp', 'EcpController@create')->name('create-ecp');
     Route::post('/simpan-ecp', 'EcpController@store')->name('simpan-ecp');
+    Route::get('/show-ecp/{ecp_no}', 'EcpController@show')->name('show-ecp');
     Route::get('/edit-ecp/{ecp}', 'EcpController@edit')->name('edit-ecp');
     Route::get('/edit-password/{{auth()->user()->user_nid}}', 'UserController@edit_password')->name('edit-password');
     Route::patch('/update-password/{user}', 'UserController@update_password')->name('update-password');
@@ -202,7 +233,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/edit-urgensi/{ecp}', 'EcpController@edit_urgensi')->name('edit-urgensi');
     Route::patch('/update-ecp/{ecp_no}', 'EcpController@update')->name('update-ecp');
     Route::get('/delete-ecp/{ecp_no}', 'EcpController@destroy')->name('delete-ecp');
-    Route::get('/show-ecp/{ecp_no}', 'EcpController@show')->name('show-ecp');
     Route::get('/cetakword/{ecp_no}', 'EcpController@cetakWord')->name('cetakword');
     
 });

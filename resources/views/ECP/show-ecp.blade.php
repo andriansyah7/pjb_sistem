@@ -2,6 +2,7 @@
 
 @section('title','Detail ECP')
 @section('container')
+
 @if ((auth()->user()->role_id=='4')&& ($ecp->progres_id=='11'))
 
 <div class ="card-tools inlane m-2">
@@ -93,7 +94,7 @@
                 <tr>
                 <th>File Pendukung</th>
                 <th>:</th>
-                <th><p> <a href="{{asset($ecp->ecp_file_pendukung) }}" class="badge badge-info" download="">Download File      <i class="fas fa-download"></i></a></p></th>
+                <th> <a href="{{asset($ecp->ecp_file_pendukung) }}" class="badge badge-info" download="">Download File      <i class="fas fa-download"></i></a></th>
                 </tr>
                 </tbody>
              </table>
@@ -150,8 +151,15 @@
             </div>     
                     @endif
                     
-                    @if ((auth()->user()->unit_id==1) && ($ecp->progres_id=='8'))
-                  
+     @foreach ($sospv as $item)
+    <td></td>
+    @endforeach
+ @php
+    $spvso1 = $item->spv_so;
+    @endphp
+
+    @if ((auth()->user()->user_nid == $spvso1) && ($ecp->progres_id=='8'))
+
                   <div>
            <h5>Review ECP ini ?</h5> 
            </div>
@@ -160,7 +168,8 @@
                      $ecp_no = str_replace('/','-',$ecp->ecp_no);
                   @endphp
                   <a href="{{route('progres-spv_so',$ecp_no)}}" class="badge badge-dark"><i onclick="return confirm('Yakin Approve ECP ?')" class="fas fa-check-circle" style="color:chartreuse"></i>Review SPV SO </a>
-          </div>     
+          </div> 
+          @elseif  (auth()->user()->user_nid != $spvso1)
                   @endif
                 
 
@@ -198,44 +207,100 @@
       </div>
 @endif
 
+@if  ($ecp->progres_id!='1')
+
+<div class="card card-warning card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Data Notulen ECP</h3>
+    @foreach ($staffso as $item)
+    <td></td>
+    @endforeach
+ @php
+    $staf = $item->staff_so;
+    @endphp
+
+    @if (auth()->user()->user_nid == $staf) 
+    <a href="{{route('create-notulen',$ecp_no)}}" style="float:right" class="btn btn-success btn-sm"><i class="fas fa-plus-square"> Notulen </i></a>
+@elseif (auth()->user()->user_nid != $staf)
+
+@endif
+  </div>
+  <div class="card-body">
+ <div class="row">
+ <div class="col-12">
+ <table class="table table-sm table-striped table-sm">
+ <thead>
+    <tr>
+      <th>#</th>
+      <th>No ECP</th>
+      <th>Tanggal </th>
+      <th>Notulis </th>
+      <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+   
+    @foreach ($notulen as $item)
+    <tr>
+    <td>{{ $loop->iteration}}</td>  
+    <td>{{$item->ecp_no}}</td>
+    <td>{{date('d M Y H:i:s',strtotime($item->created_at))}}</td>
+    <td>{{$item->notulis->user_name}}</td>
+    <td><a href="{{route('show-notulen',$item->notulen_id)}}" class="badge badge-light"><i class="fas fa-eye" style="color:black"></i> Detail</a></td>
+    </tr>
+  <!-- /.card-body -->
+  @endforeach
+    </tbody>
+ </table>   
+</div>
+<!-- /.card -->
+</div>
+</div>
+</div>
+
+@endif
+   
+
                       @if  ($ecp->progres_id!='1')
 
-            <div class="card card-success card-outline">
+            <div class="card card-warning card-outline">
               <div class="card-header">
-                <h3 class="card-title">Tindak Lanjut ECP</h3>
+                <h3 class="card-title">Data Tindak Lanjut ECP</h3>
+                @foreach ($staffso as $item)
+    <td></td>
+    @endforeach
+ @php
+    $staf = $item->staff_so;
+    @endphp
+
+    @if (auth()->user()->user_nid == $staf) 
+        <a href="{{route('create-tindaklanjut',$ecp_no)}}" style="float:right" class="btn btn-success btn-sm"><i class="fas fa-plus-square"> Tindak Lanjut </i></a>
+             
+        @elseif (auth()->user()->user_nid != $staf)
+              @endif
               </div>
               <div class="card-body">
              <div class="row">
-             <div class="col-11">
-             <table class="table table-sm table-borderless">
+             <div class="col-12">
+             <table class="table table-sm table-striped table-sm">
+             <thead>
+                <tr>
+                  <th>#</th>
+                  <th>No ECP</th>
+                  <th>Tanggal </th>
+                  <th>Nama Staff SO </th>
+                  <th>Aksi</th>
+                  </tr>
+                </thead>
                 <tbody>
+               
                 @foreach ($tdk as $item)
                 <tr>
-                <th width="120px">No ECP </th>
-                <th>:</th>
-                <th>{{$item->ecp_no}}</th>
-                </tr>
-                <tr>
-                <th width="120px">Tanggal Approval </th>
-                <th>:</th>
-                <th>{{date('d M Y H:i:s',strtotime($item->created_at))}}</th>
-                </tr>
-                <tr>
-                <th>Nama Notulis</th>
-                <th>:</th>
-                <th>{{$item->notulis->user_name}}</th>
-                </tr>
-                
-                <tr>
-                <th>Deskripsi Tindak Lanjut</th>
-                <th>:</th>
-                <td>{{$item->tindaklanjut_deskripsi}}</td>
-                </tr>
-
-                <tr>
-                <th>File Terkait</th>
-                <th>:</th>
-                <th><p> <a href="{{asset($item->tindaklanjut_file_terkait) }}" class="badge badge-info" download="">Download File      <i class="fas fa-download"></i></a></p></th>
+                <td>{{ $loop->iteration}}</td>  
+                <td>{{$item->ecp_no}}</td>
+                <td>{{date('d M Y H:i:s',strtotime($item->created_at))}}</td>
+                <td>{{$item->notulis->user_name}}</td>
+                <td><a href="{{route('show-tindaklanjut',$item->tindaklanjut_id)}}" class="badge badge-light"><i class="fas fa-eye" style="color:black"></i> Detail</a></td>
                 </tr>
               <!-- /.card-body -->
               @endforeach
@@ -266,12 +331,14 @@
              <table class="table table-sm table-borderless">
                 <tbody>
                 @foreach ($spv as $spv_approval)
+                <th width="1px">#{{ $loop->iteration}}</th> 
                 <tr>
-                <th width="120px">No ECP </th>
+                <th >No ECP </th>
                 <th>:</th>
                 <th>{{$spv_approval->ecp_no}}</th>
                 </tr>
                 <tr>
+                
                 <th width="120px">Tanggal Approval </th>
                 <th>:</th>
                 <th>{{date('d M Y H:i:s',strtotime($spv_approval->created_at))}}</th>
@@ -298,7 +365,12 @@
                 <th>:</th>
                 <td>{{$spv_approval->spv_approval_alasan}}</td>
                 </tr>
-              <!-- /.card-body -->
+                <tr>
+                <th></th>
+                  </tr>
+              
+              
+              
               @endforeach
                 </tbody>
              </table>   

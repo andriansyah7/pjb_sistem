@@ -110,9 +110,7 @@
 
              
             
-             <div>
-            <a href="" class="btn btn-info btn-sm">Print Approval <i class="fas fa-print"></i></a>
-             </div>
+            
              </div>
             </div>
              </div>

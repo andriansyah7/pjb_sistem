@@ -12,11 +12,22 @@ use Illuminate\Http\Request;
 
 class SerpMainEquipmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index()
+    {
+        $serp_system = Serp_System::all();
+        $serp_main = Serp_Main_Equipment::orderBy('MPI','desc')->get();
+        $pic = Serp_Pic::all();
+        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
+    }   
+
+    public function search(Request $request)
+    { 
+        $serp_system = Serp_System::all();
+     
+        $serp_main = Serp_Main_Equipment::where('serp_pic_id',$request->get('serp_pic_id'))->orderBy('MPI','desc')->limit(50)->get();
+        $pic = Serp_Pic::all();
+        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
+    }
 
 
    public function ekspor ()
@@ -117,12 +128,14 @@ class SerpMainEquipmentController extends Controller
         return redirect('data-serp_main')->with('success', 'Data Berhasil Tersimpan!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Serp_Main_Equipment  $serp_Main_Equipment
-     * @return \Illuminate\Http\Response
-     */
+
+    public function history()
+    {
+        $main1= Serp_Main_Equipment::count();
+        dd($main1);
+
+    }
+
     public function show(Serp_Main_Equipment $serp_Main_Equipment)
     {
         //

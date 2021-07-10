@@ -21,7 +21,12 @@ class MeqaApprovalController extends Controller
      */
     public function index()
     {
-        //
+        $data = Auth::user()->user_nid;
+        $nama = Auth::user()->user_name;
+        $meqa = Meqa_approval::where('spv_so',$data)->orderBy('created_at','desc')->get();
+        $jumlahmeqa = Meqa_approval::where('spv_so',$data)->orderBy('created_at','desc')->count();
+        
+        return view('MANAGER.data-disposisi-spvso', compact('meqa','data','nama','jumlahmeqa'));
     }
 
     /**
@@ -33,7 +38,7 @@ class MeqaApprovalController extends Controller
     {
        
        
-        $spv = User::where('unit_id','1')->where('role_id','3')->get();
+        $spv = User::whereIn('fungsi_id',[1,2])->where('role_id','3')->get();
         return view ('MEQA_APPROVE.create-approval',compact('spv'));
     }
 

@@ -5,7 +5,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/dashboard" class="nav-link {{ Route::currentRouteNamed('beranda') ? 'active' : '' }}">
+            <a href="/dashboard" class="nav-link {{ Route::currentRouteNamed('dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-home"></i>
               <p>Dashboard </p>
             </a>
@@ -13,7 +13,9 @@
           
           <!-- Layanan -->
           <li class="nav-header">Layanan</li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-ecp') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-spv') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-manager') ? 'menu-open' : '' }} 
+          || {{ Route::currentRouteNamed('data-meqa') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-notulen') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-tindaklanjut') ? 'menu-open' : '' }} 
+          || {{ Route::currentRouteNamed('data-ecp-meqa') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-ecp-approval2') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-disposisi-spvso') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
@@ -62,11 +64,19 @@
               </li>
               @endif
 
+              @if ((auth()->user()->role_id=="2") && (auth()->user()->fungsi_id=="4"))
+              <li class="nav-item">
+                <a href="{{route('data-ecp-meqa')}}" class="nav-link {{ Route::currentRouteNamed('data-ecp-meqa') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data ECP MEQA</p>  
+                </a>
+              </li>
+              @endif
               @if (auth()->user()->role_id=="2")
           <li class="nav-item">
                 <a href="{{route('data-ecp-approval2')}}" class="nav-link {{ Route::currentRouteNamed('data-ecp-approval2') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data ECP</p>
+                  <p>Data ECP ORIGINATOR </p> 
                 </a>
               </li>
           
@@ -104,19 +114,24 @@
               </li>
               @endif
 
-          @if (auth()->user()->role_id=="3")
+          @if ((auth()->user()->role_id=="3")  && ((auth()->user()->fungsi_id=="1") || (auth()->user()->fungsi_id=="2")))
+        
           <li class="nav-item">
-                <a href="{{route('data-ecp-approval1')}}" class="nav-link {{ Route::currentRouteNamed('data-ecp-approval1') ? 'active' : '' }}">
-                  <i class="far fa-file"></i>
-                  <p>Data ECP</p>
-                </a>
-              </li>
-          <li class="nav-item">
-                <a href="{{route('data-ecp')}}" class="nav-link {{ Route::currentRouteNamed('data-ecp') ? 'active' : '' }}">
+                <a href="{{route('data-disposisi-spvso')}}" class="nav-link {{ Route::currentRouteNamed('data-disposisi-spvso') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
                   <p>Data Disposisi ECP</p>
                 </a>
               </li>
+            @endif
+          
+          @if (auth()->user()->role_id=="3")
+          <li class="nav-item">
+                <a href="{{route('data-ecp-approval1')}}" class="nav-link {{ Route::currentRouteNamed('data-ecp-approval1') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Approval ECP Originator</p>
+                </a>
+              </li>
+        
           
           <!-- <li class="nav-item">
                 <a href="{{route('data-spv')}}" class="nav-link {{ Route::currentRouteNamed('data-spv') ? 'active' : '' }}">
@@ -193,11 +208,21 @@
               </li>
               @endif
 
-              @if (auth()->user()->role_id=="5")
+              @if ((auth()->user()->role_id=="5") && ((auth()->user()->fungsi_id=="1") || (auth()->user()->fungsi_id=="2")))
+              
+              <li class="nav-item">
+                <a href="{{route('data-spv_so')}}" class="nav-link {{ Route::currentRouteNamed('data-spv_so') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p> Disposisi ECP</p>
+                </a>
+              </li>
+              @endif
+
+              @if (auth()->user()->role_id=="5") 
           <li class="nav-item">
                 <a href="{{route('data-ecp')}}" class="nav-link {{ Route::currentRouteNamed('data-ecp') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
-                  <p>Data ECP</p>
+                  <p> Data ECP</p>
                 </a>
               </li>
 
@@ -238,7 +263,25 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-rcfa') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                RCFA
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('data-rcfa')}}" class="nav-link {{ Route::currentRouteNamed('data-rcfa') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data RCFA</p>
+                </a>
+              </li>
+              </ul>
+              </li>
+
+          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-serp_main') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-serp_history') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
@@ -254,8 +297,45 @@
                 </a>
               </li>
               </ul>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('data-serp_history')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_history') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data History</p>
+                </a>
+              </li>
+              </ul>
               </li>
 
+              @if ((auth()->user()->role_id=="5") && ((auth()->user()->fungsi_id=="1") || (auth()->user()->fungsi_id=="2")))
+
+          <li class="nav-item has-treeview {{ Route::currentRouteNamed('create-notulen-ecp') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('create-notulen-rcfa') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+               NOTULEN
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('create-notulen-ecp')}}" class="nav-link {{ Route::currentRouteNamed('create-notulen-ecp') ? 'active' : '' }}">
+                  <i class="fas fa-plus-circle"></i>
+                  <p>Notulen ECP</p>
+                </a>
+              </li>
+              </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('create-notulen-rcfa')}}" class="nav-link {{ Route::currentRouteNamed('create-notulen-rcfa') ? 'active' : '' }}">
+                  <i class="fas fa-plus-circle"></i>
+                  <p>Notulen RCFA</p>
+                </a>
+              </li>
+              </ul>
+              </li>
+          @endif
 
 
 
@@ -268,7 +348,7 @@
           @if (auth()->user()->role_id=="4")
           <li class="nav-header">Pengaturan</li>
           
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-serp_system') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-serp_pic') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
@@ -300,7 +380,7 @@
           @if (auth()->user()->role_id=="1")
           <li class="nav-header">Pengaturan</li>
 
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-blok') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-serp_unit') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
@@ -325,7 +405,7 @@
               </ul>
               </li>
 
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-user') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-jabatan') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-unit') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-fungsi') ? 'menu-open' : '' }} ">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>

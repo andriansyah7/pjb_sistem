@@ -25,12 +25,14 @@ class TindakLanjutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($ecp_no)
     {
+        $ecp_no= str_replace('-','/',$ecp_no);
+
         $tindaklanjut = Tindaklanjut::orderBy('created_at','desc')->get();
         $ecp= Ecp::all();
         $user= User::all();
-        return view('TINDAKLANJUT.create-tindaklanjut',compact('tindaklanjut','ecp','user'));
+        return view('TINDAKLANJUT.create-tindaklanjut',compact('tindaklanjut','ecp_no','user'));
     }
 
     /**
@@ -46,7 +48,7 @@ class TindakLanjutController extends Controller
             'tindaklanjut_notulis'=>'required',
             'tindaklanjut_deskripsi'=>'required',
             'tindaklanjut_file_terkait'=>'required',
-            'updated_at'=>'required',
+           
         ]);
         $file =$request->file('tindaklanjut_file_terkait'); 
             
@@ -66,7 +68,7 @@ class TindakLanjutController extends Controller
             'updated_at' => date('Y-M-d'),
 
         ]);
-        return redirect('data-tindaklanjut')->with('success', 'Data Berhasil Tersimpan!');
+        return redirect('data-ecp')->with('success', 'Data Berhasil Tersimpan!');
     }
 
     /**
@@ -75,9 +77,11 @@ class TindakLanjutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+   
+    public function show(TindakLanjut $tindaklanjut)
     {
-        //
+        
+        return view ('TINDAKLANJUT.show-tindaklanjut', compact('tindaklanjut'));
     }
 
     /**

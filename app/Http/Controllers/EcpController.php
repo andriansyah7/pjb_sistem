@@ -8,6 +8,7 @@ use App\Models\Spv_so;
 use App\Models\Manager_approval;
 use App\Models\Meqa_approval;
 use App\Models\ECM_Review;
+use App\Models\Notulen;
 use App\Models\Tindaklanjut;
 use App\Models\Urgensi;
 use App\Models\Status_ecp;
@@ -38,7 +39,8 @@ class EcpController extends Controller
         $approval2 = User::where('role_id',"2")->get();
         $data = Auth::user()->user_nid;
         $ecp = Ecp::where('ecp_approval_1',$data)->orderBy('created_at','desc')->get();
-        return view('SPV.data-ecp-approval1', compact('approval1','approval2','ecp'));
+        $jumlah = Ecp::where('ecp_approval_1',$data)->where('progres_id','1')->orderBy('created_at','desc')->count();
+        return view('SPV.data-ecp-approval1', compact('approval1','approval2','ecp','jumlah'));
     }
     
     public function ecpapproval2()
@@ -48,14 +50,24 @@ class EcpController extends Controller
         $approval2 = User::where('role_id',"2")->get();
         $data = Auth::user()->user_nid;
       
-        if (Auth::user()->fungsi_id=='4') {
-            $ecpapproval= Ecp::orderBy('created_at','desc')->get();
-            return view('MANAGER.data-ecp-approval2', compact('approval1','approval2','ecpapproval'));
-        }
+     
             $ecpapproval = Ecp::where('ecp_approval_2',$data)->orderBy('created_at','desc')->get();
-        return view('MANAGER.data-ecp-approval2', compact('approval1','approval2','ecpapproval'));
+            $jum = Ecp::where('ecp_approval_2',$data)->where('progres_id','2')->orderBy('created_at','desc')->count();
+
+        return view('MANAGER.data-ecp-approval2', compact('approval1','approval2','ecpapproval','jum'));
     }
 
+    public function meqaapproval()
+    {
+       
+
+        $approval1 = User::where('role_id',"3")->get();
+        $approval2 = User::where('role_id',"2")->get();
+        $data = Auth::user()->user_nid;
+        $ecpapproval= Ecp::orderBy('created_at','desc')->get();
+        $jumlah= Ecp::where('progres_id','4')->orderBy('created_at','desc')->count();
+        return view('MANAGER.data-ecp-MEQA', compact('ecpapproval','jumlah'));
+    }
 
 
     public function create()
@@ -136,15 +148,24 @@ class EcpController extends Controller
         $approval1 = User::where('role_id',"3")->get();
         $approval2 = User::where('role_id',"2")->get();
 
+        
+        $data = Auth::user()->user_nid;
+        
+        $staffso= Spv_so::where('ecp_no',$ecp_no)->get();
+        $sospv= Meqa_approval::where('ecp_no',$ecp_no)->get();
+        
      
-        $tdk = Tindaklanjut::where('ecp_no',$ecp_no)->get();
+     
+        $notulen = Notulen::where('ecp_no',$ecp_no)->orderBy('created_at','desc')->get();
+        $tdk = Tindaklanjut::where('ecp_no',$ecp_no)->orderBy('created_at','desc')->get();
         $review = ECM_Review::where('ecp_no',$ecp_no)->get();
         $meqa = Meqa_approval::where('ecp_no',$ecp_no)->get();
         $spvso = Spv_so::where('ecp_no',$ecp_no)->get();
         $spv = Spv_approval::where('ecp_no',$ecp_no)->get();
         $mng = Manager_approval::where('ecp_no',$ecp_no)->get();
         $ecp = Ecp::findOrFail($ecp_no);
-        return view ('ECP.show-ecp', compact('ecp','approval1','approval2','ecp_no','spv','mng','review','meqa','spvso','tdk'));
+        return view ('ECP.show-ecp', compact('ecp','approval1','approval2','ecp_no','spv','mng','review','meqa','spvso','tdk','notulen','staffso','sospv'));
+    
     }
 
     public function progres_spv($ecp_no)
@@ -213,7 +234,7 @@ class EcpController extends Controller
     public function progres_meqa($ecp_no)
     {
        
-        $spv = User::where('unit_id','1')->where('role_id','3')->OrderBy('fungsi_id','asc')->get();
+        $spv = User::whereIn('fungsi_id',[1, 2])->where('role_id','3')->OrderBy('fungsi_id','asc')->get();
         $status = Status_ecp::all();
 
 
@@ -249,13 +270,7 @@ class EcpController extends Controller
     public function progres_spv_so($ecp_no)
     {
         $ecp_no= str_replace('-','/',$ecp_no);
-        if (Auth::user()->fungsi_id=='1') {
-           
-        $staff = User::where('fungsi_id','1')->where('role_id','5')->get();
-        }
-        elseif (Auth::user()->fungsi_id=='2') {
-            $staff = User::where('fungsi_id','2')->where('role_id','5')->get();
-        }
+     
            
         $status = Status_ecp::all();
         try{
