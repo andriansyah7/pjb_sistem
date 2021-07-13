@@ -7,6 +7,7 @@ use App\Models\Serp_Main_Equipment;
 use App\Models\Serp_Pic;
 use App\Exports\MainEquipmentExport;
 use App\Imports\MainEquipmentImport;
+use App\Models\HistorySerp;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
@@ -14,12 +15,59 @@ class SerpMainEquipmentController extends Controller
 {
     public function index()
     {
+        $tahun=  date('Y');
         $serp_system = Serp_System::all();
         $serp_main = Serp_Main_Equipment::orderBy('MPI','desc')->get();
+        $serp_array = Serp_Main_Equipment::orderBy('MPI','desc')->get()->toarray();
+        $array= [$serp_array];
+
         $pic = Serp_Pic::all();
-        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
+         return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic','tahun'));
+        
+      
     }   
 
+    public function inserthistory()
+    {
+       
+        $serp_system = Serp_System::all();
+        $serp_main = Serp_Main_Equipment::orderBy('MPI','desc')->get();
+        $serp_array = Serp_Main_Equipment::orderBy('MPI','desc')->get()->toarray();
+        $array= [$serp_array];
+        $tahun=  date('Y');
+        $saatini= date('Y-m-d H:i:s');
+        
+        $pic = Serp_Pic::all();
+        
+        $allintests = [];
+        foreach($serp_main as $item){ //$intersts array contains input data
+            $data = new HistorySerp();
+            $data->history_serp_tahun = $tahun;
+            $data->serp_main_equipment_id = $item->serp_main_equipment_id;
+            $data->serp_system_id = $item->serp_system_id;
+            $data->serp_main_equipment_name = $item->serp_main_equipment_name;
+            $data->OC = $item->OC;
+            $data->PT = $item->PT;
+            $data->PQ = $item->PQ;
+            $data->SF = $item->SF;
+            $data->RC = $item->RC;
+            $data->PE = $item->PE;
+            $data->RT = $item->RT;
+            $data->SCR = $item->SCR;
+            $data->OCR = $item->OCR;
+            $data->ACR = $item->ACR;
+            $data->AFPF = $item->AFPF;
+            $data->MPI = $item->MPI;
+            $data->serp_pic_id = $item->serp_pic_id;
+            $data->serp_main_equipment_keterangan = $item->serp_main_equipment_keterangan;
+  
+            $allintests[] = $data->attributesToArray();
+        }
+        HistorySerp::insert($allintests);
+
+        return redirect('data-serp_history')->with('success', 'Data Berhasil Tersimpan!');
+
+    }
    
     public function search(Request $request)
     { 

@@ -1,6 +1,6 @@
 @extends('HalamanDepan.beranda')
 
-@section('title','Data Main Equipment')
+@section('title','Data History Main Equipment')
 @section('container')
  
 <div class="content">

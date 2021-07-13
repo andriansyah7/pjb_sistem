@@ -35,7 +35,14 @@ class HistorySerpController extends Controller
 
     public function create()
     {
-        //
+        $serp_system = Serp_System::all();
+        $serp_main = Serp_Main_Equipment::orderBy('MPI','desc')->get();
+        $serp_array = Serp_Main_Equipment::orderBy('MPI','desc')->get()->toarray();
+        $array= [$serp_array];
+
+        $pic = Serp_Pic::all();
+        
+        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
     }
 
     /**
@@ -44,7 +51,7 @@ class HistorySerpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Serp_Main_Equipment $serp)
     {
         //
     }

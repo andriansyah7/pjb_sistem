@@ -195,6 +195,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
    
     //serp_main_equipment
     Route::get('/create-history', 'SerpMainEquipmentController@history')->name('create-history');
+    Route::get('/insert-history', 'SerpMainEquipmentController@inserthistory')->name('insert-history');
     Route::get('/data-serp_main', 'SerpMainEquipmentController@index')->name('data-serp_main');
     Route::get('/search-serp_main', 'SerpMainEquipmentController@search')->name('search-serp_main');
     Route::get('/create-serp_main', 'SerpMainEquipmentController@create')->name('create-serp_main');

@@ -15,16 +15,23 @@
             <form action="{{route('search-serp_main')}}" method="GET">
             @csrf
                 <tr>
-              <th><label>Lihat Top 10% <br>
-              Berdasarkan PIC :</label></th>
+                <th>
+                <a  class="btn btn-light btn-sm">Lihat Top 10% Berdasarkan PIC : </a>
+                </th>
                 
             <th>  <select name="serp_pic_id"  class="form-control select2">
+            <option selected disabled><-Pilih PIC-></option>
                 @foreach ($pic as $item)
                   <option value="{{$item->serp_pic_id}}"> {{$item->serp_pic_name}} </option>
                 @endforeach
               </select></th>
               
               <th width="10px"><button type="submit" class="btn btn-sm btn-primary">Search</button></th>
+                </tr>
+
+                <tr>
+           <th><a href="{{route('insert-history')}}" onclick="return confirm('Yakin insert history?')" class="btn btn-danger btn-sm"><i class="fas fa-plus-circle"></i> Insert History SERP {{$tahun}} </a>
+           </th>
                 </tr>
             </form>
                 </tbody>
