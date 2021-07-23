@@ -28,7 +28,7 @@
             <!-- /.card-header -->
             <div class="card-body">
              <div class="row">
-             <div class="col-11">
+             <div class="col-15">
              <table class="table table-sm table-borderless">
                 <tbody>
                 <tr>
@@ -327,7 +327,7 @@
               </div>
               <div class="card-body">
              <div class="row">
-             <div class="col-11">
+             <div class="col-15">
              <table class="table table-sm table-borderless">
                 <tbody>
                 @foreach ($spv as $spv_approval)
@@ -390,7 +390,7 @@
               </div>
               <div class="card-body">
              <div class="row">
-             <div class="col-11">
+             <div class="col-15">
              <table class="table table-sm table-borderless">
                 <tbody>
                 @foreach ($mng as $manager_approval)
@@ -449,7 +449,7 @@
   </div>
   <div class="card-body">
  <div class="row">
- <div class="col-11">
+ <div class="col-15">
  <table class="table table-sm table-borderless">
     <tbody>
     @foreach ($review as $item)
@@ -494,7 +494,7 @@
   </div>
   <div class="card-body">
  <div class="row">
- <div class="col-11">
+ <div class="col-15">
  <table class="table table-sm table-borderless">
     <tbody>
     @foreach ($meqa as $item)
@@ -561,7 +561,7 @@
   </div>
   <div class="card-body">
  <div class="row">
- <div class="col-11">
+ <div class="col-15">
  <table class="table table-sm table-borderless">
     <tbody>
     @foreach ($spvso as $item)

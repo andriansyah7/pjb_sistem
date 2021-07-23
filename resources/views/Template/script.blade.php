@@ -40,6 +40,16 @@
         </script>
 
 <script type="text/javascript">
+
+    $(document).ready(function() {
+
+        $('select').selectpicker();
+
+    });
+
+</script>
+
+<script type="text/javascript">
   $(function () {
     $('#timepicker').datetimepicker({
       format: 'LT'

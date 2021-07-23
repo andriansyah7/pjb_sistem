@@ -281,6 +281,24 @@
               </ul>
               </li>
 
+          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-kajian') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                KAJIAN ENGINEERING
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('data-kajian')}}" class="nav-link {{ Route::currentRouteNamed('data-kajian') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data Kajian Engineering</p>
+                </a>
+              </li>
+              </ul>
+              </li>
+
           <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-serp_main') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-serp_history') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>

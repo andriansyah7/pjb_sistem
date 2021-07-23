@@ -163,9 +163,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     //disposisi
     Route::get('/data-spv_so', 'SpvSoController@index')->name('data-spv_so');
     Route::get('/data-disposisi-spvso', 'MeqaApprovalController@index')->name('data-disposisi-spvso');
-
-   
-
+    
+    
+    
     //tindaklanjutecp
     Route::get('/data-tindaklanjut', 'TindakLanjutController@index')->name('data-tindaklanjut');
     Route::get('/create-tindaklanjut/{ecp_no}', 'TindakLanjutController@create')->name('create-tindaklanjut');
@@ -192,7 +192,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::patch('/update-serp_pic/{serp_pic}', 'SerpPicController@update')->name('update-serp_pic');
     Route::get('/delete-serp_pic/{serp_pic}', 'SerpPicController@destroy')->name('delete-serp_pic');
     Route::get('/show-serp_pic/{serp_pic}', 'SerpPicController@show')->name('show-serp_pic');
-   
+    
     //serp_main_equipment
     Route::get('/create-history', 'SerpMainEquipmentController@history')->name('create-history');
     Route::get('/insert-history', 'SerpMainEquipmentController@inserthistory')->name('insert-history');
@@ -212,13 +212,21 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/search-serp_history', 'HistorySerpController@search')->name('search-serp_history');
     Route::get('/history-serp/{serp_main_equipment}', 'HistorySerpController@edit')->name('history-serp');
     Route::post('simpan-history', 'HistorySerpController@update')->name('simpan-history');
-   
-   
+    
+    
     //Rcfa
     Route::get('/data-rcfa', 'RcfaController@index')->name('data-rcfa');
     Route::get('/create-rcfa', 'RcfaController@create')->name('create-rcfa');
     Route::post('/simpan-rcfa', 'RcfaController@store')->name('simpan-rcfa');
     Route::get('/show-rcfa/{rcfa_no}', 'RcfaController@show')->name('show-rcfa');
+    
+    //kajian_engineering
+    Route::get('/data-kajian', 'KajianEngineeringController@index')->name('data-kajian');
+    Route::get('/create-kajian', 'KajianEngineeringController@create')->name('create-kajian');
+    Route::post('/simpan-kajian', 'KajianEngineeringController@store')->name('simpan-kajian');
+    Route::get('/show-kajian/{kajian_no}', 'KajianEngineeringController@show')->name('show-kajian');
+    Route::get('/delete-kajian/{kajian_no}', 'KajianEngineeringController@destroy')->name('delete-kajian');
+    Route::get('/progres-kajianbyspv/{kajian_no}', 'KajianEngineeringController@progres_kajianbyspv')->name('progres-kajianbyspv');
 });
 
 //user staff

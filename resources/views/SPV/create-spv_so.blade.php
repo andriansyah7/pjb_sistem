@@ -40,7 +40,7 @@
                 <select class="form-control select2 @error('staff_so') is-invalid @enderror"  name="staff_so" value="{{old('staff_so')}}">
                 @foreach($staff as $item)
                 <option selected value="{{$item->user_nid}}">{{$item->user_name}} : {{$item->jabatan->jabatan_name}} {{$item->fungsi->fungsi_name}}</option>
-@endforeach
+                @endforeach
                 @error('staff_so') <div class="invalid-feedback"> Masukkan Nama !  </div> @enderror 
                 </select>
               </div>
