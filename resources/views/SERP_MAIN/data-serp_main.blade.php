@@ -88,6 +88,7 @@
                   <th width="10px">NO</th>
                   <th width="10px">KKS</th>
                   <th width="200px">NAMA EQUIPMENT</th>
+                  <th width="100px">NAMA UNIT</th>
                   <th width="200px">NAMA SYSTEM</th>
                   <th width="1px">PT</th>
                   <th width="1px">OC</th>
@@ -102,7 +103,6 @@
                   <th width="1px">AFPF</th>
                   <th width="2px">MPI</th>
                   <th >PIC</th>
-                  <th >KETERANGAN</th>
                   <th >AKSI</th>
                 </tr>
                 </thead>
@@ -113,6 +113,7 @@
                     <td>{{ $loop->iteration}}</td> 
                     <td>{{$item->serp_main_equipment_id}}</td>
                     <td>{{$item->serp_main_equipment_name}}</td>
+                    <td>{{$item->system->unit->serp_unit_name}}</td>
                     <td>{{$item->system->serp_system_name}}</td>
                     <td>{{$item->PT}}</td>
                     <td>{{$item->OC}}</td>
@@ -127,7 +128,6 @@
                     <td>{{$item->AFPF}}</td>
                     <td>{{$item->MPI}}</td>
                     <td>{{$item->pic->serp_pic_name}}</td>
-                    <td>{{$item->serp_main_equipment_keterangan}}</td>
                     <td>
                       <a href="{{route('edit-serp_main',$item->serp_main_equipment_id)}}" class="badge badge-light"><i class="fas fa-edit" style="color:blue"></i>Edit</a> 
                       <a href="{{route('history-serp',$item->serp_main_equipment_id)}}" class="badge badge-light"><i class="fas fa-plus-circle" style="color:blue"></i>History</a> 
