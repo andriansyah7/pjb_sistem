@@ -420,6 +420,20 @@
                   <p>Data Unit</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{route('data-serp_system')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_system') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data System</p>
+                </a>
+              </li>
+
+          <li class="nav-item">
+                <a href="{{route('data-serp_pic')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_pic') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data PIC</p>
+                </a>
+              </li>
               </ul>
               </li>
 
