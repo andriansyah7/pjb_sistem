@@ -16,13 +16,29 @@ class SerpMainEquipmentController extends Controller
     public function index()
     {
         $tahun=  date('Y');
+        $serp_pic_id = "A";
         $serp_system = Serp_System::all();
         $serp_main = Serp_Main_Equipment::orderBy('MPI','desc')->get();
         $serp_array = Serp_Main_Equipment::orderBy('MPI','desc')->get()->toarray();
         $array= [$serp_array];
 
         $pic = Serp_Pic::all();
-         return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic','tahun'));
+         return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic','tahun','serp_pic_id'));
+        
+      
+    }   
+
+    public function topten()
+    {
+        $tahun=  date('Y');
+        $serp_pic_id = "A";
+        $serp_system = Serp_System::all();
+        $serp_main_jumlah = Serp_Main_Equipment::orderBy('MPI','desc')->get()->count();
+        $serp_main_10p = floor($serp_main_jumlah/10);
+        $serp_main = Serp_Main_Equipment::orderBy('MPI','desc')->take($serp_main_10p)->get();
+
+        $pic = Serp_Pic::all();
+         return view('SERP_MAIN.data-topten',compact('serp_system','serp_main','pic','tahun','serp_pic_id'));
         
       
     }   
@@ -71,19 +87,50 @@ class SerpMainEquipmentController extends Controller
    
     public function search(Request $request)
     { 
+        $tahun=date('Y');
+        $serp_system = Serp_System::all();
+        $serp_pic_id = $request->get('serp_pic_id');
+        if ($serp_pic_id=="A")
+        {
+            $serp_main = Serp_Main_Equipment::orderBy('mpi','desc')->get();
+        }
+        else 
+        {
+            $serp_main = Serp_Main_Equipment::where('serp_pic_id',$serp_pic_id)->orderBy('MPI','desc')->get();
+        }
+        $pic = Serp_Pic::all();
+        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic','serp_pic_id','tahun'));
+    }
+
+    public function searchtopten(Request $request)
+    { 
+        $tahun=date('Y');
         $serp_pic_id = $request->get('serp_pic_id');
         $serp_system = Serp_System::all();
-        $serp_main_sc = Serp_Main_Equipment::where('serp_pic_id',$serp_pic_id)->orderBy('mpi','desc')->get()->count();
-        $serp_main_10p = floor($serp_main_sc/10);
-        $serp_main = Serp_Main_Equipment::where('serp_pic_id',$serp_pic_id)->orderBy('mpi','desc')->take($serp_main_10p)->get();
+        if ($serp_pic_id=="A")
+        {
+            $serp_all = Serp_Main_Equipment::orderBy('MPI','desc')->get()->count();
+            $serp_main_10p = floor($serp_all/10);
+            $serp_main = Serp_Main_Equipment::orderBy('MPI','desc')->take($serp_main_10p)->get();
+        }
+        else
+        {
+            $serp_main_sc = Serp_Main_Equipment::where('serp_pic_id',$serp_pic_id)->orderBy('MPI','desc')->get()->count();
+            $serp_main_10p = floor($serp_main_sc/10);
+            $serp_main = Serp_Main_Equipment::where('serp_pic_id',$serp_pic_id)->orderBy('MPI','desc')->take($serp_main_10p)->get();
+        }
         $pic = Serp_Pic::all();
-        return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic','serp_pic_id'));
+        return view('SERP_MAIN.data-topten',compact('serp_system','serp_main','pic','serp_pic_id','tahun'));
     }
 
 
    public function ekspor ()
    {
-    return Excel::download(new MainEquipmentExport, 'serp_main_equipment.xlsx');
+    $tahun=date('d-m-Y');
+    $file= 'serp_main_equipment';
+    $ekstension= 'xlsx';
+    $nama= $tahun.'_'.$file.'.'.$ekstension;
+    return Excel::download(new MainEquipmentExport, $nama);
 
    }
 
@@ -108,7 +155,7 @@ class SerpMainEquipmentController extends Controller
 
 
        // notifikasi
-       return redirect('data-serp_main')->with('success', 'Data Berhasil DiImpor!');
+       return redirect('data-serp_main')->with('success', 'Data Berhasil Di Impor!');
 
    }
 

@@ -16,13 +16,13 @@
             @csrf
                 <tr>
                 <th>
-                <a  class="btn btn-light btn-sm">Lihat Top 10% Berdasarkan PIC : </a>
+                <a  class="btn btn-light btn-sm"><b>Filter by PIC &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : </b></a>
                 </th>
                 
             <th>  <select name="serp_pic_id"  class="form-control select2">
-            <option selected disabled><-Pilih PIC-></option>
+            <option value="A" {{($serp_pic_id=="A") ? 'selected':''}}>ALL</option>
                 @foreach ($pic as $item)
-                  <option value="{{$item->serp_pic_id}}"> {{$item->serp_pic_name}} </option>
+                  <option value="{{$item->serp_pic_id}}" {{($serp_pic_id==$item->serp_pic_id) ? 'selected':''}}> {{$item->serp_pic_name}} </option>
                 @endforeach
               </select></th>
               
@@ -64,10 +64,11 @@
  
 							@csrf
  
-							<label>Pilih file excel</label>
+							<label for="formFile" class="form-label">Pilih file excel</label><br><i style="color:red">*Pastikan hapus header sebelum import data <br>*Format tanggal YYYY-MM-DD HH:ii:ss (ex: 2021-07-13 17:52:31 ) </i></a> <br>
 							<div class="form-group">
-								<input type="file" name="file" required="required">
+								<input class="form-control" type="file" id="formFile" name="file" required="required">
 							</div>
+   
  
 						</div>
 						<div class="modal-footer">

@@ -37,7 +37,7 @@
               <select class="form-control select2 @error('unit_id') is-invalid @enderror" id="unit_id" name="unit_id">
                 <option selected disabled></option>
               @foreach($unit as $unt)
-                <option value="{{$unt->unit_id}}" {{($user->unit_id == $unt ->unit_id) ? 'selected':''}}>{{$unt->unit_name}}</option>
+                <option value="{{$unt->unit_id}}" {{($user->unit_id == $unt->unit_id) ? 'selected':''}}>{{$unt->unit_name}}</option>
                @endforeach
               </select>
               @error('unit_id') <div class="invalid-feedback"> {{$message}} </div> @enderror

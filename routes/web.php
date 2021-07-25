@@ -198,6 +198,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/insert-history', 'SerpMainEquipmentController@inserthistory')->name('insert-history');
     Route::get('/data-serp_main', 'SerpMainEquipmentController@index')->name('data-serp_main');
     Route::get('/search-serp_main', 'SerpMainEquipmentController@search')->name('search-serp_main');
+    Route::get('/data-top_ten', 'SerpMainEquipmentController@topten')->name('data-top_ten');
+    Route::get('/search-top_ten', 'SerpMainEquipmentController@searchtopten')->name('search-top_ten');
     Route::get('/create-serp_main', 'SerpMainEquipmentController@create')->name('create-serp_main');
     Route::get('/ekspor-serp_main', 'SerpMainEquipmentController@ekspor')->name('ekspor-serp_main');
     Route::post('/impor-serp_main', 'SerpMainEquipmentController@impor')->name('impor-serp_main');

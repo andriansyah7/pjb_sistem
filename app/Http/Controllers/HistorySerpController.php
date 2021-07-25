@@ -27,9 +27,17 @@ class HistorySerpController extends Controller
     public function search(Request $request)
     { 
         $serp_system = Serp_System::all();
-     
-        $serp_main = HistorySerp::where('serp_pic_id',$request->get('serp_pic_id'))->orderBy('MPI','desc')->limit(50)->get();
         $pic = Serp_Pic::all();
+        $serp_pic_id = $request->get('serp_pic_id');
+
+        if ($serp_pic_id=="A")
+        {
+            $serp_main = HistorySerp::orderBy('MPI','desc')->get();
+        }
+        else
+        {
+            $serp_main = HistorySerp::where('serp_pic_id',$request->get('serp_pic_id'))->orderBy('MPI','desc')->get();
+        }
         return view('SERP_MAIN.data-serp_history',compact('serp_system','serp_main','pic'));
     }
 
@@ -45,12 +53,6 @@ class HistorySerpController extends Controller
         return view('SERP_MAIN.data-serp_main',compact('serp_system','serp_main','pic'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Serp_Main_Equipment $serp)
     {
         //

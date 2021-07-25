@@ -299,7 +299,7 @@
               </ul>
               </li>
 
-          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-serp_main') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-serp_history') ? 'menu-open' : '' }}">
+          <li class="nav-item has-treeview  {{ Route::currentRouteNamed('data-top_ten') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-serp_main') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-serp_history') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
@@ -309,9 +309,18 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('data-serp_main')}}" class="nav-link {{ Route::currentRouteNamed('data-serp_main') ? 'active' : '' }}">
+                <a href="{{route('data-serp_main')}}" method="GET" class="nav-link {{ Route::currentRouteNamed('data-serp_main') ? 'active' : '' }}">
                   <i class="far fa-file"></i>
                   <p>Data Main Equipment</p>
+                </a>
+              </li>
+              </ul>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('data-top_ten')}}" class="nav-link {{ Route::currentRouteNamed('data-top_ten') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data Top 10%</p>
                 </a>
               </li>
               </ul>
