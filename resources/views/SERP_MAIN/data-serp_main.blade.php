@@ -64,7 +64,7 @@
  
 							@csrf
  
-							<label for="formFile" class="form-label">Pilih file excel</label><br><i style="color:red">*Pastikan hapus header sebelum import data <br>*Format tanggal YYYY-MM-DD HH:ii:ss (ex: 2021-07-13 17:52:31 ) </i></a> <br>
+							<label for="formFile" class="form-label">Pilih file excel</label><br><i style="color:red">*Format tanggal YYYY-MM-DD HH:ii:ss (ex: 2021-07-13 17:52:31 ) </i></a> <br>
 							<div class="form-group">
 								<input class="form-control" type="file" id="formFile" name="file" required="required">
 							</div>

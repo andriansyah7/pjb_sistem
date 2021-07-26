@@ -20,7 +20,7 @@ class AllMainEquipmentExport implements FromCollection, WithHeadings, ShouldAuto
     public function headings(): array
     {
         return[
-            'KKS',
+            'serp_main_equipment_id',
             'serp_system_id',
             'serp_main_equipment_name',
             'PT',

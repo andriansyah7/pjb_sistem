@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Serp_Main_Equipment;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class MainEquipmentImport implements ToModel
+class MainEquipmentImport implements ToModel, WithStartRow
 {
     
     public function model(array $row)
@@ -32,4 +33,9 @@ class MainEquipmentImport implements ToModel
             'updated_at' => $row[18], 
         ]);
     }
+
+        public function startRow(): int
+        {
+            return 2;
+        }
 }
