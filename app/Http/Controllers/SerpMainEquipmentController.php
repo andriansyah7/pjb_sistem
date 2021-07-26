@@ -6,10 +6,14 @@ use App\Models\Serp_System;
 use App\Models\Serp_Main_Equipment;
 use App\Models\Serp_Pic;
 use App\Exports\MainEquipmentExport;
+use App\Exports\AllMainEquipmentExport;
+use App\Exports\AllTopTenExport;
+use App\Exports\TopTenPicExport;
 use App\Imports\MainEquipmentImport;
 use App\Models\HistorySerp;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+
 
 class SerpMainEquipmentController extends Controller
 {
@@ -92,7 +96,7 @@ class SerpMainEquipmentController extends Controller
         $serp_pic_id = $request->get('serp_pic_id');
         if ($serp_pic_id=="A")
         {
-            $serp_main = Serp_Main_Equipment::orderBy('mpi','desc')->get();
+            $serp_main = Serp_Main_Equipment::orderBy('MPI','desc')->get();
         }
         else 
         {
@@ -124,13 +128,56 @@ class SerpMainEquipmentController extends Controller
     }
 
 
-   public function ekspor ()
-   {
+   public function ekspor ($serp_pic_id)
+{
     $tahun=date('d-m-Y');
     $file= 'serp_main_equipment';
     $ekstension= 'xlsx';
-    $nama= $tahun.'_'.$file.'.'.$ekstension;
-    return Excel::download(new MainEquipmentExport, $nama);
+    if ($serp_pic_id=="A")
+    {
+        $pic= "All";
+    }
+    else
+    {
+        $pic= Serp_Pic::where('serp_pic_id',$serp_pic_id)->pluck('serp_pic_name');
+    }
+    $nama= $tahun.'_'.$pic.'_'.$file.'.'.$ekstension;
+    if ($serp_pic_id=="A")
+    {
+        return Excel::download(new AllMainEquipmentExport, $nama);
+        
+    }
+    else
+    {
+        return  (new MainEquipmentExport)->forserp_pic_id($serp_pic_id)->download($nama);
+    }
+}
+  
+    public function eksportop_ten ($serp_pic_id)
+    {
+     $tahun=date('d-m-Y');
+     $file= 'serp_main_equipment';
+     $ekstension= 'xlsx';
+     if ($serp_pic_id=="A")
+     {
+         $pic= "All";
+     }
+     else
+     {
+         $pic= Serp_Pic::where('serp_pic_id',$serp_pic_id)->pluck('serp_pic_name');
+     }
+     $nama= $tahun.'_'.$pic.'_'.$file.'.'.$ekstension;
+
+     if ($serp_pic_id=="A")
+     {
+         return Excel::download(new AllTopTenExport, $nama);
+         
+     }
+     else
+     {
+         return  (new TopTenPicExport)->forserp_pic_id($serp_pic_id)->download($nama);
+     }
+
 
    }
 

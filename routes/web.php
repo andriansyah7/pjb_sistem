@@ -201,7 +201,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/data-top_ten', 'SerpMainEquipmentController@topten')->name('data-top_ten');
     Route::get('/search-top_ten', 'SerpMainEquipmentController@searchtopten')->name('search-top_ten');
     Route::get('/create-serp_main', 'SerpMainEquipmentController@create')->name('create-serp_main');
-    Route::get('/ekspor-serp_main', 'SerpMainEquipmentController@ekspor')->name('ekspor-serp_main');
+    Route::get('/ekspor-serp_main/{serp_pic_id}', 'SerpMainEquipmentController@ekspor')->name('ekspor-serp_main');
+    Route::get('/ekspor-top_ten/{serp_pic_id}', 'SerpMainEquipmentController@eksportop_ten')->name('ekspor-top_ten');
     Route::post('/impor-serp_main', 'SerpMainEquipmentController@impor')->name('impor-serp_main');
     Route::post('/simpan-serp_main', 'SerpMainEquipmentController@store')->name('simpan-serp_main');
     Route::get('/edit-serp_main/{serp_main_equipment}', 'SerpMainEquipmentController@edit')->name('edit-serp_main');

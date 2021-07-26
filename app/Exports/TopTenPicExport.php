@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
 
-class MainEquipmentExport implements FromQuery, WithHeadings, ShouldAutoSize
+class TopTenPicExport implements FromQuery, WithHeadings, ShouldAutoSize
 {
     use Exportable;
     public function forserp_pic_id($serp_pic_id)
@@ -21,11 +21,11 @@ class MainEquipmentExport implements FromQuery, WithHeadings, ShouldAutoSize
     
     public function query()
     {
-        return Serp_Main_Equipment::query()->where('serp_pic_id', $this->serp_pic_id);
+        $serp_main_sc = Serp_Main_Equipment::where('serp_pic_id', $this->serp_pic_id)->orderBy('MPI','desc')->get()->count();
+        $serp_main_10p = floor($serp_main_sc/10);
+        $hasil = Serp_Main_Equipment::query()->where('serp_pic_id', $this->serp_pic_id)->orderBy('MPI','desc')->take($serp_main_10p);
+   return $hasil;
     }
-
-    
-
    
 
     public function headings(): array

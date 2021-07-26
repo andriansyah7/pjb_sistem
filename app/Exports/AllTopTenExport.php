@@ -2,31 +2,20 @@
 
 namespace App\Exports;
 
-
 use App\Models\Serp_Main_Equipment;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\Exportable;
 
-class MainEquipmentExport implements FromQuery, WithHeadings, ShouldAutoSize
+class AllTopTenExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
-    use Exportable;
-    public function forserp_pic_id($serp_pic_id)
+    public function collection()
     {
-        $this->serp_pic_id = $serp_pic_id;
-        
-        return $this;
+        $serp_all = Serp_Main_Equipment::orderBy('MPI','desc')->get()->count();
+        $serp_main_10p = floor($serp_all/10);
+        return Serp_Main_Equipment::orderBy('MPI','desc')->take($serp_main_10p)->get();
+      
     }
-    
-    public function query()
-    {
-        return Serp_Main_Equipment::query()->where('serp_pic_id', $this->serp_pic_id);
-    }
-
-    
-
-   
 
     public function headings(): array
     {

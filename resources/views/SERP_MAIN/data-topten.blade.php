@@ -43,7 +43,7 @@
 
       <div style="float:right" class ="card-tools inlane mb-2">
 
-            <a href="{{route('ekspor-serp_main')}}" class="btn btn-info btn-sm">Ekspor Data <i class="fas fa-download"></i></a>
+            <a href="{{route('ekspor-top_ten',$serp_pic_id)}}" class="btn btn-info btn-sm">Ekspor Data <i class="fas fa-download"></i></a>
             <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#importExcel">Impor Data <i class="fas fa-upload"></i></a>
             <a href="{{route('create-serp_main')}}" class="btn btn-success btn-sm">Tambah Data <i class="fas fa-plus-square"></i></a>
       </div>
