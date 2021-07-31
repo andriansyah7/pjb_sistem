@@ -91,18 +91,18 @@
                   <th width="200px">NAMA EQUIPMENT</th>
                   <th width="100px">NAMA UNIT</th>
                   <th width="200px">NAMA SYSTEM</th>
-                  <th width="1px">PT</th>
-                  <th width="1px">OC</th>
-                  <th width="1px">PQ</th>
-                  <th width="1px">SF</th>
-                  <th width="1px">RT</th>
-                  <th width="1px">RC</th>
-                  <th width="1px">PE</th>
-                  <th width="2px">SCR</th>
-                  <th width="1px">OCR</th>
-                  <th width="2px">ACR</th>
-                  <th width="1px">AFPF</th>
-                  <th width="2px">MPI</th>
+                  <th width="50px">PT</th>
+                  <th width="50px">OC</th>
+                  <th width="50px">PQ</th>
+                  <th width="50px">SF</th>
+                  <th width="50px">RT</th>
+                  <th width="50px">RC</th>
+                  <th width="50px">PE</th>
+                  <th width="50px">SCR</th>
+                  <th width="50px">OCR</th>
+                  <th width="50px">ACR</th>
+                  <th width="50px">AFPF</th>
+                  <th width="50px">MPI</th>
                   <th >PIC</th>
                   <th >AKSI</th>
                 </tr>
