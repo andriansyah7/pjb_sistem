@@ -29,6 +29,7 @@ Route::get('cetakmng/{manager_approval_id}', 'ManagerController@cetakmng')->name
 //super user
 Route::group(['middleware' => ['auth', 'ceklevel: 1']], function () {
     //Data User
+    Route::post('/impor-user', 'UserController@impor')->name('impor-user');
     Route::get('/data-user', 'UserController@index')->name('data-user');
     Route::get('/create-user', 'UserController@create')->name('create-user');
     Route::get('/fungsi/{unit_id}', 'UserController@getfungsi')->name('get-fungsi');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UserImport;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Jabatan;
@@ -10,6 +11,7 @@ use App\Models\Fungsi;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -28,11 +30,31 @@ class UserController extends Controller
         return view('USER.data-user',compact('user','jabatan','roles','fungsi'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function impor(Request $request) 
+    {
+        // validasi
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+ 
+        // menangkap file excel
+        $file = $request->file('file');
+ 
+        // membuat nama file unik
+        $nama_file = rand().$file->getClientOriginalName();
+ 
+        // upload ke folder file_user di dalam folder public
+        $file->move('file_user',$nama_file);
+ 
+        // import data
+        Excel::import(new UserImport,'file_user/'.$nama_file);
+ 
+ 
+        // notifikasi
+        return redirect('data-user')->with('success', 'Data Berhasil Di Impor!');
+ 
+    }
+
     public function create()
     {
         $jabatan = Jabatan::all();
