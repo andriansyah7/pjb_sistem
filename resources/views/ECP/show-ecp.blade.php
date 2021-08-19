@@ -150,7 +150,7 @@
                     <a href="{{route('reject-meqa',$ecp_no)}}" class="badge badge-dark"><i onclick="return confirm('Yakin Reject ECP ?')" class="fas fa-times-circle" style="color:red"></i> Reject</a>
             </div>     
                     @endif
-                    
+     @if ($ecp->progres_id=='8')        
      @foreach ($sospv as $item)
     <td></td>
     @endforeach
@@ -171,7 +171,7 @@
           </div> 
           @elseif  (auth()->user()->user_nid != $spvso1)
                   @endif
-                
+                @endif
 
 
                     <!-- MEQA_SignOff_ECP -->
@@ -207,22 +207,23 @@
       </div>
 @endif
 
-@if  ($ecp->progres_id!='1')
 
 <div class="card card-warning card-outline">
   <div class="card-header">
     <h3 class="card-title">Data Notulen ECP</h3>
+    @if ($ecp->progres_id=='11') 
     @foreach ($staffso as $item)
     <td></td>
     @endforeach
  @php
     $staf = $item->staff_so;
     @endphp
-
+    
     @if (auth()->user()->user_nid == $staf) 
     <a href="{{route('create-notulen',$ecp_no)}}" style="float:right" class="btn btn-success btn-sm"><i class="fas fa-plus-square"> Notulen </i></a>
-@elseif (auth()->user()->user_nid != $staf)
-
+    @elseif (auth()->user()->user_nid != $staf)
+    
+    @endif
 @endif
   </div>
   <div class="card-body">
@@ -258,26 +259,27 @@
 </div>
 </div>
 
-@endif
+
    
 
-                      @if  ($ecp->progres_id!='1')
 
-            <div class="card card-warning card-outline">
-              <div class="card-header">
-                <h3 class="card-title">Data Tindak Lanjut ECP</h3>
-                @foreach ($staffso as $item)
+<div class="card card-warning card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Data Tindak Lanjut ECP</h3>
+    @if ($ecp->progres_id=='11')
+   @foreach ($staffso as $item)
     <td></td>
     @endforeach
  @php
     $staf = $item->staff_so;
     @endphp
-
+    
     @if (auth()->user()->user_nid == $staf) 
-        <a href="{{route('create-tindaklanjut',$ecp_no)}}" style="float:right" class="btn btn-success btn-sm"><i class="fas fa-plus-square"> Tindak Lanjut </i></a>
-             
-        @elseif (auth()->user()->user_nid != $staf)
-              @endif
+    <a href="{{route('create-tindaklanjut',$ecp_no)}}" style="float:right" class="btn btn-success btn-sm"><i class="fas fa-plus-square"> Tindak Lanjut </i></a>
+    
+    @elseif (auth()->user()->user_nid != $staf)
+    @endif
+    @endif
               </div>
               <div class="card-body">
              <div class="row">
@@ -312,7 +314,8 @@
 </div>
 </div>
 </div>
-@endif
+
+
                
     
 

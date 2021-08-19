@@ -270,7 +270,13 @@ class EcpController extends Controller
     public function progres_spv_so($ecp_no)
     {
         $ecp_no= str_replace('-','/',$ecp_no);
-     
+        if (Auth::user()->fungsi_id=='1') {
+           
+            $staff = User::where('fungsi_id','1')->where('role_id','5')->get();
+            }
+            elseif (Auth::user()->fungsi_id=='2') {
+                $staff = User::where('fungsi_id','2')->where('role_id','5')->get();
+            }
            
         $status = Status_ecp::all();
         try{
