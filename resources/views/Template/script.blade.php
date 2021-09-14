@@ -30,6 +30,27 @@
 <script src="{{asset('adminLTE')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="{{asset('adminLTE')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+<!-- summernote -->
+<script src="{{asset('adminLTE')}}/plugins/summernote/summernote-bs4.min.js"></script>
+<script type="text/javascript">
+    $('.kajian').summernote({
+            tabsize: 2,
+            height: 150,
+            dialogsInBody: true,
+            toolbar:true,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+
+</script>
+
+
 <!-- page script -->
 <script type="text/javascript">
             $(function () {

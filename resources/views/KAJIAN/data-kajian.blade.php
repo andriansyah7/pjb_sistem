@@ -21,11 +21,10 @@
                 <tr>
                   <th>#</th>
                   <th>NO KAJIAN</th>
-                  <th>SPV SO</th>
+                 
                   <th>JUDUL KAJIAN</th>
-                  <th>REQUESTER</th>
-                  <th>DISPOSISI STAFF SO</th>
-                  <th>TANGGAL PEMBUATAN</th>
+                  
+                  <th>TANGGAL IDENTIFIKASI AWAL</th>
                   <th>PROGRES</th>
                   <th>AKSI</th>
                 </tr>
@@ -36,10 +35,9 @@
                 <tr>
                 <td>{{ $loop->iteration}}</td>                   
                     <td>{{$item->kajian_no}}</td>
-                    <td>{{$item->spv->user_name}}</td>
+                   
                     <td>{{$item->kajian_judul}}</td>  
-                    <td>{{$item->requester->user_name}}</td>  
-                    <td>{{$item->disposisi_staffso->user_name}}</td>
+                   
                     <td>{{date('d M Y H:i:s',strtotime($item->created_at))}}</td>
                     <td><i>{{$item->progres_kajian->progres_kajian_name}}</i></td>
                     <td>

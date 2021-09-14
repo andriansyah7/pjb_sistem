@@ -275,6 +275,8 @@
     @endphp
     
     @if (auth()->user()->user_nid == $staf) 
+    <a href="{{route('progres-tindaklanjut',$ecp_no)}}" style="float:right"class="btn btn-warning btn-sm">Ready Sign Off <i class="fas fa-check-circle"></i></a> &nbsp
+
     <a href="{{route('create-tindaklanjut',$ecp_no)}}" style="float:right" class="btn btn-success btn-sm"><i class="fas fa-plus-square"> Tindak Lanjut </i></a>
     
     @elseif (auth()->user()->user_nid != $staf)

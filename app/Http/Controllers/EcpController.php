@@ -223,7 +223,7 @@ class EcpController extends Controller
             Ecp::where('ecp_no',$ecp_no)->update([
                 'progres_id'=>5
             ]);
-            return view('TINDAKLANJUT.create-tindaklanjut', compact('ecp_no'))->with('success', 'Berhasil Merubah Progres ECP!');
+            return redirect()->back()->with('success', 'Berhasil Merubah Progres ECP!');
             
         }catch (\Exception $e){
             return redirect('data-ecp')->with('info', 'Gagal Merubah Progres ECP');

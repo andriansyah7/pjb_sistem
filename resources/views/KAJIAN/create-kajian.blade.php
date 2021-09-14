@@ -48,7 +48,7 @@
               <select class="form-control select2 @error('kajian_requester') is-invalid @enderror" name="kajian_requester" value="{{old('kajian_requester')}}">
               <option selected disabled>Pilih Requester-></option>
               @foreach($spv as $item)
-                <option value="{{$item->user_nid}}">{{$item->user_name}} : {{$item->jabatan->jabatan_name}} {{$item->unit->unit_name}}</option>
+                <option value="{{$item->user_nid}}">{{$item->user_name}} : {{$item->jabatan->jabatan_name}} {{$item->fungsi->fungsi_name}}</option>
               @endforeach
               </select>
               @error('kajian_requester') <div class="invalid-feedback"> {{$message}} </div> @enderror
@@ -58,7 +58,7 @@
             <label>Pihak yang Terlibat</label> <a style="color:red"><i>*Bisa memilih lebih dari 1 SPV  <i><a>
               <select class="form control select2" multiple data-live-search="true"  name="kajian_pihak_terlibat[]" value="{{old('kajian_pihak_terlibat')}}">
               @foreach($spv as $item)
-                <option value="{{$item->user_name}}">{{$item->user_name}} : {{$item->jabatan->jabatan_name}} {{$item->unit->unit_name}}</option>
+                <option value="{{$item->user_name}}">{{$item->user_name}} : {{$item->jabatan->jabatan_name}} {{$item->fungsi->fungsi_name}}</option>
               @endforeach
               </select>
               @error('kajian_pihak_terlibat') <div class="invalid-feedback"> {{$message}} </div> @enderror
@@ -78,8 +78,9 @@
                 <div class="form-group">
                 <label for="user_nid">Disposisi STAFF SO</label>
                 <select class="form-control select2 @error('kajian_disposisi_staff_so') is-invalid @enderror"  name="kajian_disposisi_staff_so" value="{{old('kajian_disposisi_staff_so')}}">
+                <option selected disabled>Pilih Staff SO-></option>
                 @foreach($disposisistaffso as $item)
-                <option selected value="{{$item->user_nid}}">{{$item->user_name}} : {{$item->jabatan->jabatan_name}} {{$item->fungsi->fungsi_name}}</option>
+                <option value="{{$item->user_nid}}">{{$item->user_name}} : {{$item->jabatan->jabatan_name}} {{$item->fungsi->fungsi_name}}</option>
                 @endforeach
                 @error('kajian_disposisi_staff_so') <div class="invalid-feedback"> Masukkan Nama !  </div> @enderror 
                 </select>

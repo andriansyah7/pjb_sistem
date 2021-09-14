@@ -38,8 +38,9 @@
               <div class="form-group">
                 <label for="user_nid">Disposisi STAFF SO</label>
                 <select class="form-control select2 @error('staff_so') is-invalid @enderror"  name="staff_so" value="{{old('staff_so')}}">
+                <option selected disabled>Pilih Staff SO-></option>
                 @foreach($staff as $item)
-                <option selected value="{{$item->user_nid}}">{{$item->user_name}} : {{$item->jabatan->jabatan_name}} {{$item->fungsi->fungsi_name}}</option>
+                <option value="{{$item->user_nid}}">{{$item->user_name}} : {{$item->jabatan->jabatan_name}} {{$item->fungsi->fungsi_name}}</option>
                 @endforeach
                 @error('staff_so') <div class="invalid-feedback"> Masukkan Nama !  </div> @enderror 
                 </select>

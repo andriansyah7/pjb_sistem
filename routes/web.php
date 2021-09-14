@@ -164,8 +164,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     //disposisi
     Route::get('/data-spv_so', 'SpvSoController@index')->name('data-spv_so');
     Route::get('/data-disposisi-spvso', 'MeqaApprovalController@index')->name('data-disposisi-spvso');
-    
-    
+  
     
     //tindaklanjutecp
     Route::get('/data-tindaklanjut', 'TindakLanjutController@index')->name('data-tindaklanjut');
@@ -231,7 +230,21 @@ Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {
     Route::get('/show-kajian/{kajian_no}', 'KajianEngineeringController@show')->name('show-kajian');
     Route::get('/delete-kajian/{kajian_no}', 'KajianEngineeringController@destroy')->name('delete-kajian');
     Route::get('/progres-kajianbyspv/{kajian_no}', 'KajianEngineeringController@progres_kajianbyspv')->name('progres-kajianbyspv');
+    
+    //disposisi_kajian_engineering
+    Route::get('/data-disposisi-staffso', 'KajianStaffSOController@index')->name('data-disposisi-staffso');
+    Route::get('/progres-kajianbystaffso/{kajian_no}', 'KajianEngineeringController@progres_kajianbystaffso')->name('progres-kajianbystaffso');
+    Route::post('/save-kajian', 'KajianStaffSOController@store')->name('save-kajian');
+    
+    //kajian_approval_spvso
+    Route::get('/progres-approvalspvso/{kajian_no}', 'KajianEngineeringController@progres_approvalspvso')->name('progres-approvalspvso');
+    Route::post('/simpan-approvalspvso', 'KajianApprovalSPVSOController@store')->name('simpan-approvalspvso');
+   
+    //kajian_approval_meqa
+    Route::get('/progres-approvalmeqa/{kajian_no}', 'KajianEngineeringController@progres_approvalmeqa')->name('progres-approvalmeqa');
+    Route::post('/simpan-approvalmeqa', 'KajianApprovalMEQAController@store')->name('simpan-approvalmeqa');
 });
+
 
 //user staff
 Route::group(['middleware' => ['auth', 'ceklevel:1,2,3,4,5']], function () {

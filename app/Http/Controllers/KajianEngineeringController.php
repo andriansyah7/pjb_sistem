@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KajianApprovalMEQA;
+use App\Models\KajianApprovalSPVSO;
 use App\Models\KajianEngineering;
+use App\Models\KajianStaffSO;
+use App\Models\StatusKajian;
 use App\Models\Urgensi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -100,7 +104,12 @@ class KajianEngineeringController extends Controller
         $kajian_no= str_replace('-','/',$kajian_no);
         $kajian = KajianEngineering::findOrFail($kajian_no);
         $pihak= KajianEngineering::select('kajian_pihak_terlibat')->get();
-        return view ('KAJIAN.show-kajian', compact('kajian','pihak'));
+
+        $kajian_analisa = KajianStaffSO::where('kajian_no',$kajian_no)->get();
+        $approval_spv = KajianApprovalSPVSO::where('kajian_no',$kajian_no)->get();
+        $approval_meqa = KajianApprovalMEQA::where('kajian_no',$kajian_no)->get();
+
+        return view ('KAJIAN.show-kajian', compact('kajian','pihak','kajian_analisa','approval_spv','approval_meqa'));
     }
 
     /**
@@ -152,6 +161,57 @@ class KajianEngineeringController extends Controller
             
         }catch (\Exception $e){
             return redirect('data-kajian')->with('info', 'Gagal Didisposisikan ke STAFF SO');
+        }
+        return redirect()->back();
+    }
+
+    public function progres_kajianbystaffso($kajian_no)
+    {
+        $kajian_no= str_replace('-','/',$kajian_no);
+        try{
+            KajianEngineering::where('kajian_no',$kajian_no)->update([
+                'progres_kajian_id'=>3
+            ]);
+            return view('KAJIAN_STAFF_SO.create-dokumen-kajian', compact('kajian_no'))->with('success', 'Berhasil Merubah Progres Kajian!');
+        
+            
+        }catch (\Exception $e){
+            return redirect('data-kajian')->with('info', 'Gagal Didisposisikan ke STAFF SO');
+        }
+        return redirect()->back();
+    }
+
+   
+    public function progres_approvalspvso($kajian_no)
+    {
+        $kajian_no= str_replace('-','/',$kajian_no);
+        $status = StatusKajian::all();
+        try{
+            KajianEngineering::where('kajian_no',$kajian_no)->update([
+                'progres_kajian_id'=>4
+            ]);
+            return view('KAJIAN.approval-spvso', compact('kajian_no','status'))->with('success', 'Berhasil Merubah Progres Kajian!');
+        
+            
+        }catch (\Exception $e){
+            return redirect('data-kajian')->with('info', 'Gagal Membuat Approval SPV');
+        }
+        return redirect()->back();
+    }
+
+    public function progres_approvalmeqa($kajian_no)
+    {
+        $kajian_no= str_replace('-','/',$kajian_no);
+        $status = StatusKajian::all();
+        try{
+            KajianEngineering::where('kajian_no',$kajian_no)->update([
+                'progres_kajian_id'=>5
+            ]);
+            return view('KAJIAN.approval-meqa', compact('kajian_no','status'))->with('success', 'Berhasil Merubah Progres Kajian!');
+        
+            
+        }catch (\Exception $e){
+            return redirect('data-kajian')->with('info', 'Gagal Membuat Approval MEQA');
         }
         return redirect()->back();
     }

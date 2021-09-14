@@ -281,7 +281,7 @@
               </ul>
               </li>
 
-          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-kajian') ? 'menu-open' : '' }}">
+          <li class="nav-item has-treeview {{ Route::currentRouteNamed('data-kajian')? 'menu-open' : '' }}">
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
@@ -296,7 +296,18 @@
                   <p>Data Kajian Engineering</p>
                 </a>
               </li>
-              </ul>
+            </ul>
+            @if ((auth()->user()->role_id=="5") && ((auth()->user()->fungsi_id=="1") || (auth()->user()->fungsi_id=="2")))
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('data-disposisi-staffso')}}" class="nav-link {{ Route::currentRouteNamed('data-data-disposisi-staffso') ? 'active' : '' }}">
+                  <i class="far fa-file"></i>
+                  <p>Data Disposisi Kajian Engineering</p>
+                </a>
+              </li>
+            </ul>
+            @endif
+
               </li>
 
           <li class="nav-item has-treeview  {{ Route::currentRouteNamed('data-top_ten') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-serp_main') ? 'menu-open' : '' }} || {{ Route::currentRouteNamed('data-serp_history') ? 'menu-open' : '' }}">
